@@ -1,0 +1,35 @@
+{
+  "development": {
+    "username": "hottofind",
+    "password": "hottofind",
+    "database": "hot",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+      "timestamps": false
+  },
+  "logging": false
+  },
+  "test": {
+    "username": "hottofind",
+    "password": "hottofind",
+    "database": "hot",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+      "timestamps": false
+  },
+  "logging": false
+  },
+  "production": {
+    "username": "hottofind",
+    "password": "hottofind",
+    "database": "hottofind",
+    "host": "db.hottofind.com",
+    "dialect": "mysql",
+    "define": {
+      "timestamps": false
+  },
+  "logging": false
+}
+}

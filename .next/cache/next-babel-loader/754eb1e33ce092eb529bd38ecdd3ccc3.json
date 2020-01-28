@@ -1,0 +1,1 @@
+{"ast":null,"code":"function getHost(req) {\n  if (!req) return \"\";\n  var host = req.headers.host;\n\n  if (host.startsWith(\"localhost\")) {\n    return \"http://\".concat(host);\n  }\n\n  return \"https://\".concat(host);\n}\n\nexport default getHost;","map":null,"metadata":{},"sourceType":"module"}

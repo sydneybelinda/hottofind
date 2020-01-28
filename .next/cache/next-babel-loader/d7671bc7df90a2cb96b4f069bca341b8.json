@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default (function (req, res) {\n  var username = req.query.username;\n  res.end(\"Post: \".concat(username));\n});","map":null,"metadata":{},"sourceType":"module"}
