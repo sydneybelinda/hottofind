@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import nextCookie from "next-cookies";
-import { API } from "../config";
+import { API, COUNTRYCODE } from "../config";
 
 export const deletePost = async id => {
   const url = `/api/post/delete`;
@@ -134,6 +134,44 @@ export const getlatest = async c => {
 
   return posts;
 };
+
+export const getPage = async query => {
+
+  const { slug, city, page = 1 } = query 
+
+  
+  let url = `${API}/posts/get?countrycode=${COUNTRYCODE}`;
+
+  if (slug[0]) {
+    url += `&catindex=${slug[0]}`;
+  }
+  if (slug[1]) {
+    url += `&keyindex=${slug[1]}`;
+  }
+
+  if (city) {
+    url += `&city=${city}`;
+  }
+
+  if (page) {
+    url += `&page=${page}`;
+  }
+
+  const res = await fetch(url);
+  let data = await res.json();
+
+  const urlb = `${API}/city/get/${COUNTRYCODE}`;
+  const resb = await fetch(urlb);
+  let cities = await resb.json();
+
+  return {
+    posts: data,
+    cities: cities,
+    page: parseInt(page, 10),
+    city: city,
+    query: query
+  };
+}
 
 export const submitProfile = async e => {
   const url = `${API}/dashboard/profile/edit`;

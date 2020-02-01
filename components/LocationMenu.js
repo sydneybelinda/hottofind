@@ -106,7 +106,7 @@ export default function LocationMenu(props) {
     }
 
     if (city == "ALL CITIES") {
-      var href = pathname + "/" + props.catindex + "/" + props.keyindex;
+      var href = "/posts/" + props.catindex + "/" + props.keyindex;
     }
 
     router.push(href);

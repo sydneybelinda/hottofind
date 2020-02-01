@@ -183,7 +183,7 @@ function Index(props) {
                   <Grid
                     className={classes.gitem}
                     item
-                    key={post.title}
+                    key={`${post.title}-${post.id}`}
                     xs={12}
                     sm={4}
                     md={3}
@@ -231,8 +231,13 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async ctx => {
+Index.getInitialProps = async (req,ctx) => {
   const { API, COUNTRYCODE } = config;
+
+  //const host  = req.headers.host || window.location.hostname
+
+
+
 
   const posts = await Queries.getlatest(COUNTRYCODE);
 

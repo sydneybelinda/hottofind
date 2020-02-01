@@ -141,8 +141,10 @@ const theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["crea
 
 module.exports = {
   PRIVATEKEY: "wowwow",
-  URL: "http://localhost:3000",
-  API: "http://localhost:3000/api",
+  // URL: "http://localhost:3000",
+  // API: "http://localhost:3000/api",
+  URL: "http://au.hottofind.com:3000",
+  API: "http://au.hottofind.com:3000/api",
   COUNTRYCODE: "au"
 };
 
@@ -211,6 +213,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "core-js/library/fn/parse-int");
 
 /***/ }),
 
@@ -2146,7 +2159,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/theme */ "./components/theme.js");
 /* harmony import */ var _utils_queries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/queries */ "./utils/queries.js");
 
-var _jsxFileName = "C:\\src\\hottofindtest\\pages\\_app.js";
+var _jsxFileName = "C:\\src\\hottofind\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 
@@ -2243,7 +2256,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
 /*!**************************!*\
   !*** ./utils/queries.js ***!
   \**************************/
-/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, submitProfile, uploadProfilePhoto, deleteAvatar */
+/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, getPage, submitProfile, uploadProfilePhoto, deleteAvatar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2257,17 +2270,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllCities", function() { return getAllCities; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getlatest", function() { return getlatest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPage", function() { return getPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProfile", function() { return submitProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadProfilePhoto", function() { return uploadProfilePhoto; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAvatar", function() { return deleteAvatar; });
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next-cookies */ "next-cookies");
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../config */ "./config.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next-cookies */ "next-cookies");
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../config */ "./config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -2276,12 +2293,12 @@ const deletePost = async id => {
   const url = `/api/post/delete`;
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()({
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
         id: id
       })
     });
@@ -2304,12 +2321,12 @@ const deleteFile = async name => {
   const url = `/api/dashboard/file/delete`;
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()({
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
         name: name
       })
     });
@@ -2331,22 +2348,22 @@ const deleteFile = async name => {
   }
 };
 const getUserPosts = async username => {
-  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(`${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/posts/byuser/${username}`);
+  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(`${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/byuser/${username}`);
   let posts = await res.json();
   return posts;
 };
 const checkUserLogin = async ctx => {
   const {
     token
-  } = next_cookies__WEBPACK_IMPORTED_MODULE_2___default()(ctx);
-  const apiUrl = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/profile`;
+  } = next_cookies__WEBPACK_IMPORTED_MODULE_3___default()(ctx);
+  const apiUrl = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/profile`;
 
   const redirectOnError = () => false ? undefined : ctx.res.writeHead(302, {
     Location: "/login"
   }).end();
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(apiUrl, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(apiUrl, {
       credentials: "include",
       headers: {
         // Authorization: JSON.stringify({ token })
@@ -2367,57 +2384,94 @@ const checkUserLogin = async ctx => {
   }
 };
 const getPost = async id => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/post/id/${id}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/post/id/${id}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   const post = await data.json();
   return post;
 };
 const getCities = async countrycode => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/city/get/${countrycode}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get/${countrycode}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   let cities = await data.json();
   return cities;
 };
 const getAllCities = async () => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/city/get`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   let cities = await data.json();
   return cities;
 };
 const getCategories = async () => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/category/get`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/category/get`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   let categories = await data.json();
   return categories;
 };
 const getlatest = async c => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/posts/latest?countrycode=${c}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/latest?countrycode=${c}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   let posts = await data.json();
   return posts;
 };
+const getPage = async query => {
+  const {
+    slug,
+    city,
+    page = 1
+  } = query;
+  let url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/get?countrycode=${_config__WEBPACK_IMPORTED_MODULE_4__["COUNTRYCODE"]}`;
+
+  if (slug[0]) {
+    url += `&catindex=${slug[0]}`;
+  }
+
+  if (slug[1]) {
+    url += `&keyindex=${slug[1]}`;
+  }
+
+  if (city) {
+    url += `&city=${city}`;
+  }
+
+  if (page) {
+    url += `&page=${page}`;
+  }
+
+  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  let data = await res.json();
+  const urlb = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get/${_config__WEBPACK_IMPORTED_MODULE_4__["COUNTRYCODE"]}`;
+  const resb = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(urlb);
+  let cities = await resb.json();
+  return {
+    posts: data,
+    cities: cities,
+    page: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(page, 10),
+    city: city,
+    query: query
+  };
+};
 const submitProfile = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/edit`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/edit`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
+    body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
   });
   let submit = await data.json();
   return submit;
 };
 const uploadProfilePhoto = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/changeavatar`;
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/changeavatar`;
 
   try {
-    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
+    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
     });
     let resp = await data;
     return resp;
@@ -2430,15 +2484,15 @@ const uploadProfilePhoto = async e => {
   }
 };
 const deleteAvatar = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/deleteavatar`;
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/deleteavatar`;
 
   try {
-    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
+    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
     });
     let resp = await data;
     return resp;
@@ -2561,6 +2615,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "core-js/library/fn/parse-int":
+/*!***********************************************!*\
+  !*** external "core-js/library/fn/parse-int" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/parse-int");
 
 /***/ }),
 

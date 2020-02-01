@@ -46,8 +46,10 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["create
 
 module.exports = {
   PRIVATEKEY: "wowwow",
-  URL: "http://localhost:3000",
-  API: "http://localhost:3000/api",
+  // URL: "http://localhost:3000",
+  // API: "http://localhost:3000/api",
+  URL: "http://au.hottofind.com:3000",
+  API: "http://au.hottofind.com:3000/api",
   COUNTRYCODE: "au"
 };
 
@@ -182,6 +184,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "./no
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/set-prototype-of */ "./node_modules/core-js/library/fn/object/set-prototype-of.js");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "./node_modules/core-js/library/fn/parse-int.js");
 
 /***/ }),
 
@@ -3295,7 +3308,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, easing, duration, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6399,6 +6412,19 @@ module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/fn/parse-int.js":
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/library/fn/parse-int.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ../modules/es6.parse-int */ "./node_modules/core-js/library/modules/es6.parse-int.js");
+module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/core-js/library/modules/_core.js").parseInt;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/fn/promise.js":
 /*!****************************************************!*\
   !*** ./node_modules/core-js/library/fn/promise.js ***!
@@ -8306,6 +8332,26 @@ module.exports = function (KEY, exec) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/modules/_parse-int.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_parse-int.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $parseInt = __webpack_require__(/*! ./_global */ "./node_modules/core-js/library/modules/_global.js").parseInt;
+var $trim = __webpack_require__(/*! ./_string-trim */ "./node_modules/core-js/library/modules/_string-trim.js").trim;
+var ws = __webpack_require__(/*! ./_string-ws */ "./node_modules/core-js/library/modules/_string-ws.js");
+var hex = /^[-+]?0[xX]/;
+
+module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? function parseInt(str, radix) {
+  var string = $trim(String(str), 3);
+  return $parseInt(string, (radix >>> 0) || (hex.test(string) ? 16 : 10));
+} : $parseInt;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/modules/_perform.js":
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/library/modules/_perform.js ***!
@@ -8623,6 +8669,60 @@ module.exports = function (TO_STRING) {
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_string-trim.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_string-trim.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+var defined = __webpack_require__(/*! ./_defined */ "./node_modules/core-js/library/modules/_defined.js");
+var fails = __webpack_require__(/*! ./_fails */ "./node_modules/core-js/library/modules/_fails.js");
+var spaces = __webpack_require__(/*! ./_string-ws */ "./node_modules/core-js/library/modules/_string-ws.js");
+var space = '[' + spaces + ']';
+var non = '\u200b\u0085';
+var ltrim = RegExp('^' + space + space + '*');
+var rtrim = RegExp(space + space + '*$');
+
+var exporter = function (KEY, exec, ALIAS) {
+  var exp = {};
+  var FORCE = fails(function () {
+    return !!spaces[KEY]() || non[KEY]() != non;
+  });
+  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];
+  if (ALIAS) exp[ALIAS] = fn;
+  $export($export.P + $export.F * FORCE, 'String', exp);
+};
+
+// 1 -> String#trimLeft
+// 2 -> String#trimRight
+// 3 -> String#trim
+var trim = exporter.trim = function (string, TYPE) {
+  string = String(defined(string));
+  if (TYPE & 1) string = string.replace(ltrim, '');
+  if (TYPE & 2) string = string.replace(rtrim, '');
+  return string;
+};
+
+module.exports = exporter;
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_string-ws.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_string-ws.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
+  '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
 
 
 /***/ }),
@@ -9223,6 +9323,21 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(/*! ./_set-pr
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/es6.parse-int.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/es6.parse-int.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+var $parseInt = __webpack_require__(/*! ./_parse-int */ "./node_modules/core-js/library/modules/_parse-int.js");
+// 18.2.5 parseInt(string, radix)
+$export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt });
 
 
 /***/ }),
@@ -18402,7 +18517,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\src\\hottofindtest\\pages\\_app.js";
+var _jsxFileName = "C:\\src\\hottofind\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement;
 
 
@@ -18539,7 +18654,7 @@ function (_App) {
 /*!**************************!*\
   !*** ./utils/queries.js ***!
   \**************************/
-/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, submitProfile, uploadProfilePhoto, deleteAvatar */
+/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, getPage, submitProfile, uploadProfilePhoto, deleteAvatar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18553,19 +18668,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllCities", function() { return getAllCities; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getlatest", function() { return getlatest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPage", function() { return getPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProfile", function() { return submitProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadProfilePhoto", function() { return uploadProfilePhoto; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAvatar", function() { return deleteAvatar; });
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! isomorphic-unfetch */ "./node_modules/next/dist/build/polyfills/fetch/index.js");
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next-cookies */ "./node_modules/next-cookies/index.js");
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../config */ "./config.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! isomorphic-unfetch */ "./node_modules/next/dist/build/polyfills/fetch/index.js");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next-cookies */ "./node_modules/next-cookies/index.js");
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../config */ "./config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -18573,19 +18692,19 @@ __webpack_require__.r(__webpack_exports__);
 
 var deletePost = function deletePost(id) {
   var url, response, error;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function deletePost$(_context) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function deletePost$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           url = "/api/post/delete";
           _context.prev = 1;
           _context.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
+            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()({
               id: id
             })
           }));
@@ -18628,19 +18747,19 @@ var deletePost = function deletePost(id) {
 };
 var deleteFile = function deleteFile(name) {
   var url, response, error;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function deleteFile$(_context2) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function deleteFile$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           url = "/api/dashboard/file/delete";
           _context2.prev = 1;
           _context2.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
+            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()({
               name: name
             })
           }));
@@ -18682,17 +18801,17 @@ var deleteFile = function deleteFile(name) {
 };
 var getUserPosts = function getUserPosts(username) {
   var res, posts;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getUserPosts$(_context3) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getUserPosts$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()("".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/posts/byuser/").concat(username)));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()("".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/posts/byuser/").concat(username)));
 
         case 2:
           res = _context3.sent;
           _context3.next = 5;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(res.json());
 
         case 5:
           posts = _context3.sent;
@@ -18708,12 +18827,12 @@ var getUserPosts = function getUserPosts(username) {
 var checkUserLogin = function checkUserLogin(ctx) {
   var _nextCookie, token, apiUrl, redirectOnError, response, js, user;
 
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function checkUserLogin$(_context4) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function checkUserLogin$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _nextCookie = next_cookies__WEBPACK_IMPORTED_MODULE_3___default()(ctx), token = _nextCookie.token;
-          apiUrl = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/profile");
+          _nextCookie = next_cookies__WEBPACK_IMPORTED_MODULE_4___default()(ctx), token = _nextCookie.token;
+          apiUrl = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/profile");
 
           redirectOnError = function redirectOnError() {
             return true ? Router.push("/login") : undefined;
@@ -18721,7 +18840,7 @@ var checkUserLogin = function checkUserLogin(ctx) {
 
           _context4.prev = 3;
           _context4.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(apiUrl, {
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(apiUrl, {
             credentials: "include",
             headers: {
               // Authorization: JSON.stringify({ token })
@@ -18738,7 +18857,7 @@ var checkUserLogin = function checkUserLogin(ctx) {
           }
 
           _context4.next = 10;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(response.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(response.json());
 
         case 10:
           js = _context4.sent;
@@ -18747,7 +18866,7 @@ var checkUserLogin = function checkUserLogin(ctx) {
 
         case 15:
           _context4.next = 17;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(redirectOnError());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(redirectOnError());
 
         case 17:
           return _context4.abrupt("return", _context4.sent);
@@ -18770,18 +18889,18 @@ var checkUserLogin = function checkUserLogin(ctx) {
 };
 var getPost = function getPost(id) {
   var url, data, post;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getPost$(_context5) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getPost$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/post/id/").concat(id);
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/post/id/").concat(id);
           _context5.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
         case 3:
           data = _context5.sent;
           _context5.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
           post = _context5.sent;
@@ -18796,18 +18915,18 @@ var getPost = function getPost(id) {
 };
 var getCities = function getCities(countrycode) {
   var url, data, cities;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getCities$(_context6) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getCities$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/city/get/").concat(countrycode);
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/city/get/").concat(countrycode);
           _context6.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
         case 3:
           data = _context6.sent;
           _context6.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
           cities = _context6.sent;
@@ -18822,18 +18941,18 @@ var getCities = function getCities(countrycode) {
 };
 var getAllCities = function getAllCities() {
   var url, data, cities;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getAllCities$(_context7) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getAllCities$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/city/get");
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/city/get");
           _context7.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
         case 3:
           data = _context7.sent;
           _context7.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
           cities = _context7.sent;
@@ -18848,18 +18967,18 @@ var getAllCities = function getAllCities() {
 };
 var getCategories = function getCategories() {
   var url, data, categories;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getCategories$(_context8) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getCategories$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/category/get");
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/category/get");
           _context8.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
         case 3:
           data = _context8.sent;
           _context8.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
           categories = _context8.sent;
@@ -18874,18 +18993,18 @@ var getCategories = function getCategories() {
 };
 var getlatest = function getlatest(c) {
   var url, data, posts;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getlatest$(_context9) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getlatest$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/posts/latest?countrycode=").concat(c);
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/posts/latest?countrycode=").concat(c);
           _context9.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
         case 3:
           data = _context9.sent;
           _context9.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
           posts = _context9.sent;
@@ -18898,34 +19017,96 @@ var getlatest = function getlatest(c) {
     }
   });
 };
-var submitProfile = function submitProfile(e) {
-  var url, data, submit;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function submitProfile$(_context10) {
+var getPage = function getPage(query) {
+  var slug, city, _query$page, page, url, res, data, urlb, resb, cities;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getPage$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/dashboard/profile/edit");
-          _context10.next = 3;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+          slug = query.slug, city = query.city, _query$page = query.page, page = _query$page === void 0 ? 1 : _query$page;
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/posts/get?countrycode=").concat(_config__WEBPACK_IMPORTED_MODULE_5__["COUNTRYCODE"]);
+
+          if (slug[0]) {
+            url += "&catindex=".concat(slug[0]);
+          }
+
+          if (slug[1]) {
+            url += "&keyindex=".concat(slug[1]);
+          }
+
+          if (city) {
+            url += "&city=".concat(city);
+          }
+
+          if (page) {
+            url += "&page=".concat(page);
+          }
+
+          _context10.next = 8;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
+
+        case 8:
+          res = _context10.sent;
+          _context10.next = 11;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(res.json());
+
+        case 11:
+          data = _context10.sent;
+          urlb = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/city/get/").concat(_config__WEBPACK_IMPORTED_MODULE_5__["COUNTRYCODE"]);
+          _context10.next = 15;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(urlb));
+
+        case 15:
+          resb = _context10.sent;
+          _context10.next = 18;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(resb.json());
+
+        case 18:
+          cities = _context10.sent;
+          return _context10.abrupt("return", {
+            posts: data,
+            cities: cities,
+            page: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(page, 10),
+            city: city,
+            query: query
+          });
+
+        case 20:
+        case "end":
+          return _context10.stop();
+      }
+    }
+  });
+};
+var submitProfile = function submitProfile(e) {
+  var url, data, submit;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function submitProfile$(_context11) {
+    while (1) {
+      switch (_context11.prev = _context11.next) {
+        case 0:
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/dashboard/profile/edit");
+          _context11.next = 3;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
+            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()(e)
           }));
 
         case 3:
-          data = _context10.sent;
-          _context10.next = 6;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data.json());
+          data = _context11.sent;
+          _context11.next = 6;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data.json());
 
         case 6:
-          submit = _context10.sent;
-          return _context10.abrupt("return", submit);
+          submit = _context11.sent;
+          return _context11.abrupt("return", submit);
 
         case 8:
         case "end":
-          return _context10.stop();
+          return _context11.stop();
       }
     }
   });
@@ -18933,66 +19114,25 @@ var submitProfile = function submitProfile(e) {
 var uploadProfilePhoto = function uploadProfilePhoto(e) {
   var url, data, resp, _error$json, _resp;
 
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function uploadProfilePhoto$(_context11) {
-    while (1) {
-      switch (_context11.prev = _context11.next) {
-        case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/dashboard/profile/changeavatar");
-          _context11.prev = 1;
-          _context11.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
-          }));
-
-        case 4:
-          data = _context11.sent;
-          _context11.next = 7;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data);
-
-        case 7:
-          resp = _context11.sent;
-          return _context11.abrupt("return", resp);
-
-        case 11:
-          _context11.prev = 11;
-          _context11.t0 = _context11["catch"](1);
-          console.error("You have an error in your code or there are Network issues.", _context11.t0);
-          _error$json = _context11.t0.json(), _resp = _error$json.resp;
-          return _context11.abrupt("return", _resp);
-
-        case 16:
-        case "end":
-          return _context11.stop();
-      }
-    }
-  }, null, null, [[1, 11]]);
-};
-var deleteAvatar = function deleteAvatar(e) {
-  var url, data, resp, _error$json2, _resp2;
-
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function deleteAvatar$(_context12) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function uploadProfilePhoto$(_context12) {
     while (1) {
       switch (_context12.prev = _context12.next) {
         case 0:
-          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_4__["API"], "/dashboard/profile/deleteavatar");
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/dashboard/profile/changeavatar");
           _context12.prev = 1;
           _context12.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
+            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()(e)
           }));
 
         case 4:
           data = _context12.sent;
           _context12.next = 7;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(data);
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data);
 
         case 7:
           resp = _context12.sent;
@@ -19002,12 +19142,53 @@ var deleteAvatar = function deleteAvatar(e) {
           _context12.prev = 11;
           _context12.t0 = _context12["catch"](1);
           console.error("You have an error in your code or there are Network issues.", _context12.t0);
-          _error$json2 = _context12.t0.json(), _resp2 = _error$json2.resp;
-          return _context12.abrupt("return", _resp2);
+          _error$json = _context12.t0.json(), _resp = _error$json.resp;
+          return _context12.abrupt("return", _resp);
 
         case 16:
         case "end":
           return _context12.stop();
+      }
+    }
+  }, null, null, [[1, 11]]);
+};
+var deleteAvatar = function deleteAvatar(e) {
+  var url, data, resp, _error$json2, _resp2;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function deleteAvatar$(_context13) {
+    while (1) {
+      switch (_context13.prev = _context13.next) {
+        case 0:
+          url = "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["API"], "/dashboard/profile/deleteavatar");
+          _context13.prev = 1;
+          _context13.next = 4;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()(e)
+          }));
+
+        case 4:
+          data = _context13.sent;
+          _context13.next = 7;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(data);
+
+        case 7:
+          resp = _context13.sent;
+          return _context13.abrupt("return", resp);
+
+        case 11:
+          _context13.prev = 11;
+          _context13.t0 = _context13["catch"](1);
+          console.error("You have an error in your code or there are Network issues.", _context13.t0);
+          _error$json2 = _context13.t0.json(), _resp2 = _error$json2.resp;
+          return _context13.abrupt("return", _resp2);
+
+        case 16:
+        case "end":
+          return _context13.stop();
       }
     }
   }, null, null, [[1, 11]]);

@@ -12,6 +12,7 @@ import LocationMenu from "../../components/LocationMenu";
 import PostPreview from "../../components/postPreview";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";
+import * as Queries from "../../utils/queries"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -256,8 +257,7 @@ function Posts(props) {
       <Container maxWidth="xl" className={classes.cont}>
         <div className={classes.left}>
           <div className={classes.filter}>
-            {/* <PostAccordian categories={props.categories} catindex={catindex} keyindex={keyindex}  /> */}
-            <LocationMenu
+           <LocationMenu
               cities={props.cities}
               catindex={catindex}
               keyindex={keyindex}
@@ -287,7 +287,6 @@ function Posts(props) {
                 ))
               : ""}
           </Grid>
-          {/* End sub featured posts */}
           <div className={classes.pagination}>
             {props.page > 1 ? (
               <Link href={`/posts${pLock}`}>
@@ -323,45 +322,17 @@ function Posts(props) {
 }
 
 Posts.getInitialProps = async ({ query }) => {
-  // const res = await fetch('http://localhost:3000/api/posts/latest');
 
-  const { API, COUNTRYCODE } = config;
-  const { city, page = 1 } = query;
+const data = await Queries.getPage(query)
+  
 
-  //   let page = 1
-  //  if(query.page){
-  //   page = query.page
-  //  }
 
-  let url = `${API}/posts/get?countrycode=${COUNTRYCODE}`;
-
-  if (query.catindex) {
-    url += `&catindex=${query.catindex}`;
-  }
-  if (query.keyindex) {
-    url += `&keyindex=${query.keyindex}`;
-  }
-
-  if (city) {
-    url += `&city=${city}`;
-  }
-
-  if (page) {
-    url += `&page=${page}`;
-  }
-
-  const res = await fetch(url);
-  let data = await res.json();
-
-  const urlb = `${API}/city/get/${COUNTRYCODE}`;
-  const resb = await fetch(urlb);
-  let cities = await resb.json();
-
+  
   return {
-    posts: data,
-    cities: cities,
-    page: parseInt(page, 10),
-    city: city,
+    posts: data.posts,
+    cities: data.cities,
+    page: data.page,
+    city: data.city,
     query: query
   };
 };
