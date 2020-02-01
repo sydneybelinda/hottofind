@@ -2429,12 +2429,12 @@ const getPage = async query => {
 
   if (city) {
     url += `&city=${city}`;
-  }
+  } // if (page) {
+  //   url += `&page=${page}`;
+  // }
 
-  if (page) {
-    url += `&page=${page}`;
-  }
 
+  console.log(url);
   const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
   let data = await res.json();
   const urlb = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get/${_config__WEBPACK_IMPORTED_MODULE_4__["COUNTRYCODE"]}`;

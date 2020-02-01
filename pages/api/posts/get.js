@@ -7,7 +7,7 @@ export default async (req, res) => {
 
   const order = "";
   const limit = 100;
-  //  const offset = limit * (page-1)
+  const offset = (limit * page) -1
 
   let where = { country: countrycode };
 
@@ -47,8 +47,8 @@ export default async (req, res) => {
         }
       ],
       order: [["createdAt", "DESC"]],
-      limit: limit
-      //  offset: offset,
+      limit: limit,
+      offset: offset,
     });
 
     //   const posts = await Post.findAndCountAll({

@@ -153,9 +153,11 @@ export const getPage = async query => {
     url += `&city=${city}`;
   }
 
-  if (page) {
-    url += `&page=${page}`;
-  }
+  // if (page) {
+  //   url += `&page=${page}`;
+  // }
+
+  console.log(url)
 
   const res = await fetch(url);
   let data = await res.json();

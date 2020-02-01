@@ -19035,12 +19035,12 @@ var getPage = function getPage(query) {
 
           if (city) {
             url += "&city=".concat(city);
-          }
+          } // if (page) {
+          //   url += `&page=${page}`;
+          // }
 
-          if (page) {
-            url += "&page=".concat(page);
-          }
 
+          console.log(url);
           _context10.next = 8;
           return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()(url));
 
