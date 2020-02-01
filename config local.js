@@ -1,3 +1,6 @@
+
+// Rename config.js
+
 module.exports = {
   PRIVATEKEY: "wowwow",
   URL: "http://localhost:3000",
