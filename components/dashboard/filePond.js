@@ -37,16 +37,7 @@ class FileUploader extends React.Component {
     super(props);
 
     this.state = {
-      // Set initial files, type 'local' means this is a file
-      // that has already been uploaded to the server (see docs)
-      //  files: [
-      //     {
-      //       source: `${URL}/public/uploadedfiles/${this.props.files.name}`,
-      //       options: {
-      //         type: "local"
-      //       }
-      //     }
-      //  ]
+   
       files: []
     };
   }
@@ -56,7 +47,7 @@ class FileUploader extends React.Component {
       var files = [];
       this.props.files.map(file => {
         files.push({
-          source: `${URL}/uploadedimages/${file.name}`,
+          source: `${URL}/static/uploadedimages/${file.name}`,
           options: {
             type: "local"
           }
@@ -102,7 +93,7 @@ class FileUploader extends React.Component {
                 .then(load);
             },
             remove: (source, load, error) => {
-              var name = source.replace(`${URL}/uploadedimages/`, "");
+              var name = source.replace(`${URL}/static/uploadedimages/`, "");
 
               Queries.deleteFile(name);
 

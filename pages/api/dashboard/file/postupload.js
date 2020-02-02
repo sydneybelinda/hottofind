@@ -5,15 +5,17 @@ export default async (req, res) => {
 
   const form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
+
+
     const uploadedFile = files.file.path;
     const fileName = files.file.name;
 
-    fs.rename(uploadedFile, `public/uploadedimages/${fileName}`, function(err) {
+    fs.rename(uploadedFile, `static/uploadedimages/${fileName}`, function(err) {
       if (err) {
         return res.status(500).send(err);
       }
 
-      return res.status(200).send(`public/uploadedimages/${fileName}`);
+      return res.status(200).send(`static/uploadedimages/${fileName}`);
     });
   });
 };

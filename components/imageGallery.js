@@ -12,7 +12,7 @@ class MyGallery extends React.Component {
   }
 
   render() {
-    const url = `${URL}/uploadedimages/`;
+    const url = `${URL}/static/uploadedimages/`;
 
     if (this.props.files[0]) {
       var files = [];

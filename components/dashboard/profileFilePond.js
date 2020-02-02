@@ -56,7 +56,7 @@ class FileUploader extends React.Component {
       var files = [];
 
       files.push({
-        source: `${URL}/uploadedimages/profile/${this.props.user.avatar}`,
+        source: `${URL}/static/uploadedimages/profile/${this.props.user.avatar}`,
         options: {
           type: "local"
         }

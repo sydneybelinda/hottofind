@@ -215,7 +215,7 @@ class PostPreview extends React.Component {
   };
 
   addDefaultSrc = ev => {
-    ev.target.src = "/uploadedimages/noimage.jpg";
+    ev.target.src = "/static/uploadedimages/noimage.jpg";
   };
 
   render() {
@@ -225,12 +225,12 @@ class PostPreview extends React.Component {
     var image;
 
     if (post.files[0]) {
-      image = "/uploadedimages/" + post.files[0].name;
+      image = "/static/uploadedimages/" + post.files[0].name;
 
       // if (!fs.existsSync(image)) {
       //  image = "/uploadedimages/noimage.jpg";
       // }
-    } else image = "/uploadedimages/noimage.jpg";
+    } else image = "/static/uploadedimages/noimage.jpg";
 
     //const src = URL + image
 
@@ -271,7 +271,7 @@ class PostPreview extends React.Component {
               /> */}
             <Img
               className="img-responsive"
-              src={[image, "/uploadedimages/noimage.jpg"]}
+              src={[image, "/static/uploadedimages/noimage.jpg"]}
               alt={this.props.post.title}
               style={{
                 position: "absolute",
