@@ -262,7 +262,7 @@ function Post(props) {
                       <Grid item xs={12} md={2}>
                         <div className={classes.price}>
                           <h4 className={classes.price}>
-                            {post.price ? `${post.price} ${post.currency}` : ""}
+                            {post.price ? `$${post.price}` : ""}
                           </h4>
                         </div>
                       </Grid>

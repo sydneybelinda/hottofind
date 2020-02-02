@@ -158,6 +158,7 @@ function NestedList(props) {
               <ExpandMore className={classes.exicon} />
             )}
           </ListItem>
+          
           <Collapse in={accountOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <div className={classes.menuItem}>
@@ -192,7 +193,10 @@ function NestedList(props) {
         </>
       )}
       <Divider />
+      <ListItem button  className={classes.cats}>
+      <Link href={"/"}><div className={classes.cats}>Home</div></Link>
 
+      </ListItem>
       <ListItem button onClick={handleEmploymentClick} className={classes.cats}>
         <div className={classes.cats}>Employment</div>
         {employmentOpen ? (
