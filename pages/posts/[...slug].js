@@ -13,6 +13,8 @@ import PostPreview from "../../components/postPreview";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries"
+import Sort from "../../components/sort"
+import cookies from 'next-cookies'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -153,14 +155,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Posts(props) {
-  const [data, setData] = useState({ next: true, previous: true });
+
+  console.log(props.defaultSort)
+
+  
+  const [data, setData] = useState({ 
+    next: true, 
+    previous: true, 
+    limit: 100,
+    sort: 'latest'
+   });
 
   const classes = useStyles();
 
-  const acount = props.page * 100;
+  const total = props.posts.count || 0
+
+  const acount = props.page * data.limit;
 
   const router = useRouter();
   const { slug } = router.query;
+
+  var prevpage = parseInt(props.page) - 1;
+ var nextpage = parseInt(props.page) + 1;
+
+ console.log('nextpage: ', nextpage)
 
   const capitalize = s => {
     if (typeof s !== "string") return "";
@@ -184,21 +202,12 @@ function Posts(props) {
   if (keyindex) {
     pLock += `/${keyindex}`;
   }
+  pLock += `?`
+
   if (props.city) {
-    pLock += `?city=${props.city}`;
+    pLock += `city=${props.city}`;
   }
 
-  // if(keyindex){
-  //  pLock = `/${catindex}/${keyindex}`
-  // } else {
-  //    pLock = `/${catindex}`
-  // }
-
-  // var cty;
-
-  // if (props.city){
-  //   cty = `&city=${props.city}`
-  // }
 
   if (category) {
     var cat = category.maincategory;
@@ -210,10 +219,8 @@ function Posts(props) {
 
   return (
     <Layout user={props.user} categories={props.categories}>
-      {/* Main featured post */}
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
-          {/* Increase the priority of the hero background image */}
           {
             <img
               style={{ display: "none" }}
@@ -252,8 +259,6 @@ function Posts(props) {
         </Container>
       </Paper>
       <Breadcrumbs query={props.query} categories={props.categories} />
-      {/* End main featured post */}
-      {/* Sub featured posts */}
       <Container maxWidth="xl" className={classes.cont}>
         <div className={classes.left}>
           <div className={classes.filter}>
@@ -268,7 +273,7 @@ function Posts(props) {
         <div className={classes.right}>
           <Grid container spacing={4} className={classes.grid}>
             <Grid item xs={12} md={12}>
-              {/* <h2>Latest Posts</h2> */}
+<Sort total={total} page={props.page} limit={data.limit} defaultSort={props.defaultSort} />
               <Divider />
             </Grid>
             {props.posts.rows
@@ -289,28 +294,32 @@ function Posts(props) {
           </Grid>
           <div className={classes.pagination}>
             {props.page > 1 ? (
-              <Link href={`/posts${pLock}`}>
-                <a>First page</a>
+              <Link href={`${pLock.replace("?",'')}`}>
+                First page
               </Link>
             ) : (
               ""
             )}
             {props.page > 1 ? (
+              <Link href={`${pLock}&page=${prevpage}`}>
               <button
-                onClick={() => router.push(`${pLock}&page=${props.page - 1}`)}
+              // onClick={() => router.push(`${pLock}&page=${prevpage}`)}
                 disabled={props.page <= 1}
               >
                 PREV
               </button>
+              </Link>
             ) : (
               ""
             )}
             {props.posts.count > acount ? (
+              <Link href={`${pLock}&page=${nextpage}`}>
               <button
-                onClick={() => router.push(`${pLock}&page=${props.page + 1}`)}
+               // onClick={() => router.push(`${pLock}&page=${nextpage}`)}
               >
                 NEXT
               </button>
+              </Link>
             ) : (
               ""
             )}
@@ -321,11 +330,15 @@ function Posts(props) {
   );
 }
 
-Posts.getInitialProps = async ({ query }) => {
+Posts.getInitialProps = async (ctx) => {
 
-const data = await Queries.getPage(query)
+
+
   
 
+const data = await Queries.getPage(ctx)
+  
+const defaultSort = cookies(ctx).defaultSort
 
   
   return {
@@ -333,7 +346,8 @@ const data = await Queries.getPage(query)
     cities: data.cities,
     page: data.page,
     city: data.city,
-    query: query
+    query: ctx.query,
+    defaultSort: defaultSort
   };
 };
 

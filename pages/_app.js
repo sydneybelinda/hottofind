@@ -5,10 +5,12 @@ import Head from "next/head";
 import React from "react";
 import theme from "../components/theme";
 import * as Queries from "../utils/queries";
+import cookies from 'next-cookies'
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const categories = await Queries.getCategories();
+
 
     let pageProps = {};
 
@@ -17,7 +19,9 @@ export default class MyApp extends App {
       //   pageProps.config = config
     }
 
+
     pageProps.categories = categories;
+    pageProps.defaultSort = cookies(ctx).defaultSort || ''
 
     return { pageProps };
   }

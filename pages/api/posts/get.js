@@ -1,13 +1,30 @@
 import { File, Post } from "../../../models";
 
 export default async (req, res) => {
+
+  async function getSort(p) {
+        switch(p) {
+      case 'latest':
+        return ["createdAt", "DESC"];
+        case 'oldest':
+          return ["createdAt", "ASC"];
+      default:
+        return ["createdAt", "DESC"]
+    }
+
+  }
+
+
+
   const {
-    query: { catindex, keyindex, countrycode, city, page = 1 }
+    query: { catindex, keyindex, countrycode, city, sort, page = 1 }
   } = req;
 
-  const order = "";
   const limit = 100;
-  const offset = (limit * page) -1
+  const offset = (limit * page) - limit
+  const order = await getSort(sort)
+
+  console.log("offset: ", offset)
 
   let where = { country: countrycode };
 
@@ -39,6 +56,8 @@ export default async (req, res) => {
 
   try {
     const posts = await Post.findAndCountAll({
+      limit,
+      offset,
       where: where,
       include: [
         {
@@ -46,9 +65,10 @@ export default async (req, res) => {
           as: "files"
         }
       ],
-      order: [["createdAt", "DESC"]],
-      limit: limit,
-      offset: offset,
+      distinct:true,
+      order: [order],
+    //  limit: limit,
+    //  offset: offset,
     });
 
     //   const posts = await Post.findAndCountAll({

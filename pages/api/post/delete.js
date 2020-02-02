@@ -3,7 +3,7 @@ import { Post } from "../../../models";
 export default async (req, res) => {
   if (req.method === "POST") {
     const id = req.body.id;
-    console.log(id);
+ 
 
     try {
       const post = await Post.destroy({

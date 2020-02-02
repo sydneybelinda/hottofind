@@ -69,7 +69,7 @@ class UserPosts extends React.Component {
         ? this.props.posts.map(post => {
             const dateToFormat = post.updatedAt;
             const title = post.title;
-            // const status = this.checkStatus(post.status)
+  
 
             const status = "";
             const action = (

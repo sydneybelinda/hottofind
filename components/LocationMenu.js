@@ -12,6 +12,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const useStyles = makeStyles({
+  root: {
+
+  },
   card: {
     minWidth: 275
   },

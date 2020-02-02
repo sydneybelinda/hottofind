@@ -1,5 +1,6 @@
 import { slide as Menu } from "react-burger-menu";
 import MenuList from "./menuList";
+import Link from "next/link";
 import "./styles.css";
 
 class mobileMenu extends React.Component {
@@ -13,11 +14,11 @@ class mobileMenu extends React.Component {
   render() {
     return (
       <>
-        <div className="brand"> HotToFind</div>
+        <div className="brand"><Link href="/profile"><a className="homelink">HotToFind</a></Link></div>
         <Menu right>
           <MenuList user={this.props.user} categories={this.props.categories} />
         </Menu>
-      </>
+        </>
     );
   }
 }

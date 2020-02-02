@@ -232,8 +232,7 @@ function Post(props) {
     e => e.catindex === props.query.catindex
   );
 
-  //  }
-  //if(props.query.keyindex){
+
   const subcat = props.categories.find(
     e => e.keyindex === props.query.keyindex
   );
@@ -338,6 +337,8 @@ function Post(props) {
 
 Post.getInitialProps = async ({ query, req }) => {
   const id = query.id;
+
+  let viewCount = await Queries.incrementViewCount(id);
 
   let post = await Queries.getPost(id);
   return { query, post };

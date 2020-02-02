@@ -9,10 +9,6 @@ import React from "react";
 import * as Queries from "../../utils/queries";
 import SimpleSelect from "./simpleSelect";
 
-// const UploadComponent = dynamic(() => import("./uploadcomponent"), {
-//   ssr: false
-// });
-
 const ProfileFilePond = dynamic(() => import("./profileFilePond"), {
   ssr: false
 });

@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import nextCookie from "next-cookies";
 import { API, COUNTRYCODE } from "../config";
+import cookies from 'next-cookies'
 
 export const deletePost = async id => {
   const url = `/api/post/delete`;
@@ -135,12 +136,18 @@ export const getlatest = async c => {
   return posts;
 };
 
-export const getPage = async query => {
+export const getPage = async (ctx) => {
+
+  console.log(cookies(ctx).defaultSort)
+
+  const sort = cookies(ctx).defaultSort;
+
+  const {query} = ctx
 
   const { slug, city, page = 1 } = query 
 
   
-  let url = `${API}/posts/get?countrycode=${COUNTRYCODE}`;
+  let url = `${API}/posts/get?countrycode=${COUNTRYCODE}&sort=${sort}`;
 
   if (slug[0]) {
     url += `&catindex=${slug[0]}`;
@@ -153,14 +160,15 @@ export const getPage = async query => {
     url += `&city=${city}`;
   }
 
-  // if (page) {
-  //   url += `&page=${page}`;
-  // }
+  if (page) {
+    url += `&page=${page}`;
+  }
 
-  console.log(url)
 
   const res = await fetch(url);
   let data = await res.json();
+
+  console.log(url)
 
   const urlb = `${API}/city/get/${COUNTRYCODE}`;
   const resb = await fetch(urlb);
@@ -169,7 +177,7 @@ export const getPage = async query => {
   return {
     posts: data,
     cities: cities,
-    page: parseInt(page, 10),
+    page: page,
     city: city,
     query: query
   };
@@ -237,4 +245,12 @@ export const deleteAvatar = async e => {
 
     return resp;
   }
+};
+
+export const incrementViewCount = async c => {
+  const url = `${API}/post/increment/${c}`;
+  const data = await fetch(url);
+  let post = await data.json();
+
+  return post;
 };

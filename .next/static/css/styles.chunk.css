@@ -384,4 +384,9 @@
     width: 100%;
 }
 
+.homelink{
+  color: inherit;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=styles.chunk.css.map*/

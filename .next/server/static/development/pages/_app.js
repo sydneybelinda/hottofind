@@ -214,17 +214,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "core-js/library/fn/parse-int");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/promise.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/promise.js ***!
@@ -2156,9 +2145,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/theme */ "./components/theme.js");
 /* harmony import */ var _utils_queries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/queries */ "./utils/queries.js");
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next-cookies */ "next-cookies");
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_8__);
 
 var _jsxFileName = "C:\\src\\hottofind\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
+
 
 
 
@@ -2179,6 +2171,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
     }
 
     pageProps.categories = categories;
+    pageProps.defaultSort = next_cookies__WEBPACK_IMPORTED_MODULE_8___default()(ctx).defaultSort || '';
     return {
       pageProps
     };
@@ -2201,19 +2194,19 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
     return __jsx(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 36
+        lineNumber: 40
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 37
+        lineNumber: 41
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 38
+        lineNumber: 42
       },
       __self: this
     }, "My page"), __jsx("meta", {
@@ -2221,26 +2214,26 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "minimum-scale=1, initial-scale=1, width=device-width",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 39
+        lineNumber: 43
       },
       __self: this
     })), __jsx(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["ThemeProvider"], {
       theme: _components_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 48
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_1___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 50
       },
       __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 51
       },
       __self: this
     }))));
@@ -2254,7 +2247,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
 /*!**************************!*\
   !*** ./utils/queries.js ***!
   \**************************/
-/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, getPage, submitProfile, uploadProfilePhoto, deleteAvatar */
+/*! exports provided: deletePost, deleteFile, getUserPosts, checkUserLogin, getPost, getCities, getAllCities, getCategories, getlatest, getPage, submitProfile, uploadProfilePhoto, deleteAvatar, incrementViewCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2272,16 +2265,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProfile", function() { return submitProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadProfilePhoto", function() { return uploadProfilePhoto; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAvatar", function() { return deleteAvatar; });
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next-cookies */ "next-cookies");
-/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../config */ "./config.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementViewCount", function() { return incrementViewCount; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next-cookies */ "next-cookies");
+/* harmony import */ var next_cookies__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_cookies__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../config */ "./config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -2291,12 +2283,12 @@ const deletePost = async id => {
   const url = `/api/post/delete`;
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()({
         id: id
       })
     });
@@ -2319,12 +2311,12 @@ const deleteFile = async name => {
   const url = `/api/dashboard/file/delete`;
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()({
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()({
         name: name
       })
     });
@@ -2346,22 +2338,22 @@ const deleteFile = async name => {
   }
 };
 const getUserPosts = async username => {
-  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(`${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/byuser/${username}`);
+  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(`${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/posts/byuser/${username}`);
   let posts = await res.json();
   return posts;
 };
 const checkUserLogin = async ctx => {
   const {
     token
-  } = next_cookies__WEBPACK_IMPORTED_MODULE_3___default()(ctx);
-  const apiUrl = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/profile`;
+  } = next_cookies__WEBPACK_IMPORTED_MODULE_2___default()(ctx);
+  const apiUrl = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/profile`;
 
   const redirectOnError = () => false ? undefined : ctx.res.writeHead(302, {
     Location: "/login"
   }).end();
 
   try {
-    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(apiUrl, {
+    const response = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(apiUrl, {
       credentials: "include",
       headers: {
         // Authorization: JSON.stringify({ token })
@@ -2382,42 +2374,47 @@ const checkUserLogin = async ctx => {
   }
 };
 const getPost = async id => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/post/id/${id}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/post/id/${id}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   const post = await data.json();
   return post;
 };
 const getCities = async countrycode => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get/${countrycode}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/city/get/${countrycode}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   let cities = await data.json();
   return cities;
 };
 const getAllCities = async () => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/city/get`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   let cities = await data.json();
   return cities;
 };
 const getCategories = async () => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/category/get`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/category/get`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   let categories = await data.json();
   return categories;
 };
 const getlatest = async c => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/latest?countrycode=${c}`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/posts/latest?countrycode=${c}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   let posts = await data.json();
   return posts;
 };
-const getPage = async query => {
+const getPage = async ctx => {
+  console.log(next_cookies__WEBPACK_IMPORTED_MODULE_2___default()(ctx).defaultSort);
+  const sort = next_cookies__WEBPACK_IMPORTED_MODULE_2___default()(ctx).defaultSort;
+  const {
+    query
+  } = ctx;
   const {
     slug,
     city,
     page = 1
   } = query;
-  let url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/posts/get?countrycode=${_config__WEBPACK_IMPORTED_MODULE_4__["COUNTRYCODE"]}`;
+  let url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/posts/get?countrycode=${_config__WEBPACK_IMPORTED_MODULE_3__["COUNTRYCODE"]}&sort=${sort}`;
 
   if (slug[0]) {
     url += `&catindex=${slug[0]}`;
@@ -2429,47 +2426,48 @@ const getPage = async query => {
 
   if (city) {
     url += `&city=${city}`;
-  } // if (page) {
-  //   url += `&page=${page}`;
-  // }
+  }
 
+  if (page) {
+    url += `&page=${page}`;
+  }
 
-  console.log(url);
-  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url);
+  const res = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
   let data = await res.json();
-  const urlb = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/city/get/${_config__WEBPACK_IMPORTED_MODULE_4__["COUNTRYCODE"]}`;
-  const resb = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(urlb);
+  console.log(url);
+  const urlb = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/city/get/${_config__WEBPACK_IMPORTED_MODULE_3__["COUNTRYCODE"]}`;
+  const resb = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(urlb);
   let cities = await resb.json();
   return {
     posts: data,
     cities: cities,
-    page: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(page, 10),
+    page: page,
     city: city,
     query: query
   };
 };
 const submitProfile = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/edit`;
-  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/edit`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
+    body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
   });
   let submit = await data.json();
   return submit;
 };
 const uploadProfilePhoto = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/changeavatar`;
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/changeavatar`;
 
   try {
-    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
     });
     let resp = await data;
     return resp;
@@ -2482,15 +2480,15 @@ const uploadProfilePhoto = async e => {
   }
 };
 const deleteAvatar = async e => {
-  const url = `${_config__WEBPACK_IMPORTED_MODULE_4__["API"]}/dashboard/profile/deleteavatar`;
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/dashboard/profile/deleteavatar`;
 
   try {
-    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
+    const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(e)
+      body: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(e)
     });
     let resp = await data;
     return resp;
@@ -2501,6 +2499,12 @@ const deleteAvatar = async e => {
     } = error.json();
     return resp;
   }
+};
+const incrementViewCount = async c => {
+  const url = `${_config__WEBPACK_IMPORTED_MODULE_3__["API"]}/post/increment/${c}`;
+  const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_1___default()(url);
+  let post = await data.json();
+  return post;
 };
 
 /***/ }),
@@ -2613,17 +2617,6 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/keys");
-
-/***/ }),
-
-/***/ "core-js/library/fn/parse-int":
-/*!***********************************************!*\
-  !*** external "core-js/library/fn/parse-int" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/library/fn/parse-int");
 
 /***/ }),
 
