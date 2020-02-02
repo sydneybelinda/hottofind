@@ -38,8 +38,26 @@ const useStyles = makeStyles(theme => ({
     fontSize: "10px"
   },
   contact: {
-    textAlign: "right"
-  }
+    [theme.breakpoints.up("sm")]: {
+      textAlign: "right"
+    },
+    textAlign: "center",
+    paddingTop: "40px"
+  },
+  company: {
+    [theme.breakpoints.up("sm")]: {
+      paddingBottom: "0px",
+      textAlign: 'left'
+    },
+    paddingBottom: "40px",
+    textAlign: 'center'
+  },
+  linksb: {
+    [theme.breakpoints.up("sm")]: {
+      textAlign: 'left'
+    },
+    textAlign: 'right'
+  },
 }));
 
 function Copyright() {
@@ -62,7 +80,7 @@ const Footer = props => {
       <div className={classes.topFooter}>
         <Container maxWidth="lg" spacing={3}>
           <Grid container>
-            <Grid item sm={4}>
+            <Grid item sm={4} xs={12}>
               <div className={classes.company}>
                 <Typography
                   variant="h6"
@@ -80,8 +98,8 @@ const Footer = props => {
                 </Typography>
               </div>
             </Grid>
-            <Grid item sm={2}></Grid>
-            <Grid item sm={2}>
+            <Grid item sm={2} xs={12}></Grid>
+            <Grid item sm={2} xs={6}>
               <div className={classes.links}>
                 <a href="/posts/employment">Jobs</a>
                 <br />
@@ -93,8 +111,8 @@ const Footer = props => {
                 <br />
               </div>
             </Grid>
-            <Grid item sm={2}>
-              <div className={classes.links}>
+            <Grid item sm={2} xs={6}>
+              <div className={classes.linksb}>
                 <a href="/posts/real-estate-selling">Realty - Buy</a>
                 <br />
                 <a href="/posts/real-estate-renting">Realty - Rent</a>
@@ -105,7 +123,7 @@ const Footer = props => {
                 <br />
               </div>
             </Grid>
-            <Grid item sm={2}>
+            <Grid item sm={2} xs={12}>
               <div className={classes.contact}>
                 <a href="mailto:info@hottofind.com">info@hottofind.com</a>
                 <p>
