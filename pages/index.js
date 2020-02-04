@@ -9,6 +9,7 @@ import PostPreview from "../components/postPreview";
 import config from "../config";
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
+import Search from '../components/search'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -56,7 +57,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
       paddingRight: 0
-    }
+    },
+    textAlign: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   mainGrid: {
     marginTop: theme.spacing(3)
@@ -124,6 +128,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: "auto",
     padding: "41px 20px",
     fontFamily: 'Lora, "Times New Roman", Times, Baskerville, Georgia, serif'
+  },
+  flex:{
+    justifyContent: "center"
   }
 }));
 
@@ -148,7 +155,7 @@ function Index(props) {
             />
           }
           <div className={classes.overlay} />
-          <Grid container>
+          <Grid container className={classes.flex}>
             <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 {/* <Typography component="h1" variant="h3" color="inherit" gutterBottom> */}
@@ -163,6 +170,8 @@ function Index(props) {
                   Buy and sell everything from used cars to mobile phones and
                   computers, or search for property, jobs and more
                 </p>
+
+                {/* <Search /> */}
                 {/* <Link variant="subtitle1" href="#">
                     Continue reading…
                   </Link> */}

@@ -44,6 +44,7 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["create
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// Rename config.js
 module.exports = {
   PRIVATEKEY: "wowwow",
   URL: "http://localhost:3000",
@@ -13661,7 +13662,7 @@ var Jss =
 function () {
   function Jss(options) {
     this.id = instanceCounter++;
-    this.version = "10.0.3";
+    this.version = "10.0.4";
     this.plugins = new PluginsRegistry();
     this.options = {
       id: {

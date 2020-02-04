@@ -139,6 +139,7 @@ const theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["crea
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// Rename config.js
 module.exports = {
   PRIVATEKEY: "wowwow",
   URL: "http://localhost:3000",
