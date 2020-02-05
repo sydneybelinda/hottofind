@@ -13,6 +13,7 @@ import Room from "@material-ui/icons/Room";
 import * as React from "react";
 import Moment from "react-moment";
 import * as Queries from "../../utils/queries";
+import {makeSlug} from "../constants"
 
 function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -240,7 +241,7 @@ const styles = theme => ({
   butDelete: {
     color: "red"
   },
-  cardActionArea: {
+  link: {
     width: "calc(100% - 55px)",
     minWidth: "calc(100% - 55px)",
     [theme.breakpoints.up("sm")]: {
@@ -276,6 +277,7 @@ class PostPreview extends React.Component {
    
       <Card className={classes.card}>
           <div className={classes.flexContainer}>
+            <Link href={`/post/${makeSlug(this.props.post.title, this.props.post.id)}`} className={classes.link}>
           <CardActionArea onClick={() => this._handleViewPost(post.id)} className={classes.cardActionArea}>
           <div className={classes.flexContainer}>
           <div className={classes.imageWrap}>
@@ -334,6 +336,7 @@ class PostPreview extends React.Component {
           </div>
 
             </CardActionArea>
+            </Link>
             <div className={classes.actions}>
             <div className={classes.root}>
             <Link href={`/dashboard/editpost/${post.id}`}>

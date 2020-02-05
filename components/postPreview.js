@@ -10,6 +10,8 @@ import * as React from "react";
 import Img from "react-image";
 //import ImageExists from 'image-exists';
 import Moment from "react-moment";
+import {makeSlug} from "./constants"
+import Link from "@material-ui/core/Link";
 
 // import Button from '../components/Button';
 
@@ -249,7 +251,8 @@ class PostPreview extends React.Component {
             </div>
           </div>
         </div>
-        <CardActionArea onClick={() => this._handleViewPost(post.id)}>
+        <Link href={`/post/${makeSlug(post.title, post.id)}`}>
+        <CardActionArea >
           <div className={classes.imageWrap}>
             {this.props.post.price ? (
               <div className={classes.price}>${this.props.post.price}</div>
@@ -260,15 +263,6 @@ class PostPreview extends React.Component {
               <RemoveRedEye className={classes.viewIcon} />{" "}
               {this.props.post.views}
             </div>
-            {/* <CardMedia
-                component="img"
-                alt={this.props.post.title}
-                height="100%"
-                image={image}
-                title={this.props.post.title}
-                style={{ position: "absolute", top:'50%', transform: 'translateY(-50%)' }}
-                onError={this.addDefaultSrc}
-              /> */}
             <Img
               className="img-responsive"
               src={[image, "/static/uploadedimages/noimage.jpg"]}
@@ -305,6 +299,7 @@ class PostPreview extends React.Component {
             </div>
           </CardContent>
         </CardActionArea>
+        </Link>
       </Card>
     );
   }

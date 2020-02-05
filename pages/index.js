@@ -11,6 +11,7 @@ import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
 import Search from '../components/search'
 
+
 const useStyles = makeStyles(theme => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`
@@ -161,7 +162,7 @@ function Index(props) {
                 {/* <Typography component="h1" variant="h3" color="inherit" gutterBottom> */}
                 <h1 className={classes.sitename}>
                   {" "}
-                  <span className={classes.hot}>HotToFind</span>{" "}
+                  <span className={classes.hot}>HotToFind</span>{" "} {config.COUNTRY}
                   <span className={classes.free}>Free Classifieds</span>{" "}
                   <span>{props.country}</span>
                 </h1>

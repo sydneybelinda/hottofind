@@ -9,6 +9,7 @@ import Layout from "../../components/layout";
 import PostBreadcrumbs from "../../components/PostBreadcrumbs";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
+import {getSlug} from "../../components/constants"
 
 // const nl2br = require("react-nl2br");
 
@@ -336,7 +337,7 @@ function Post(props) {
 }
 
 Post.getInitialProps = async ({ query, req }) => {
-  const id = query.id;
+  const id = getSlug(query.id);
 
   let viewCount = await Queries.incrementViewCount(id);
 

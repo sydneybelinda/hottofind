@@ -10,34 +10,31 @@ import React from "react";
 export const mainListItems = (
   <div>
     <Link href="/">
-      <a>
+
         <ListItem button>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-      </a>
     </Link>
     <Link href="/dashboard">
-      <a>
+
         <ListItem button>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-      </a>
+
     </Link>
     <Link href="/dashboard/editprofile">
-      <a>
         <ListItem button>
           <ListItemIcon>
             <AccountCircle />
           </ListItemIcon>
           <ListItemText primary="Edit Profile" />
         </ListItem>
-      </a>
     </Link>
   
   </div>
