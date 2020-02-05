@@ -1,33 +1,22 @@
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import React from 'react';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
 
-  },
-  card: {
-    minWidth: 275
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
-  },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
   },
   icon: {
     borderRadius: "50%",
@@ -65,12 +54,44 @@ const useStyles = makeStyles({
       backgroundColor: "#106ba3"
     }
   },
+ 
+}));
+
+const styles = theme => ({
   locHead: {
     marginBottom: "15px"
-  }
-});
+  },
+  butOpen: {
+    padding: "5px 5px",
+    minWidth: "43px",
+    float: "right"
+  },
+  card: {
+    minWidth: 275,
+    height: "63px",
+    [theme.breakpoints.up("sm")]: {
+    height: "100%"
+    }
+
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  },
+
+})
 
 function StyledRadio(props) {
+  // const [locOpen, setlocOpen] = useState(false);
+
+
   const classes = useStyles();
 
   return (
@@ -85,48 +106,78 @@ function StyledRadio(props) {
   );
 }
 
-export default function LocationMenu(props) {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(props.city);
-  const router = useRouter();
+class LocationMenu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+   
+      value: props.city
+    };
+
+    this.card = React.createRef();
+  }
+
+  render(){
+
+// export default function LocationMenu(props) {
+  const { classes, router } = this.props;
+
+  // const [value, setValue] = React.useState(props.city);
+
   const { pathname } = router;
   const bull = <span className={classes.bullet}>•</span>;
 
   const handleChange = event => {
-    setValue(event.target.value);
+    this.setState({ values: event.target.value });
     const city = event.target.value;
 
     var href = "/posts";
 
-    if (props.catindex) {
-      href += `/${props.catindex}`;
+    if (this.props.catindex) {
+      href += `/${this.props.catindex}`;
     }
-    if (props.keyindex) {
-      href += `/${props.keyindex}`;
+    if (this.props.keyindex) {
+      href += `/${this.props.keyindex}`;
     }
     if (city) {
       href += `?city=${city}`;
     }
 
     if (city == "ALL CITIES") {
-      var href = "/posts/" + props.catindex + "/" + props.keyindex;
+      var href = "/posts/" + this.props.catindex + "/" + this.props.keyindex;
     }
 
     router.push(href);
   };
 
+  const handleMenuChange = event => {
+
+    console.log("card: ", this.card)
+
+
+      if(this.card.current.offsetHeight == "63"){
+        this.card.current.style.height = "100%"
+      } else {
+        this.card.current.style.height = "63px"
+      }
+  };
+
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} ref={this.card}>
       <CardContent>
         <Typography variant="h5" component="h2" className={classes.locHead}>
-          LOCATION
+          LOCATION <Button variant="outlined" className={classes.butOpen} onClick={handleMenuChange}>      
+          <MenuIcon fontSize="small" />
+   
+        </Button>  
         </Typography>
         <FormControl component="fieldset">
           <RadioGroup
             defaultValue="ALL CITIES"
             aria-label="cities"
             name="cities"
-            value={value}
+            value={this.state.value}
             onChange={handleChange}
           >
             <FormControlLabel
@@ -135,7 +186,7 @@ export default function LocationMenu(props) {
               label="ALL CITIES"
               key="ALL CITIES"
             />
-            {props.cities.map(city => (
+            {this.props.cities.map(city => (
               <FormControlLabel
                 value={city.city.toLowerCase()}
                 control={<StyledRadio />}
@@ -150,3 +201,6 @@ export default function LocationMenu(props) {
     </Card>
   );
 }
+}
+
+export default withRouter(withStyles(styles)(LocationMenu))

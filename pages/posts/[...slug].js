@@ -12,9 +12,9 @@ import LocationMenu from "../../components/LocationMenu";
 import PostPreview from "../../components/postPreview";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";
-import * as Queries from "../../utils/queries"
-import Sort from "../../components/sort"
-import cookies from 'next-cookies'
+import * as Queries from "../../utils/queries";
+import Sort from "../../components/sort";
+import cookies from "next-cookies";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -126,10 +126,16 @@ const useStyles = makeStyles(theme => ({
   },
   left: {
     [theme.breakpoints.up("sm")]: {
-      display: "block"
+      display: "block",
+      width: "350px",
+      height: "100%"
     },
-    display: "none",
-    width: "350px",
+    
+    overflow: "hidden",
+    marginBottom: "15px",
+
+    width: "100%",
+
     flex: "none"
   },
   right: {
@@ -139,8 +145,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%"
   },
   cont: {
-    display: "flex",
-    flexDirection: "row"
+    display: "block",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      flexDirection: "row"
+    }
   },
   city: {
     textTransform: "capitalize"
@@ -155,20 +164,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Posts(props) {
+  console.log(props.defaultSort);
 
-  console.log(props.defaultSort)
-
-  
-  const [data, setData] = useState({ 
-    next: true, 
-    previous: true, 
+  const [data, setData] = useState({
+    next: true,
+    previous: true,
     limit: 100,
-    sort: 'latest'
-   });
+    sort: "latest"
+  });
 
   const classes = useStyles();
 
-  const total = props.posts.count || 0
+  const total = props.posts.count || 0;
 
   const acount = props.page * data.limit;
 
@@ -176,9 +183,9 @@ function Posts(props) {
   const { slug } = router.query;
 
   var prevpage = parseInt(props.page) - 1;
- var nextpage = parseInt(props.page) + 1;
+  var nextpage = parseInt(props.page) + 1;
 
- console.log('nextpage: ', nextpage)
+  console.log("nextpage: ", nextpage);
 
   const capitalize = s => {
     if (typeof s !== "string") return "";
@@ -202,12 +209,11 @@ function Posts(props) {
   if (keyindex) {
     pLock += `/${keyindex}`;
   }
-  pLock += `?`
+  pLock += `?`;
 
   if (props.city) {
     pLock += `city=${props.city}`;
   }
-
 
   if (category) {
     var cat = category.maincategory;
@@ -262,7 +268,7 @@ function Posts(props) {
       <Container maxWidth="xl" className={classes.cont}>
         <div className={classes.left}>
           <div className={classes.filter}>
-           <LocationMenu
+            <LocationMenu
               cities={props.cities}
               catindex={catindex}
               keyindex={keyindex}
@@ -273,7 +279,12 @@ function Posts(props) {
         <div className={classes.right}>
           <Grid container spacing={4} className={classes.grid}>
             <Grid item xs={12} md={12}>
-<Sort total={total} page={props.page} limit={data.limit} defaultSort={props.defaultSort} />
+              <Sort
+                total={total}
+                page={props.page}
+                limit={data.limit}
+                defaultSort={props.defaultSort}
+              />
               <Divider />
             </Grid>
             {props.posts.rows
@@ -294,31 +305,29 @@ function Posts(props) {
           </Grid>
           <div className={classes.pagination}>
             {props.page > 1 ? (
-              <Link href={`${pLock.replace("?",'')}`}>
-                First page
-              </Link>
+              <Link href={`${pLock.replace("?", "")}`}>First page</Link>
             ) : (
               ""
             )}
             {props.page > 1 ? (
               <Link href={`${pLock}&page=${prevpage}`}>
-              <button
-              // onClick={() => router.push(`${pLock}&page=${prevpage}`)}
-                disabled={props.page <= 1}
-              >
-                PREV
-              </button>
+                <button
+                  // onClick={() => router.push(`${pLock}&page=${prevpage}`)}
+                  disabled={props.page <= 1}
+                >
+                  PREV
+                </button>
               </Link>
             ) : (
               ""
             )}
             {props.posts.count > acount ? (
               <Link href={`${pLock}&page=${nextpage}`}>
-              <button
-               // onClick={() => router.push(`${pLock}&page=${nextpage}`)}
-              >
-                NEXT
-              </button>
+                <button
+                // onClick={() => router.push(`${pLock}&page=${nextpage}`)}
+                >
+                  NEXT
+                </button>
               </Link>
             ) : (
               ""
@@ -330,17 +339,11 @@ function Posts(props) {
   );
 }
 
-Posts.getInitialProps = async (ctx) => {
+Posts.getInitialProps = async ctx => {
+  const data = await Queries.getPage(ctx);
 
+  const defaultSort = cookies(ctx).defaultSort;
 
-
-  
-
-const data = await Queries.getPage(ctx)
-  
-const defaultSort = cookies(ctx).defaultSort
-
-  
   return {
     posts: data.posts,
     cities: data.cities,
