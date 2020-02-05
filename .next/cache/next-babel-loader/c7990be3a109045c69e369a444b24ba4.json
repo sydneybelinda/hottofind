@@ -1,1 +1,0 @@
-{"ast":null,"code":"function getHost(req) {\n  if (!req) return \"\";\n  const {\n    host\n  } = req.headers;\n\n  if (host.startsWith(\"localhost\")) {\n    return `http://${host}`;\n  }\n\n  return `https://${host}`;\n}\n\nexport default getHost;","map":null,"metadata":{},"sourceType":"module"}

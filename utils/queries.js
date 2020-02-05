@@ -59,8 +59,10 @@ export const deleteFile = async name => {
   }
 };
 
-export const getUserPosts = async username => {
-  const res = await fetch(`${API}/posts/byuser/${username}`);
+export const getUserPosts = async (username,ctx) => {
+
+  const sort = cookies(ctx).defaultSort;
+  const res = await fetch(`${API}/posts/byuser/${username}?sort=${sort}`);
   let posts = await res.json();
 
   return posts;

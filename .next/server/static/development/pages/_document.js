@@ -1545,6 +1545,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/theme */ "./components/theme.js");
+/* harmony import */ var emotion_server__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! emotion-server */ "emotion-server");
+/* harmony import */ var emotion_server__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(emotion_server__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -1564,19 +1566,20 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
 class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_9___default.a {
   render() {
     return __jsx("html", {
       lang: "en",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 9
+        lineNumber: 10
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_9__["Head"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 10
+        lineNumber: 11
       },
       __self: this
     }, __jsx("meta", {
@@ -1584,7 +1587,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_9___default.a {
       content: _components_theme__WEBPACK_IMPORTED_MODULE_11__["default"].palette.primary.main,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 13
       },
       __self: this
     }), __jsx("link", {
@@ -1592,25 +1595,25 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_9___default.a {
       href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 14
       },
       __self: this
     })), __jsx("body", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 19
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_9__["Main"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 20
       },
       __self: this
     }), __jsx(next_document__WEBPACK_IMPORTED_MODULE_9__["NextScript"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 21
       },
       __self: this
     })));
@@ -1642,13 +1645,13 @@ MyDocument.getInitialProps = async ctx => {
   // 4. page.render
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["ServerStyleSheets"]();
-  const originalRenderPage = ctx.renderPage;
+  const originalRenderPage = ctx.renderPage; // const style = extractCritical(page.html);
 
   ctx.renderPage = () => originalRenderPage({
     enhanceApp: App => props => sheets.collect(__jsx(App, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__["default"])({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 56
+        lineNumber: 60
       },
       __self: undefined
     })))
@@ -1657,7 +1660,8 @@ MyDocument.getInitialProps = async ctx => {
   const initialProps = await next_document__WEBPACK_IMPORTED_MODULE_9___default.a.getInitialProps(ctx);
   return _objectSpread({}, initialProps, {
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...react__WEBPACK_IMPORTED_MODULE_10___default.a.Children.toArray(initialProps.styles), sheets.getStyleElement()]
+    styles: [...react__WEBPACK_IMPORTED_MODULE_10___default.a.Children.toArray(initialProps.styles), sheets.getStyleElement() // style
+    ]
   });
 };
 
@@ -1859,6 +1863,17 @@ module.exports = require("core-js/library/fn/symbol/iterator");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/weak-map");
+
+/***/ }),
+
+/***/ "emotion-server":
+/*!*********************************!*\
+  !*** external "emotion-server" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("emotion-server");
 
 /***/ }),
 

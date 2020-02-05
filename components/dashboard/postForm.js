@@ -206,7 +206,9 @@ class PostForm extends React.Component {
         <form noValidate onSubmit={this.handleSubmit}>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={4}>
-              Photo
+            <Typography variant="h6" gutterBottom>
+                   Photos
+                  </Typography>
               <div
                 style={{
                   // backgroundImage: `url('${user.avatar}')`,
@@ -343,7 +345,7 @@ class PostForm extends React.Component {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <TextField
-                    required
+                  
                     id="lastname"
                     name="lastname"
                     label="Last Name"

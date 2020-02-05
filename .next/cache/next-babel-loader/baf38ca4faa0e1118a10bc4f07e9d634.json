@@ -1,1 +1,0 @@
-{"ast":null,"code":"module.exports = {\n  PRIVATEKEY: 'wowwow',\n  URL: 'http://localhost:3000',\n  API: 'http://localhost:3000/api',\n  COUNTRYCODE: 'au'\n};","map":null,"metadata":{},"sourceType":"script"}

@@ -1,1 +1,0 @@
-{"code":"(window.webpackJsonp=window.webpackJsonp||[]).push([[39],{\"0uTC\":function(n,u,e){\"use strict\";e.r(u),u.default=function(n,u){var e=n.query.username;u.end(\"Post: \".concat(e))}},X9in:function(n,u,e){(window.__NEXT_P=window.__NEXT_P||[]).push([\"/user/username/[username]\",function(){return e(\"0uTC\")}])}},[[\"X9in\",0]]]);"}

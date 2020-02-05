@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport Typography from \"@material-ui/core/Typography\";\nimport React from \"react\";\nexport default function Title(props) {\n  return __jsx(Typography, {\n    component: \"h2\",\n    variant: \"h6\",\n    color: \"primary\",\n    gutterBottom: true\n  }, props.children);\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default ((req, res) => {\n  const {\n    query: {\n      username\n    }\n  } = req;\n  res.end(`Post: ${username}`);\n});","map":null,"metadata":{},"sourceType":"module"}
