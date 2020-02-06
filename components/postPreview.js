@@ -41,7 +41,8 @@ const styles = theme => ({
       display: "block",
       paddingBottom: "69%",
       borderTop: "1px solid silver",
-      borderBottom: "1px solid silver"
+      borderBottom: "1px solid silver",
+      flex: 'none'
     }
   },
   cat: {
@@ -149,7 +150,10 @@ const styles = theme => ({
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    textAlign: "left"
+    textAlign: "left",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex"
+  }
   },
   personIcon: {
     height: "11px",
@@ -174,7 +178,11 @@ const styles = theme => ({
     lineHeight: "1.43",
     letterSpacing: "0.01071em",
     flex: "1",
-    textAlign: "right"
+    textAlign: "right",
+    position: "relative",
+    [theme.breakpoints.up("sm")]: {
+    display: "flex",
+    }
   },
   roomIcon: {
     height: "11px",
@@ -193,6 +201,10 @@ const styles = theme => ({
     display: "flex"
   },
   card: {
+
+    [theme.breakpoints.up("sm")]: {
+      height: "auto",
+    },
     height: "120px",
     boxShadow:
       "0 0px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 12px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
@@ -210,6 +222,7 @@ const styles = theme => ({
   content: {
     width: "70%",
     float: "right",
+    paddingBottom: 15,
     marginTop: "29px",
     [theme.breakpoints.up("sm")]: {
       width: "100%",
@@ -218,11 +231,25 @@ const styles = theme => ({
     }
   },
   gitem: {
-    padding: "2px 16px !important"
+    padding: "2px 16px !important",
+    [theme.breakpoints.up("sm")]: {
+      padding: "16px !important",
+    }
   },
   flex: {
-    display: "flex"
+    display: "flex", 
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+  },
+  spanCity: {
+    width: "calc(100% - 11px)",
+    maxWidth: "calc(100% - 11px)"
+  },
+  spanOwner: {
+    width: "calc(100% - 11px)",
+    maxWidth: "calc(100% - 11px)"
   }
+}
 });
 
 class PostPreview extends React.Component {
@@ -309,15 +336,22 @@ class PostPreview extends React.Component {
               {post.title ? post.title : "untitled"}
             </Typography>
             <div className={classes.cardBottom}>
-              <div className={classes.owner}>
+              {/* <div className={classes.owner}>
+              <div className={classes.cl}>
                 <Person className={classes.personIcon} />{" "}
-                {this.props.post.owner}
-              </div>
+                </div>
+                <div className={classes.spanOwner}>{this.props.post.owner}</div>
+              </div> */}
               <div className={classes.location}>
+             
                 <Room className={classes.roomIcon} />{" "}
+               
+                <span className={classes.spanCity}>
                 {this.props.post.cities
                   ? Capitalize(this.props.post.cities)
                   : ""}
+                  
+                  </span>
               </div>
             </div>
           </CardContent>
