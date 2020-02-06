@@ -27,10 +27,8 @@ export default async (req, res) => {
     }
 
 
-    var elasticsearch = require('elasticsearch'),
-    fs = require('fs')
-  //  pubs = JSON.parse(posts) // name of my first file to parse
-  //  forms = JSON.parse(fs.readFileSync(__dirname + '/forms.json')); // and the second set
+    var elasticsearch = require('elasticsearch')
+
 var client = new elasticsearch.Client({  // default is fine for me, change as you see fit
   host: 'db.hottoind.com:9200',
   log: 'trace'
@@ -38,12 +36,11 @@ var client = new elasticsearch.Client({  // default is fine for me, change as yo
 
 
 for (var i = 0; i < posts.length; i++ ) {
-    client.create({
-      index: "hottofind", // name your index
-      type: "post", // describe the data thats getting created
-      id: posts[i].id, // increment ID every iteration - I already sorted mine but not a requirement
-      body: posts[i] // *** THIS ASSUMES YOUR DATA FILE IS FORMATTED LIKE SO: [{prop: val, prop2: val2}, {prop:...}, {prop:...}] - I converted mine from a CSV so pubs[i] is the current object {prop:..., prop2:...}
-    }, function(error, response) {
+    client.index({
+        index: 'hottofind',
+        // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+        body: posts
+      }), function(error, response) {
       if (error) {
         console.error(error);
         return;
