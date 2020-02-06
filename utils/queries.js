@@ -140,9 +140,9 @@ export const getlatest = async c => {
 
 export const getPage = async (ctx) => {
 
-  console.log(cookies(ctx).defaultSort)
 
   const sort = cookies(ctx).defaultSort;
+  const view = cookies(ctx).defaultView;
 
   const {query} = ctx
 

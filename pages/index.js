@@ -118,6 +118,14 @@ const useStyles = makeStyles(theme => ({
       paddingRight: "20px"
     }
   },
+  rootContainer: {
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: "16px",
+      paddingRight: "16px"
+    }
+  },
   text: { background: "#e9e7e7", marginTop: "35px" },
   heading: {
     textAlign: "center"
@@ -182,7 +190,7 @@ function Index(props) {
         </Container>
       </Paper>
       <div className={classes.mainPosts}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" className={classes.rootContainer}>
           <Grid container spacing={4} className={classes.grid}>
             <Grid item xs={12} md={12}>
               <h2 className={classes.heading}>Latest Posts</h2>
@@ -190,17 +198,15 @@ function Index(props) {
             </Grid>
             {props.posts.length > 0
               ? props.posts.map(post => (
-                  <Grid
-                    className={classes.gitem}
-                    item
-                    key={`${post.title}-${post.id}`}
-                    xs={12}
-                    sm={4}
-                    md={3}
-                    lg={2}
-                  >
-                    <PostPreview post={post} />
-                  </Grid>
+
+                    <PostPreview
+                     post={post}
+                     xs="12"
+                     sm="4"
+                     md="3"
+                     lg="2"
+                     />
+
                 ))
               : ""}
           </Grid>

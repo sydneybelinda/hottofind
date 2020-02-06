@@ -74,9 +74,9 @@ const components = {
 						<ResultCard.Description>
 							<div>
 								<div className="price">${item.price}</div>
-								<p className="info">
+								{/* <p className="info">
 									{item.room_type} · {item.accommodates} guests
-								</p>
+								</p> */}
 							</div>
 						</ResultCard.Description>
 					</ResultCard>

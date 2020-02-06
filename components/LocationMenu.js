@@ -64,7 +64,11 @@ const styles = theme => ({
   butOpen: {
     padding: "5px 5px",
     minWidth: "43px",
-    float: "right"
+    float: "right",
+    display: "block",
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+      }
   },
   card: {
     minWidth: 275,

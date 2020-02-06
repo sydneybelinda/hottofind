@@ -4,10 +4,14 @@ import Head from "./head";
 import Header from "./header";
 const useStyles = makeStyles(theme => ({
   wrap: {
+
     [theme.breakpoints.up("sm")]: {
       marginTop: "94px"
     },
-    marginTop: "56px"
+    marginTop: "56px",
+    width: "100%",
+    maxWidth: "100%",
+    overflowX: "hidden"
   }
 }));
 

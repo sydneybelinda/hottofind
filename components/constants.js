@@ -1,3 +1,9 @@
+export const appConfig = e => {
+    return {
+
+     }
+}
+
 export const makeSlug = (string,id) => {
     const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;'
     const b = 'aaaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------'
@@ -18,4 +24,8 @@ export const makeSlug = (string,id) => {
 
 export const getSlug = (string) => {
     return string.split('~')[1]
+}
+
+export const setViewType = (v) => {
+    
 }

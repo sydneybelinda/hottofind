@@ -1,14 +1,15 @@
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
-import Person from "@material-ui/icons/Person";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import Room from "@material-ui/icons/Room";
 import * as React from "react";
+import Img from "react-image";
 import Moment from "react-moment";
+import { makeSlug } from "./constants";
 
 function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -20,19 +21,20 @@ const styles = theme => ({
     paddingBottom: "15px"
   },
   imageWrap: {
-    width: "100%",
-    paddingBottom: "100%",
+    width: "55px",
+    minWidth: "55px",
+
     position: "relative",
-    borderTop: "1px solid silver",
-    borderBottom: "1px solid silver",
+    border: "1px solid #c7c7c7",
+    borderRadius: "2px",
     overflow: "hidden",
-    width: "30%",
     display: "inline-block",
-    paddingBottom: "30%",
+    paddingBottom: "115px",
     [theme.breakpoints.up("sm")]: {
-      width: "100%",
+      width: "120px",
+      minWidth: "120px",
       display: "block",
-      paddingBottom: "69%",
+      paddingBottom: "120px",
       borderTop: "1px solid silver",
       borderBottom: "1px solid silver"
     }
@@ -66,9 +68,10 @@ const styles = theme => ({
     }
   },
   cardLeft: {
-    flex: "1 100%",
-    background: "#ffffff",
+    display: "flex",
+    background: "#e6e6e6",
     textAlign: "right",
+    height: "50px",
     [theme.breakpoints.up("sm")]: {
       background: "#e6e6e6",
       textAlign: "left",
@@ -122,7 +125,9 @@ const styles = theme => ({
     fontWeight: "500",
     // lineHeight: "1.43",
     letterSpacing: "0.01071em",
-    color: "black"
+    color: "black",
+    marginTop: "26px",
+    padding: "0 15px"
     // padding: "16px",
     // paddingBottom: "2px",
     // color: "rgba(0, 0, 0, 0.87)"
@@ -165,7 +170,9 @@ const styles = theme => ({
     lineHeight: "1.43",
     letterSpacing: "0.01071em",
     flex: "1",
-    textAlign: "right"
+    textAlign: "right",
+    paddingRight: "15px",
+    paddingTop: "16px"
   },
   roomIcon: {
     height: "11px",
@@ -199,6 +206,7 @@ const styles = theme => ({
   },
   content: {
     width: "70%",
+    padding: "0",
     float: "right",
     marginTop: "29px",
     [theme.breakpoints.up("sm")]: {
@@ -206,6 +214,38 @@ const styles = theme => ({
       float: "none",
       marginTop: "0"
     }
+  },
+  flexContainer: {
+    display: "flex"
+  },
+  rightContent: {
+    flex: 1,
+    position: "relative",
+    width: "calc(100% - 240px)"
+  },
+  actions: {
+    width: "120px",
+    borderLeft: "1px solid #dedede",
+    padding: "10px"
+  },
+  cats: {
+    flex: "1"
+  },
+  loc: {
+    flex: "1"
+  },
+  butDelete: {
+    color: "red"
+  },
+  link: {
+    width: "100%",
+    minWidth: "100%"
+  },
+  gitem: {
+    padding: "2px 16px !important"
+  },
+  cardActionArea: {
+    width: "100%"
   }
 });
 
@@ -221,82 +261,95 @@ class PostPreview extends React.Component {
     var image;
 
     if (post.files[0]) {
-      image = "/public/uploadedimages/" + post.files[0].name;
-    } else image = "/public/uploadedimages/noimage.jpg";
+      image = "/static/uploadedimages/" + post.files[0].name;
+
+      // if (!fs.existsSync(image)) {
+      //  image = "/uploadedimages/noimage.jpg";
+      // }
+    } else image = "/static/uploadedimages/noimage.jpg";
 
     const dateToFormat = this.props.post.updatedAt;
 
     return (
-      //   <GridItem item xs={6} sm={3} className={classes.gi}>
-      <Card className={classes.card}>
-        <div className={classes.cHeader}>
-          <div className={classes.cardLeft}>
-            <div className={classes.cat}>
-              {this.props.post.catindex} > {this.props.post.keyindex}
-            </div>
-            <div className={classes.date}>
-              <Moment date={dateToFormat} format="D MMMM YY - HH:mm" />
-            </div>
-          </div>
-        </div>
-        <CardActionArea onClick={() => this._handleViewPost(post.id)}>
-          <div className={classes.imageWrap}>
-            {this.props.post.price ? (
-              <div className={classes.price}>${this.props.post.price}</div>
-            ) : (
-              ""
-            )}
-            <div className={classes.views}>
-              <RemoveRedEye className={classes.viewIcon} />{" "}
-              {this.props.post.views}
-            </div>
-            <CardMedia
-              component="img"
-              alt={this.props.post.title}
-              height="100%"
-              image={image}
-              title={this.props.post.title}
-              style={{
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)"
-              }}
-            />
-          </div>
-          <CardContent className={classes.content}>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h3"
-              noWrap
-              className={classes.title}
+      <Grid className={classes.gitem} item  xs={12}>
+        <Card className={classes.card}>
+          <div className={classes.flexContainer}>
+            <Link
+              href={`/post/${makeSlug(
+                this.props.post.title,
+                this.props.post.id
+              )}`}
+              className={classes.link}
             >
-              {post.title ? post.title : "untitled"}
-            </Typography>
-            <div className={classes.cardBottom}>
-              <div className={classes.owner}>
-                <Person className={classes.personIcon} />{" "}
-                {this.props.post.owner}
-              </div>
-              <div className={classes.location}>
-                <Room className={classes.roomIcon} />{" "}
-                {this.props.post.cities
-                  ? Capitalize(this.props.post.cities)
-                  : ""}
-              </div>
-            </div>
-          </CardContent>
-        </CardActionArea>
-        {/* <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
-          </CardActions> */}
-      </Card>
-      //   </GridItem>
+              <CardActionArea
+                onClick={() => this._handleViewPost(post.id)}
+                className={classes.cardActionArea}
+              >
+                <div className={classes.flexContainer}>
+                  <div className={classes.imageWrap}>
+                    {this.props.post.price ? (
+                      <div className={classes.price}>
+                        ${this.props.post.price}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <div className={classes.views}>
+                      <RemoveRedEye className={classes.viewIcon} />{" "}
+                      {this.props.post.views}
+                    </div>
+                    <Img
+                      className="img-responsive"
+                      src={[image, "/static/uploadedimages/noimage.jpg"]}
+                      alt={this.props.post.title}
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        width: "100%"
+                      }}
+                    />
+                  </div>
+
+                  <div className={classes.rightContent}>
+                    <div className={classes.cardLeft}>
+                      <div className={classes.cats}>
+                        <div className={classes.cat}>
+                          {this.props.post.catindex} >{" "}
+                          {this.props.post.keyindex}
+                        </div>
+                        <div className={classes.date}>
+                          <Moment
+                            date={dateToFormat}
+                            format="D MMMM YY - HH:mm"
+                          />
+                        </div>
+                      </div>
+                      <div className={classes.loc}>
+                        <div className={classes.location}>
+                          <Room className={classes.roomIcon} />{" "}
+                          {this.props.post.cities
+                            ? Capitalize(this.props.post.cities)
+                            : ""}
+                        </div>
+                      </div>
+                    </div>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h3"
+                      noWrap
+                      className={classes.title}
+                    >
+                      {post.title ? post.title : "untitled"}
+                    </Typography>
+                  </div>
+                </div>
+              </CardActionArea>
+            </Link>
+          </div>
+        </Card>
+      </Grid>
     );
   }
 }

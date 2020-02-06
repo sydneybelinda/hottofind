@@ -10,6 +10,7 @@ import Breadcrumbs from "../../components/breadcrumbs";
 import Layout from "../../components/layout";
 import LocationMenu from "../../components/LocationMenu";
 import PostPreview from "../../components/postPreview";
+import PostWide from "../../components/postWide";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
@@ -146,9 +147,13 @@ const useStyles = makeStyles(theme => ({
   },
   cont: {
     display: "block",
+    paddingLeft: 0,
+    paddingRight: 0,
     [theme.breakpoints.up("sm")]: {
       display: "flex",
-      flexDirection: "row"
+      flexDirection: "row",
+      paddingLeft: 16,
+      paddingRight: 16,
     }
   },
   city: {
@@ -164,13 +169,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Posts(props) {
-  console.log(props.defaultSort);
+
 
   const [data, setData] = useState({
     next: true,
     previous: true,
     limit: 100,
-    sort: "latest"
+    sort: "latest",
+    view: props.defaultView || 'grid',
   });
 
   const classes = useStyles();
@@ -184,8 +190,6 @@ function Posts(props) {
 
   var prevpage = parseInt(props.page) - 1;
   var nextpage = parseInt(props.page) + 1;
-
-  console.log("nextpage: ", nextpage);
 
   const capitalize = s => {
     if (typeof s !== "string") return "";
@@ -222,6 +226,18 @@ function Posts(props) {
   }
 
   var sub = `All Posts in ${config.COUNTRYCODE}`;
+
+  const _selectListView = e => {
+    setData({view: "list"});
+    document.cookie = `defaultView=list; path=/`;
+//    window.location.reload()
+  };
+
+  const _selectGridView = e => {
+    setData({view: "grid"});
+    document.cookie = `defaultView=list; path=/`;
+//    window.location.reload()
+  };
 
   return (
     <Layout user={props.user} categories={props.categories}>
@@ -282,24 +298,31 @@ function Posts(props) {
               <Sort
                 total={total}
                 page={props.page}
-                limit={data.limit}
+                limit={"100"}
                 defaultSort={props.defaultSort}
+                defaultView={props.defaultView}
+                selectListView={_selectListView}
+                selectGridView={_selectGridView}
               />
               <Divider />
             </Grid>
             {props.posts.rows
               ? props.posts.rows.map(post => (
-                  <Grid
-                    className={classes.gitem}
-                    item
+
+                 (data.view == "grid") ? 
+                    <PostPreview post={post}
                     key={post.id}
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                  >
-                    <PostPreview post={post} />
-                  </Grid>
+                    xs='12'
+                    sm='6'
+                    md='4'
+                    lg='3'
+                    />
+                    : 
+                   <PostWide post={post}
+                   key={post.id}
+                   />
+            
+
                 ))
               : ""}
           </Grid>
@@ -342,7 +365,8 @@ function Posts(props) {
 Posts.getInitialProps = async ctx => {
   const data = await Queries.getPage(ctx);
 
-  const defaultSort = cookies(ctx).defaultSort;
+  const defaultSort = await cookies(ctx).defaultSort;
+  const defaultView = await cookies(ctx).defaultView;
 
   return {
     posts: data.posts,
@@ -350,7 +374,8 @@ Posts.getInitialProps = async ctx => {
     page: data.page,
     city: data.city,
     query: ctx.query,
-    defaultSort: defaultSort
+    defaultSort: defaultSort,
+    defaultView: defaultView
   };
 };
 
