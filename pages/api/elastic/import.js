@@ -40,7 +40,7 @@ for (var i = 0; i < posts.length; i++ ) {
         index: 'hottofind',
         // type: '_doc', // uncomment this line if you are using {es} ≤ 6
         body: posts
-      }), function(error, response) {
+      }, function(error, response) {
       if (error) {
         console.error(error);
         return;
