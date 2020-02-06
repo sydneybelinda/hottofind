@@ -233,7 +233,7 @@ const styles = theme => ({
   gitem: {
     padding: "2px 16px !important",
     [theme.breakpoints.up("sm")]: {
-      padding: "16px !important",
+      padding: "8px !important",
     }
   },
   flex: {
@@ -267,12 +267,12 @@ class PostPreview extends React.Component {
 
     var image;
 
+   // image = "/static/uploadedimages/noimage.jpg";
+
+    //console.log(post)
+
     if (post.files[0]) {
       image = "/static/uploadedimages/" + post.files[0].name;
-
-      // if (!fs.existsSync(image)) {
-      //  image = "/uploadedimages/noimage.jpg";
-      // }
     } else image = "/static/uploadedimages/noimage.jpg";
 
     //const src = URL + image

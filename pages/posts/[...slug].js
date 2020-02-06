@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
   gitem: {
     padding: "2px !important",
     [theme.breakpoints.up("sm")]: {
-      padding: "16px !important"
+      padding: "8px !important"
     }
   },
   grid: {
@@ -293,7 +293,7 @@ function Posts(props) {
           </div>
         </div>
         <div className={classes.right}>
-          <Grid container spacing={4} className={classes.grid}>
+          <Grid container spacing={2} className={classes.grid}>
             <Grid item xs={12} md={12}>
               <Sort
                 total={total}

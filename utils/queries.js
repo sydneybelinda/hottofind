@@ -256,3 +256,11 @@ export const incrementViewCount = async c => {
 
   return post;
 };
+
+export const getAllPosts = async c => {
+  const url = `${API}/posts/getall`;
+  const data = await fetch(url);
+  let posts = await data.json();
+
+  return posts;
+};

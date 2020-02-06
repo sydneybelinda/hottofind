@@ -122,8 +122,8 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: "5px",
     paddingRight: "5px",
     [theme.breakpoints.up("sm")]: {
-      paddingLeft: "16px",
-      paddingRight: "16px"
+      paddingLeft: "8px",
+      paddingRight: "8px"
     }
   },
   text: { background: "#e9e7e7", marginTop: "35px" },
@@ -191,7 +191,7 @@ function Index(props) {
       </Paper>
       <div className={classes.mainPosts}>
         <Container maxWidth="xl" className={classes.rootContainer}>
-          <Grid container spacing={4} className={classes.grid}>
+          <Grid container spacing={2} className={classes.grid}>
             <Grid item xs={12} md={12}>
               <h2 className={classes.heading}>Latest Posts</h2>
               <Divider />

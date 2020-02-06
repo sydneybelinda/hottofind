@@ -5,6 +5,8 @@ export default async (req, res) => {
     query: { id }
   } = req;
 
+  console.log(id)
+
   try {
     // const posts = await Post.findAll({
     //   });

@@ -10,6 +10,10 @@ import {
 } from '@appbaseio/reactivesearch';
 import initReactivesearch from '@appbaseio/reactivesearch/lib/server';
 
+import PostPreview from "../components/postPreview";
+import PostWide from "../components/postWide";
+
+
 import '../test.css';
 
 const components = {
@@ -67,19 +71,26 @@ const components = {
 		size: 12,
 		render: ({ data }) => (
 			<ReactiveList.ResultCardsWrapper>
-				{data.map(item => (
-					<ResultCard href={`/post/${item._id}`} key={item._id}>
-						<ResultCard.Image src={item.image} />
-						<ResultCard.Title>{item.title}</ResultCard.Title>
-						<ResultCard.Description>
-							<div>
-								<div className="price">${item.price}</div>
-								{/* <p className="info">
-									{item.room_type} · {item.accommodates} guests
-								</p> */}
-							</div>
-						</ResultCard.Description>
-					</ResultCard>
+				{data.map(post => (
+					                    <PostPreview post={post}
+										key={post._id}
+										xs='12'
+										sm='6'
+										md='4'
+										lg='3'
+										/>
+					// <ResultCard href={`/post/${item._id}`} key={item._id}>
+					// 	<ResultCard.Image src={item.image} />
+					// 	<ResultCard.Title>{item.title}</ResultCard.Title>
+					// 	<ResultCard.Description>
+					// 		<div>
+					// 			<div className="price">${item.price}</div>
+					// 			{/* <p className="info">
+					// 				{item.room_type} · {item.accommodates} guests
+					// 			</p> */}
+					// 		</div>
+					// 	</ResultCard.Description>
+					// </ResultCard>
 				))}
 			</ReactiveList.ResultCardsWrapper>
 		),
