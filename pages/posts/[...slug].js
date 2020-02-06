@@ -235,7 +235,7 @@ function Posts(props) {
 
   const _selectGridView = e => {
     setData({view: "grid"});
-    document.cookie = `defaultView=list; path=/`;
+    document.cookie = `defaultView=grid; path=/`;
 //    window.location.reload()
   };
 
