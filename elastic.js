@@ -14,7 +14,6 @@ var client = new Client({  // default is fine for me, change as you see fit
 async function run () {
 
     const posts = await Post.findAll({
-        where: {id: '28'},
         include: [
           {
             model: File,
