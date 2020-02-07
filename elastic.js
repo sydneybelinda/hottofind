@@ -3,25 +3,33 @@
 const {Post, File} = require('./models')
 
 const { Client } = require('elasticsearch')
-//const client = new Client({ node: 'http://localhost:9200' })
+const client = new Client({ node: 'http://db.hottofind.com:9200' })
 
 async function run () {
 
-    const posts = await Post.findOne({
-        where: {
-          id: "28"
-        },
+    const posts = await Post.findAll({
+
         include: [
           {
             model: File,
             as: "files"
           }
         ],
-        order: [["createdAt", "DESC"]]
       });
 
 
-console.log(posts)
+      for (var i = 0; i < posts.length; i++ ) {
+
+          await client.index({
+    index: 'hottofind',
+    // type: '_doc', // uncomment this line if you are using {es} ≤ 6
+    body: posts[i]
+  })
+
+
+console.log(posts[i].id)
+
+      }
 
 
   // Let's start by indexing some data
