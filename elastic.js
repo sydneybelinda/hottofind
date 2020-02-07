@@ -3,12 +3,18 @@
 const {Post, File} = require('./models')
 
 const { Client } = require('elasticsearch')
-const client = new Client({ node: 'http://db.hottofind.com:9200' })
+//const client = new Client({ node: 'http://db.hottofind.com:9200' })
+
+var client = new Client({  // default is fine for me, change as you see fit
+    host: 'db.hottofind.com:9200',
+    log: 'trace',
+    apiVersion: '7.5',
+  });
 
 async function run () {
 
     const posts = await Post.findAll({
-
+        where: {id: '28'},
         include: [
           {
             model: File,
