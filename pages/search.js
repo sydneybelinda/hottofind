@@ -141,7 +141,7 @@ export default class Main extends Component {
 			<div className="container">
 				<ReactiveBase {...components.settings} initialState={this.props.store}>
 					<nav className="nav">
-						<div className="title">Airbeds</div>
+						<div className="title">Search Posts:</div>
 						<DataSearch {...components.datasearch} />
 					</nav>
 					<div className="left-col">
