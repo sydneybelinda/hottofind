@@ -10,12 +10,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import SearchIcon from "@material-ui/icons/Search";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
 import { logout } from "../utils/auth";
 import Dropdown from './dropdown';
 import MobileMenu from "./mobileMenu";
+import Button from '@material-ui/core/Button';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -106,6 +108,7 @@ const useStyles = makeStyles(theme => ({
     color: "black",
     overflow: "hidden",
     whiteSpace: "nowrap",
+    paddingTop: "15px",
     textOverflow: "ellipsis",
     "&:hover": {
       color: "#009b9b"
@@ -119,6 +122,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "12px",
     fontWeight: "600",
     letterSpacing: ".12em",
+    paddingTop: "15px",
     color: "black",
     "&:hover": {
       color: "#009b9b"
@@ -253,6 +257,10 @@ export default function PrimarySearchAppBar(props) {
           </div> */}
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
+              <IconButton 
+              //onClick={toggleDrawer('right', true)}
+              onClick={props.toggleDrawer}
+              ><SearchIcon /></IconButton>
                 {props.user ? (
                   <>
                     {/* <IconButton aria-label="show 4 new mails" color="inherit">
