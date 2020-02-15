@@ -318,10 +318,11 @@ class PostPreview extends React.Component {
               src={[image, "/static/uploadedimages/noimage.jpg"]}
               alt={this.props.post.title}
               style={{
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)",
-                width: "100%"
+                // position: "absolute",
+                // top: "50%",
+                // transform: "translateY(-50%)",
+               width: "100%",
+                // webkitTransform: "translateY(-50%)"
               }}
             />
           </div>

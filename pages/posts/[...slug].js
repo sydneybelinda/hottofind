@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Layout from "../../components/layout";
 import LocationMenu from "../../components/LocationMenu";
-import PostPreview from "../../components/postPreview";
+import MediaCard from "../../components/mediaCard";
 import PostWide from "../../components/postWide";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";
@@ -310,12 +310,12 @@ function Posts(props) {
               ? props.posts.rows.map(post => (
 
                  (data.view == "grid") ? 
-                    <PostPreview post={post}
+                    <MediaCard post={post}
                     key={post.id}
-                    xs='12'
-                    sm='6'
-                    md='4'
-                    lg='3'
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
                     />
                     : 
                    <PostWide post={post}

@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Layout from "../components/layout";
 import PostPreview from "../components/postPreview";
+import MediaCard from "../components/mediaCard";
 import config from "../config";
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
@@ -190,24 +191,36 @@ function Index(props) {
         </Container>
       </Paper>
       <div className={classes.mainPosts}>
-        <Container maxWidth="xl" className={classes.rootContainer}>
+        <Container maxWidth="xl">
+        <Grid container spacing={4}>
          
             <Grid item xs={12} md={12}>
               <h2 className={classes.heading}>Latest Posts</h2>
               <Divider />
             </Grid>
-            <Grid container spacing={2} className={classes.grid}>
+            </Grid>
+            {/* <Grid container spacing={2} className={classes.grid}> */}
+            <Grid container spacing={2}>
             {props.posts.length > 0
               ? props.posts.map(post => (
 
-                    <PostPreview
-                     post={post}
-                     xs={12}
+                    // <PostPreview
+                    //  post={post}
+                    //  xs={12}
+                    //  sm={4}
+                    //  md={3}
+                    //  lg={2}
+                    //  key={post.id}
+                    //  />
+
+                    <MediaCard
+                    key={post.id}
+                    post={post}
+                    xs={12}
                      sm={4}
                      md={3}
                      lg={2}
-                     key={post.id}
-                     />
+                    />
 
                 ))
               : ""}
