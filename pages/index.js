@@ -202,10 +202,11 @@ function Index(props) {
 
                     <PostPreview
                      post={post}
-                     xs="12"
-                     sm="4"
-                     md="3"
-                     lg="2"
+                     xs={12}
+                     sm={4}
+                     md={3}
+                     lg={2}
+                     key={post.id}
                      />
 
                 ))
