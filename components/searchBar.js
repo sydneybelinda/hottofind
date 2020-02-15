@@ -11,19 +11,28 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Search from './search';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   list: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
     width: 400,
+    },
   },
   fullList: {
     width: 'auto',
   },
-});
+  drawer: {
+    left: "10%",
+    [theme.breakpoints.up("sm")]: {
+      left: "auto",
+      },
+  }
+}))
 
 export default function TemporaryDrawer(props) {
   const classes = useStyles();
 
-  console.log(props.side)
+
 
   const [state, setState] = React.useState({
     top: false,
@@ -73,7 +82,9 @@ export default function TemporaryDrawer(props) {
   return (
     <div>
 
-      <Drawer anchor="right" open={props.side} onClose={props.drawerClose}>
+      <Drawer anchor="right" open={props.side} onClose={props.drawerClose} classes={{
+        paperAnchorRight: classes.drawer,
+   }}>
         {sideList('right')}
       </Drawer>
     </div>
