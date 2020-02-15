@@ -11,7 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 var client = new Client({
   // default is fine for me, change as you see fit
-  host: "db.hottofind.com:9200",
+  host: "elasticsearch.hottofind.com",
   log: "trace",
   apiVersion: "7.5"
 });
