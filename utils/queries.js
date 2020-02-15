@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import nextCookie from "next-cookies";
 import { API, COUNTRYCODE } from "../config";
+import Router from "next/router";
 import cookies from 'next-cookies'
 
 export const deletePost = async id => {

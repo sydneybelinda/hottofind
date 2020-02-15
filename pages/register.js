@@ -49,6 +49,12 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  title: {
+    fontSize: 38
+  },
+  topMargin: {
+   flex:1
   }
 }));
 
@@ -112,8 +118,9 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        <div className={classes.title}>HotToFind</div>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign up now for a free Account
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
@@ -187,12 +194,12 @@ export default function SignUp() {
                 }
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           {userData.error && <p className="error">Error: {userData.error}</p>}
           <Button
@@ -205,6 +212,11 @@ export default function SignUp() {
             Sign Up
           </Button>
           <Grid container justify="flex-end">
+          <Grid item className={classes.topMargin}>
+              <Link href="/" variant="body2">
+                Homepage
+              </Link>
+            </Grid>
             <Grid item>
               <Link href="/login" variant="body2">
                 Already have an account? Sign in
@@ -214,7 +226,7 @@ export default function SignUp() {
         </form>
       </div>
       <Box mt={5}>
-        <Copyright />
+        {/* <Copyright /> */}
       </Box>
     </Container>
   );

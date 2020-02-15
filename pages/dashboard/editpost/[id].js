@@ -156,6 +156,12 @@ const useStyles = makeStyles(theme => ({
     boxShadow:
       "0 0px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 12px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
   },
+  item: {
+    padding: "0px !important",
+    [theme.breakpoints.up("sm")]: {
+      padding: "16px !important",
+    },
+  }
 }));
 
 function EditPost(props) {
@@ -197,7 +203,7 @@ function EditPost(props) {
         </div>
         <div className={classes.right}>
           <Grid container spacing={4} className={classes.grid}>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={12}  className={classes.item}>
               <Card className={classes.card}>
               <PostForm
                     user={props.user}
@@ -216,11 +222,15 @@ function EditPost(props) {
   );
 }
 
-EditPost.getInitialProps = async ({ query }) => {
+EditPost.getInitialProps = async ctx => {
+
+  let user = await Queries.checkUserLogin(ctx);
   const { COUNTRYCODE } = config;
   let citydata = await Queries.getCities(COUNTRYCODE);
 
-  const { id } = query;
+  const {query} = ctx;
+
+  const { id } = ctx.query;
 
   let post = await Queries.getPost(id);
 

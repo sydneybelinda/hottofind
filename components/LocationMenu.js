@@ -65,13 +65,14 @@ const styles = theme => ({
     padding: "5px 5px",
     minWidth: "43px",
     float: "right",
-    display: "block",
+    display: "flex",
     [theme.breakpoints.up("sm")]: {
       display: "none"
       }
   },
   card: {
     minWidth: 275,
+    transition: ".3s ease-in-out",
     height: "63px",
     [theme.breakpoints.up("sm")]: {
     height: "100%"

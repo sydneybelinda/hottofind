@@ -204,7 +204,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <Link href="/dashboard">
-          <a>Dashboard</a>
+          <a>My Posts</a>
         </Link>
       </MenuItem>
       <Divider />

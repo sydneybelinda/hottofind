@@ -50,6 +50,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  topMargin: {
+    marginTop: 15
   }
 }));
 
@@ -170,9 +173,15 @@ function Login() {
                 Forgot password?
               </Link>
             </Grid>
+
             <Grid item>
               <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+            <Grid item xs={6} className={classes.topMargin}>
+              <Link href="/" variant="body2">
+                Homepage
               </Link>
             </Grid>
           </Grid>
@@ -180,7 +189,7 @@ function Login() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        {/* <Copyright /> */}
       </Box>
     </Container>
   );

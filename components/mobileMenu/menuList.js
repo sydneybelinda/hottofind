@@ -7,6 +7,8 @@ import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
+
+import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -72,6 +74,10 @@ const useStyles = makeStyles(theme => ({
     margin: 10,
     color: "#fff",
     backgroundColor: deepPurple[500]
+  },
+  butWrap: {
+    padding: 16,
+    textAlign: "center"
   }
   // login: {
   //   float: "right"
@@ -135,13 +141,20 @@ function NestedList(props) {
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Menu
-        </ListSubheader>
-      }
+    //  subheader={
+        // <ListSubheader component="div" id="nested-list-subheader">
+        //   enu
+        // </ListSubheader>
+     // }
       className={classes.root}
     >
+<div className={classes.butWrap}>
+<Link href="/dashboard/newpost">
+<Button size="small" variant="outlined" size="small" color="primary" className={classes.butNew}>
+          New Post
+        </Button>
+        </Link>
+</div>
       {props.user ? (
         <>
           <ListItem
@@ -164,7 +177,7 @@ function NestedList(props) {
               <div className={classes.menuItem}>
                 <Link href={"/dashboard"}>
                   <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>Dashboard</div>
+                    <div className={classes.subcat}>My Posts</div>
                   </ListItem>
                 </Link>
               </div>

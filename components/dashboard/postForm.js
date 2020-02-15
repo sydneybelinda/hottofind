@@ -40,6 +40,12 @@ const styles = theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  container: {
+    padding: 0,
+    [theme.breakpoints.up("sm")]: {
+      padding: 16,
+    },
   }
 });
 
@@ -204,7 +210,7 @@ class PostForm extends React.Component {
     return (
       <React.Fragment>
         <form noValidate onSubmit={this.handleSubmit}>
-          <Grid container spacing={4}>
+          <Grid container spacing={4} className={classes.container}>
             <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
                    Photos
@@ -215,7 +221,7 @@ class PostForm extends React.Component {
                   // backgroundSize: "cover",
                   // backgroundPosition: "center top",
                   // maxHeight: "490px",
-                  minHeight: "310px"
+                  minHeight: "0"
                 }}
               >
                 {/* <UploadComponent user={user} /> */}
@@ -260,6 +266,21 @@ class PostForm extends React.Component {
                     placeholder="City"
                     name="city"
                     onChange={this._handleChangeCity}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    id="location"
+                    name="location"
+                    label="Location"
+                    fullWidth
+                    autoComplete="location"
+                    value={this.state.location}
+                    variant="outlined"
+                    onChange={event =>
+                      this.setState({ location: event.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}>

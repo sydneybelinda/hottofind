@@ -138,7 +138,8 @@ const useStyles = makeStyles(theme => ({
   },
   cont: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    
   },
   city: {
     textTransform: "capitalize"
@@ -155,6 +156,12 @@ const useStyles = makeStyles(theme => ({
     boxShadow:
       "0 0px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 12px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
   },
+  item: {
+    padding: "0px !important",
+    [theme.breakpoints.up("sm")]: {
+      padding: "16px !important",
+    },
+  }
 }));
 
 function NewPost(props) {
@@ -195,7 +202,7 @@ function NewPost(props) {
         </div>
         <div className={classes.right}>
           <Grid container spacing={4} className={classes.grid}>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={12} className={classes.item}>
 
             
               <Card className={classes.card}>
@@ -217,6 +224,8 @@ function NewPost(props) {
 }
 
 NewPost.getInitialProps = async ctx => {
+  let user = await Queries.checkUserLogin(ctx);
+
   const { COUNTRYCODE } = config;
   let citydata = await Queries.getCities(COUNTRYCODE);
 

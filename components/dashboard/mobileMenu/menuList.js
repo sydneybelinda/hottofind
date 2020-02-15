@@ -12,6 +12,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import React from "react";
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -114,6 +115,12 @@ function NestedList(props) {
       }
       className={classes.root}
     >
+
+<Link href="/dashboard/newpost">
+<ListItem button  className={classes.cats}>
+          New Post
+        </ListItem>
+        </Link>
       {props.user ? (
         <>
           <ListItem

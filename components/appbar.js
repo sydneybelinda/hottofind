@@ -161,6 +161,9 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     textDecoration: "none"
+  },
+  butNew: {
+    marginRight: 15
   }
 }));
 
@@ -215,7 +218,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <Link href="/dashboard">
-          <a>Dashboard</a>
+          <a>My Posts</a>
         </Link>
       </MenuItem>
       <Divider />
@@ -262,6 +265,11 @@ export default function PrimarySearchAppBar(props) {
           </div> */}
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
+              <Link href="/dashboard/newpost">
+<Button size="small" variant="outlined" size="small" color="primary" className={classes.butNew}>
+          New Post
+        </Button>
+        </Link>
               <IconButton 
               //onClick={toggleDrawer('right', true)}
               onClick={props.toggleDrawer}
