@@ -191,11 +191,12 @@ function Index(props) {
       </Paper>
       <div className={classes.mainPosts}>
         <Container maxWidth="xl" className={classes.rootContainer}>
-          <Grid container spacing={2} className={classes.grid}>
+         
             <Grid item xs={12} md={12}>
               <h2 className={classes.heading}>Latest Posts</h2>
               <Divider />
             </Grid>
+            <Grid container spacing={2} className={classes.grid}>
             {props.posts.length > 0
               ? props.posts.map(post => (
 
