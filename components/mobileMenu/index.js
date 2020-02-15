@@ -14,7 +14,7 @@ class mobileMenu extends React.Component {
   render() {
     return (
       <>
-        <div className="brand"><Link href="/"><a className="homelink">HotToFind</a></Link></div>
+        <div className="brand"><Link href={"/"}><span className="homelink">HotToFind</span></Link></div>
         <Menu right>
           <MenuList user={this.props.user} categories={this.props.categories} />
         </Menu>

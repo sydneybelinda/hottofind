@@ -61,6 +61,10 @@ const useStyles = makeStyles(theme => ({
       fontFamily: "'Calistoga', cursive",
       fontWeight: "400",
       color: "#00baa9"
+    },
+    "& a": {
+      textDecoration: "none",
+      color: "#00baa9"
     }
   },
   search: {
@@ -154,6 +158,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }
+  },
+  logo: {
+    textDecoration: "none"
   }
 }));
 
@@ -235,13 +242,11 @@ export default function PrimarySearchAppBar(props) {
         >
           <Container maxWidth="xl">
             <Toolbar>
-              <Link href="/">
-                <a className={classes.link}>
+            
                   <Typography className={classes.title} variant="h6" noWrap>
-                    HotToFind
+                  <Link href={"/"} className={classes.logo}> HotToFind </Link>
                   </Typography>
-                </a>
-              </Link>
+             
               {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
