@@ -143,7 +143,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: "calc(100% - 350px)"
     },
-    width: "100%"
+    width: "100%",
+    padding: 5
   },
   cont: {
     display: "block",

@@ -141,6 +141,11 @@ const useStyles = makeStyles(theme => ({
   },
   flex:{
     justifyContent: "center"
+  },
+  containerRoot: {
+    width: "calc(100% + -1px)",
+    paddingLeft: 10,
+    paddingRight: 10
   }
 }));
 
@@ -228,7 +233,7 @@ function Index(props) {
         </Container>
       </div>
       <div className={classes.text}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" className={classes.containerRoot}>
           <Grid container spacing={5} className={classes.mainGrid}>
             <Grid item xs={12} md={12}>
               <div className={classes.testimonial}>

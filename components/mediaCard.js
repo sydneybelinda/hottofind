@@ -25,8 +25,15 @@ import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    maxWidth: "100%",
     transition: ".3s ease-in-out",
+    display: "flex",
+    flexWrap: "wrap",
+    position: "relative",
+    [theme.breakpoints.up("sm")]: {
+        display: "block",
+        maxWidth: 345,
+    },
     // textDecoration: "none",
     // '& :hover': {
     //     background: "#00baa914"
@@ -68,11 +75,22 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500],
   },
   imageWrap: {
-      height: 150,
+      height: 120,
+      width: 120,
+      minWidth: 120,
       overflow: 'hidden',
+      order: 0,
+      borderRadius: 4,
       borderTop: "1px solid #ebebeb",
       borderBottom: "1px solid #ebebeb",
-      position: "relative"
+      position: "relative",
+      alignItems: "center",
+    display: "flex",
+      [theme.breakpoints.up("sm")]: {
+        width: "100%",
+        height: 150,
+        minWidth: "100%",
+      }
   },
   date: {
     // paddingLeft: "16px",
@@ -138,10 +156,28 @@ const useStyles = makeStyles(theme => ({
   headerRoot: {
     background: "#00000012",
     paddingTop: 8,
-    paddingBottom: 8
+    paddingBottom: 8,
+    order: 1,
+    height: 50,
+    width: "calc(100% - 120px)",
+    [theme.breakpoints.up("sm")]: {
+        width: "100%"
+        }
+
   },
   contentRoot: {
-      padding: "16px !important"
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    height: 70,
+    paddingTop: "0 !IMPORTANT",
+    paddingBottom: "0 !important",
+    width: "calc(100% - 120px)",
+    [theme.breakpoints.up("sm")]: {
+      padding: "16px !important",
+      width: "100%",
+      position: "relative"
+    }
   },
   price: {
     position: "absolute",
@@ -177,6 +213,12 @@ const useStyles = makeStyles(theme => ({
     color: "rgba(0, 0, 0, 0.54)",
     lineHeight: "1.43"
   },
+  grid: {
+    padding: "2px !important",
+    [theme.breakpoints.up("sm")]: {
+        padding: "8px !important",
+      }
+  }
 }));
 
 function Capitalize(str) {
@@ -211,6 +253,7 @@ export default function RecipeReviewCard(props) {
     sm={props.sm}
     md={props.md}
     lg={props.lg}
+    className={classes.grid}
     >
        <Link href={`/post/${makeSlug(post.title, post.id)}`}>
     <Card className={classes.root} variant="outlined">

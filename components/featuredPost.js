@@ -13,9 +13,7 @@ import Moment from "react-moment";
 import {makeSlug} from "./constants"
 import Link from "@material-ui/core/Link";
 
-function Capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+
   
 
 const useStyles = makeStyles({
