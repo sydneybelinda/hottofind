@@ -338,8 +338,8 @@ function Posts(props) {
             </Grid>
             {props.posts.rows
               ? props.posts.rows.map(post => (
-
-                 (data.view == "grid") ? 
+                (post.status == "Active") ?
+                 (data.view == "grid") ?
                     <MediaCard post={post}
                     key={post.id}
                     xs={12}
@@ -351,6 +351,8 @@ function Posts(props) {
                    <PostWide post={post}
                    key={post.id}
                    />
+                   :
+                   ''
             
 
                 ))

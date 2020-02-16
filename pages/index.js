@@ -206,15 +206,7 @@ function Index(props) {
           <Grid container spacing={2} className={classes.grid}>
             {props.posts.length > 0
               ? props.posts.map(post => (
-                  // <PostPreview
-                  //  post={post}
-                  //  xs={12}
-                  //  sm={4}
-                  //  md={3}
-                  //  lg={2}
-                  //  key={post.id}
-                  //  />
-
+                (post.status == "Active") ?
                   <MediaCard
                     key={post.id}
                     post={post}
@@ -223,6 +215,8 @@ function Index(props) {
                     md={3}
                     lg={2}
                   />
+                  :
+                  ''
                 ))
               : ""}
           </Grid>
