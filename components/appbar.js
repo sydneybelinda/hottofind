@@ -18,6 +18,7 @@ import { logout } from "../utils/auth";
 import Dropdown from './dropdown';
 import MobileMenu from "./mobileMenu";
 import Button from '@material-ui/core/Button';
+import CountryMenu from "../components/countryMenu";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -149,6 +150,7 @@ const useStyles = makeStyles(theme => ({
   },
   sectionDesktop: {
     display: "none",
+    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
       display: "flex"
     }
@@ -269,10 +271,13 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
               <Link href="/dashboard/newpost">
-<Button size="small" variant="outlined" size="small" color="primary" className={classes.butNew}>
+<Button variant="outlined"   className={classes.butNew}>
           New Post
         </Button>
         </Link>
+
+
+
               <IconButton 
               //onClick={toggleDrawer('right', true)}
               onClick={props.toggleDrawer}
@@ -311,6 +316,8 @@ export default function PrimarySearchAppBar(props) {
                     </Link>
                   </>
                 )}
+
+                <CountryMenu />
               </div>
               <div className={classes.sectionMobile}>
                 {/* <IconButton
