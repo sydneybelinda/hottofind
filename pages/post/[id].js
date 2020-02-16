@@ -9,7 +9,8 @@ import Layout from "../../components/layout";
 import PostBreadcrumbs from "../../components/PostBreadcrumbs";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
-import {getSlug} from "../../components/constants"
+import {getSlug} from "../../components/constants";
+import Divider from "@material-ui/core/Divider";
 
 // const nl2br = require("react-nl2br");
 
@@ -172,7 +173,9 @@ const useStyles = makeStyles(theme => ({
   owner: {
     fontSize: "16px",
     fontWeight: "600",
-    color: "black"
+    color: "black",
+    padding: 16,
+    textAlign: "center"
   },
   mainPost: {
     width: "100%",
@@ -193,13 +196,22 @@ const useStyles = makeStyles(theme => ({
   sidebar: {
     background: "white",
     padding: "15px",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    "& h4": {
+      marginBottom:0,
+      fontSize: 14
+    }
   },
   gallery: {
     background: "white",
     //     boxShadow: '0 0px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 12px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);',
     // position: 'relative',
     zIndex: "10"
+  },
+  text: {
+    marginLeft: 30,
+    color: "#000000",
+    fontWeight: "400"
   }
 }));
 
@@ -301,6 +313,11 @@ function Post(props) {
               <Grid item xs={12} md={4}>
                 <div className={classes.sidebar}>
                   <Grid container>
+         
+         <Grid item xs={12} md={12}>
+           <h2 className={classes.heading}>Contact Details</h2>
+           <Divider />
+         </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.owner}>
                         <h4>{post.owner}</h4>
@@ -309,19 +326,27 @@ function Post(props) {
                     <Grid item xs={12} md={12}>
                       <div className={classes.email}>
                         <h4>
-                          <a href={`mailto:${post.email}`}>{post.email}</a>
+                          Name: <span className={classes.text}>{post.firstname} {post.lastname ? post.lastname : '' } </span>
+                        </h4>
+                      </div>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <div className={classes.email}>
+                        <h4>
+                          Email: <span className={classes.text}><a href={`mailto:${post.email}`}>{post.email}</a></span>
                         </h4>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.phone}>
-                        <h4>{post.phone}</h4>
+                        <h4>
+                          Phone: <span className={classes.text}><a href={`tel:${post.phone}`}>{post.phone}</a></span></h4>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.website}>
                         <h4>
-                          <a href={post.website}>{post.website}</a>
+                          Website: <span className={classes.text}><a href={post.website} target="_blank">{post.website}</a></span>
                         </h4>
                       </div>
                     </Grid>

@@ -239,10 +239,10 @@ function Index(props) {
               <div className={classes.testimonial}>
                 <div className="classes.content">
                   <p className="classes.description">
-                    HotToFind is a Free online general purpose classifieds and
-                    listing site. Select your country and browse free online
+                    HotToFind {config.country} is a Free online general purpose classifieds and
+                    listing site.  Browse free online
                     classifieds and listing from various categories posted by
-                    users in many countries. Buy / Sell / Trade anything online
+                    users in {config.country}. Buy / Sell / Trade anything online
                     for free. <br />
                     <br /> Sign up and post your ads instantly! <br /> <br />{" "}
                     <br />
