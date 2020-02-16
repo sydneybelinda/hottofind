@@ -152,6 +152,14 @@ const Footer = props => {
                 <br />
                 <a href="https://in.hottofind.com">HotToFind India</a>
                 <br />
+                <a href="https://eu.hottofind.com">HotToFind Europe</a>
+                <br />
+                <a href="https://uk.hottofind.com">HotToFind United Kingdom</a>
+                <br />
+                <a href="https://sa.hottofind.com">HotToFind South Africa</a>
+                <br />
+                <a href="https://sg.hottofind.com">HotToFind Singapore</a>
+                <br />
                 <a href="https://uk.hottofind.com">HotToFind United Kingdom</a>
                 <br />
               </div>
