@@ -224,7 +224,7 @@ function truncateString(str, num) {
 function Post(props) {
 
 
-  if(!props.post[0]){
+  if(!props.post.id){
     return <ErrorPage errorCode={404} user={props.user} categories={props.categories} />
      }
 
@@ -403,7 +403,8 @@ Post.getInitialProps = async ctx => {
 
   let post = await Queries.getPost(id);
 
-  if(!post[0]){ctx.res.statusCode = 404}
+
+  if(!post.id){ctx.res.statusCode = 404}
 
 
 
