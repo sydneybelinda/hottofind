@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import {URL} from '../config'
+import {URL, COUNTRY} from '../config'
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -92,7 +92,7 @@ const Footer = props => {
                   gutterBottom
                   className={classes.mainText}
                 >
-                  <span className={classes.hot}>HotToFind</span> Australia
+                  <span className={classes.hot}>HotToFind</span> {COUNTRY}
                 </Typography>
                 <Typography
                   variant="subtitle1"
