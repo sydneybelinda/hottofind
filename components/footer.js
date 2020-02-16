@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import {URL} from '../config'
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -21,7 +22,8 @@ const useStyles = makeStyles(theme => ({
   },
   subtext: {
     fontFamily: 'Lora, "Times New Roman", Times, Baskerville, Georgia, serif',
-    fontSize: "12px"
+    fontSize: "12px",
+    marginBottom: 30
   },
   hot: {
     color: "#00ffe7"
@@ -42,7 +44,10 @@ const useStyles = makeStyles(theme => ({
       textAlign: "right"
     },
     textAlign: "center",
-    paddingTop: "40px"
+    "& a ": {
+      color: "#00baa9"
+    }
+
   },
   company: {
     [theme.breakpoints.up("sm")]: {
@@ -65,8 +70,8 @@ function Copyright() {
   return (
     <Typography variant="body2" align="center" className={classes.bottomText}>
       {"Copyright © "} {new Date().getFullYear()} -{" "}
-      <Link color="inherit" href="https://hottofind.com/">
-        https://hottofind.com
+      <Link color="inherit" href={URL}>
+        {URL}
       </Link>
     </Typography>
   );
@@ -96,6 +101,12 @@ const Footer = props => {
                 >
                   Free Local Classifieds - Buy / Sell / Trade anything
                 </Typography>
+                
+                <p>
+                  1 George St, <br /> Sydney NSW 2000
+                </p>
+                <a href="mailto:info@hottofind.com">info@hottofind.com</a><br/>
+                <a href={URL}>{URL}</a>
               </div>
             </Grid>
             <Grid item sm={2} xs={12}></Grid>
@@ -125,11 +136,25 @@ const Footer = props => {
             </Grid>
             <Grid item sm={2} xs={12}>
               <div className={classes.contact}>
-                <a href="mailto:info@hottofind.com">info@hottofind.com</a>
-                <p>
-                  1 George St, <br /> Sydney NSW 2000
-                </p>
-                <a href="https://hottofind.com">https://hottofind.com</a>
+              <Typography
+                  variant="h6"
+                  gutterBottom
+                  className={classes.mainText}
+                >
+                  <span className={classes.sites}>Our Sites:</span>
+                </Typography>
+                <div className={classes.links}>
+                <a href="https://au.hottofind.com">HotToFind Australia</a>
+                <br />
+                <a href="https://hottofind.com">HotToFind United States</a>
+                <br />
+                <a href="https://ca.hottofind.com">HotToFind Canada</a>
+                <br />
+                <a href="https://in.hottofind.com">HotToFind India</a>
+                <br />
+                <a href="https://uk.hottofind.com">HotToFind United Kingdom</a>
+                <br />
+              </div>
               </div>
             </Grid>
           </Grid>

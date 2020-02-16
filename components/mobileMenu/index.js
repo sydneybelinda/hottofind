@@ -33,7 +33,7 @@ class mobileMenu extends React.Component {
     return (
       <>
         <div className="brand"><Link href={"/"}><span className="homelink">HotToFind</span></Link></div>
-        <IconButton right
+        <IconButton right="true"
         className={classes.iconButton}
               //onClick={toggleDrawer('right', true)}
               onClick={this.props.toggleDrawer}

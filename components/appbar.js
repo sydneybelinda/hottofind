@@ -245,10 +245,13 @@ export default function PrimarySearchAppBar(props) {
         >
           <Container maxWidth="xl">
             <Toolbar>
-            
+            <Link href="/">
+                <a className={classes.link}>
                   <Typography className={classes.title} variant="h6" noWrap>
-                  <Link href={"/"} className={classes.logo}> HotToFind </Link>
+                    HotToFind
                   </Typography>
+                </a>
+              </Link>
              
               {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
