@@ -239,14 +239,14 @@ function Index(props) {
               <div className={classes.testimonial}>
                 <div className="classes.content">
                   <p className="classes.description">
-                    HotToFind {config.country} is a Free online general purpose classifieds and
+                    HotToFind {config.COUNTRY} is a Free online general purpose classifieds and
                     listing site.  Browse free online
                     classifieds and listing from various categories posted by
-                    users in {config.country}. Buy / Sell / Trade anything online
+                    users in {config.COUNTRY}. Buy / Sell / Trade anything online
                     for free. <br />
                     <br /> Sign up and post your ads instantly! <br /> <br />{" "}
                     <br />
-                    NOTE: hottofind.com is not responsible for any of the ads
+                    NOTE: {config.URL} is not responsible for any of the ads
                     posted online so browse carefully.
                   </p>
                   <div className="classes.infoText">
@@ -254,7 +254,7 @@ function Index(props) {
                       <a href="#">Lisa</a>
                     </h2>
                     <h4>
-                      <a href="#">CEO of HotToFind</a>
+                      <a href="#">CEO of HotToFind {config.COUNTRY}</a>
                     </h4>
                   </div>
                 </div>
