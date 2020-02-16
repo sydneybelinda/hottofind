@@ -12,6 +12,7 @@ import * as Queries from "../../utils/queries";
 import {getSlug} from "../../components/constants";
 import Divider from "@material-ui/core/Divider";
 import config from "../../config";
+import ErrorPage from '../../pages/_error';
 
 // const nl2br = require("react-nl2br");
 
@@ -221,14 +222,22 @@ function truncateString(str, num) {
 }
 
 function Post(props) {
+
+
+  if(!props.post[0]){
+    return <ErrorPage errorCode={404} user={props.user} categories={props.categories} />
+     }
+
   
 
   const end = ` - HotToFind ${config.COUNTRY}`;
   const char = 160 - end.length -3
 
-  var desc = props.post.description.slice(0, char)
+  const description = props.post.description || ''
 
-  if(props.post.description.length > char){
+  var desc = description.slice(0, char)
+
+  if(description.length > char){
 desc += ' ...'
   }
 
@@ -245,10 +254,12 @@ desc += ' ...'
 
   const { post } = props;
 
+
+
   const createdAt = props.post.createdAt;
   const updatedAt = props.post.updatedAt;
 
-  if (props.post.files[0]) {
+  if (post && post.files && post.files[0]) {
     var file = "url(/uploadedimages/" + props.post.files[0].name + ")";
   } else {
     var file = "url(/uploadedimages/noimage.jpg)";
@@ -273,6 +284,7 @@ desc += ' ...'
   );
 
   return (
+    
     <Layout user={props.user} categories={props.categories} meta={meta}>
       <PostBreadcrumbs post={props.post} categories={props.categories} />
       <div className={classes.sections}>
@@ -383,12 +395,22 @@ desc += ' ...'
   );
 }
 
-Post.getInitialProps = async ({ query, req }) => {
+Post.getInitialProps = async ctx => {
+  const { query } = ctx;
   const id = getSlug(query.id);
 
   let viewCount = await Queries.incrementViewCount(id);
 
   let post = await Queries.getPost(id);
+
+  if(!post[0]){ctx.res.statusCode = 404}
+
+
+
+//   var obj = JSON.parse("{}")
+
+// console.log("pst: " , obj.length)
+
   return { query, post };
 };
 

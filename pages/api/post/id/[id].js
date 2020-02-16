@@ -5,12 +5,12 @@ export default async (req, res) => {
     query: { id }
   } = req;
 
-  console.log(id)
+
 
   try {
-    // const posts = await Post.findAll({
-    //   });
-    const posts = await Post.findOne({
+
+    var posts;
+    posts = await Post.findOne({
       where: {
         id: id
       },
@@ -22,6 +22,12 @@ export default async (req, res) => {
       ],
       order: [["createdAt", "DESC"]]
     });
+
+    if(!posts){
+      posts = '{}';
+    }
+
+
     return res.status(200).send(posts);
   } catch (err) {
     return res.status(500).send(err);

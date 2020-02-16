@@ -5,12 +5,10 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Layout from "../components/layout";
-import PostPreview from "../components/postPreview";
 import MediaCard from "../components/mediaCard";
 import config from "../config";
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
-import Search from "../components/search";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {

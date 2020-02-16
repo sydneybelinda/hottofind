@@ -3,6 +3,7 @@ import nextCookie from "next-cookies";
 import { API, COUNTRYCODE } from "../config";
 import Router from "next/router";
 import cookies from 'next-cookies'
+import Error from 'next/error'
 
 export const deletePost = async id => {
   const url = `/api/post/delete`;
@@ -106,8 +107,14 @@ export const checkUserLogin = async ctx => {
 export const getPost = async id => {
   const url = `${API}/post/id/${id}`;
   const data = await fetch(url);
-  const post = await data.json();
-  return post;
+ // console.log('data: ', data.Response)
+ 
+    const post = await data.json();
+      return post;
+ 
+   
+  
+
 };
 
 export const getCities = async countrycode => {
@@ -171,7 +178,6 @@ export const getPage = async (ctx) => {
   const res = await fetch(url);
   let data = await res.json();
 
-  console.log(url)
 
   const urlb = `${API}/city/get/${COUNTRYCODE}`;
   const resb = await fetch(urlb);
@@ -265,3 +271,12 @@ export const getAllPosts = async c => {
 
   return posts;
 };
+
+export const throw404 = () => {
+  if (process.browser) {
+    return <Error statusCode={404} />
+  }
+  const e = new Error()
+  e.code = 'ENOENT'
+  throw e
+}

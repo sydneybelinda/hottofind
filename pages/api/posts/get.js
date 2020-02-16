@@ -20,7 +20,7 @@ export default async (req, res) => {
     query: { catindex, keyindex, countrycode, city, sort, page = 1 }
   } = req;
 
-  const limit = 100;
+  const limit = 50;
   const offset = (limit * page) - limit
   const order = await getSort(sort)
 
