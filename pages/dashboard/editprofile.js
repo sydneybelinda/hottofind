@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Breadcrumbs from "../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../components/dashboard/dashboardMenu";
-import Layout from "../../components/dashboard/layoutnew";
+import Layout from "../../components/dashboard/layout";
 import ProfileForm from "../../components/dashboard/profileForm";
 import config from "../../config";
 import { withAuth } from "../../utils/auth";

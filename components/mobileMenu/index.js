@@ -1,6 +1,7 @@
-import { slide as Menu } from "react-burger-menu";
+
 import MenuList from "./menuList";
 import SearchIcon from "@material-ui/icons/Search";
+import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Link from "next/link";
@@ -9,11 +10,21 @@ import "./styles.css";
 
 const styles = theme => ({
   iconButton: {
-  left: -41,
   padding: 0
   },
 searchIcon: {
-  fontSize: 40
+  fontSize: 40,
+  fill: "#bbbebe"
+},
+menuButton: {
+    fontSize: 40,
+    marginLeft: 10,
+    fill: "#646363",
+    padding: 0
+},
+menuIcon: {
+  width: 40,
+  height: 40
 }
 })
 
@@ -40,10 +51,18 @@ class mobileMenu extends React.Component {
               ><SearchIcon
               className={classes.searchIcon}
               /></IconButton>
-        <Menu right>
+
+<IconButton 
+className={classes.menuButton}
+    //onClick={toggleDrawer('right', true)}
+    onClick={this.props.toggleMenu}
+    ><MenuIcon 
+    className={classes.menuIcon}
+    /></IconButton>
+        {/* <Menu right>
     
           <MenuList user={this.props.user} categories={this.props.categories} />
-        </Menu>
+        </Menu> */}
         </>
     );
   }

@@ -1,16 +1,55 @@
-import Head from 'next/head'
-import React from 'react'
+import Head from "./head";
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import Header from "./header";
+import Footer from "./footer";
+import SearchBar from './searchBar';
+import MobilePanel from './mobilePanel';
+
+const useStyles = makeStyles(theme => ({
+  wrap: {
+
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "94px"
+    },
+    marginTop: "56px",
+    width: "100%",
+    maxWidth: "100%",
+    overflowX: "hidden"
+  }
+}));
+
 
 function Layout(props) {
   const meta = props.meta || "";
 
   const title = meta.title || "HotToFind Local Classifieds";
 
+  const classes = useStyles();
+  const [side, setSide] = React.useState(false);
+  const [menu, setMenu] = React.useState(false);
+
+  const _toggleDrawer = e => {
+      setSide(true)
+      console.log('click: ', side)
+  }
+
+  const _toggleMenu = e => {
+    setMenu(true)
+    console.log('click: ', menu)
+}
+
+  const _drawerClose = e => {
+    setSide(false)
+  }
+  const _menuClose = e => {
+    setMenu(false)
+  }
+
+
   return (
     <React.Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
+      <Head meta={props.meta} />  
       <style jsx global>{`
         *,
         *::before,
@@ -27,21 +66,51 @@ function Layout(props) {
             "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
 
-        .fine-uploader-dropzone-container {
-          background: transparent !important;
+        h1 {
+          font-family: "Montserrat", "Arial", "Helvetica Neue", "Helvetica",
+            sans-serif !important;
+          font-weight: 700;
+          line-height: 65px;
+          letter-spacing: -0.4px;
+          font-size: 50px;
+          margin-top: 0;
         }
 
-        span.react-fine-uploader-gallery-dropzone-content {
-          display: none;
+        h2 {
+          font-family: "Montserrat", "Arial", "Helvetica Neue", "Helvetica",
+            sans-serif !important;
+          font-size: 27px;
+          font-weight: 700;
+          line-height: 48.006px;
+          margin-bottom: 0;
         }
-        .container {
-          max-width: 65rem;
-          margin: 1.5rem auto;
-          padding-left: 1rem;
-          padding-right: 1rem;
+
+        .main {
+          margin-top: 93px;
+          min-height: 100vh;
+        }
+        @media only screen and (max-width: 600px) {
+          .main {
+            margin-top: 57px;
+          }
         }
       `}</style>
       {props.children}
+      <div className={classes.wrap}>
+        <Header {...props} toggleDrawer={_toggleDrawer} toggleMenu={_toggleMenu} />
+        <SearchBar 
+        side={side}
+        drawerClose={_drawerClose}
+        />
+        <MobilePanel 
+        menu={menu}
+        menuClose={_menuClose}
+        categories={props.categories}
+        user={props.user}
+        />
+        {props.children}
+        <Footer />
+      </div>
     </React.Fragment>
   );
 }

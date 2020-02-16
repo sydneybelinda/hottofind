@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import SearchIcon from "@material-ui/icons/Search";
+import MenuIcon from "@material-ui/icons/Menu";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
@@ -113,7 +114,6 @@ const useStyles = makeStyles(theme => ({
     color: "black",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    paddingTop: "15px",
     textOverflow: "ellipsis",
     "&:hover": {
       color: "#009b9b"
@@ -127,7 +127,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: "12px",
     fontWeight: "600",
     letterSpacing: ".12em",
-    paddingTop: "15px",
     color: "black",
     "&:hover": {
       color: "#009b9b"
@@ -157,6 +156,7 @@ const useStyles = makeStyles(theme => ({
   },
   sectionMobile: {
     display: "flex",
+    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }
@@ -179,6 +179,7 @@ export default function PrimarySearchAppBar(props) {
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
+    document.body.style="overflow:hidden"
   };
 
   const handleMobileMenuClose = () => {
@@ -232,7 +233,7 @@ export default function PrimarySearchAppBar(props) {
 
   const renderMobileMenu = (
     // <Menu >
-    <MobileMenu user={props.user} categories={props.categories} toggleDrawer={props.toggleDrawer}  />
+    <MobileMenu user={props.user} categories={props.categories} toggleDrawer={props.toggleDrawer} toggleMenu={props.toggleMenu} />
     // </Menu>
   );
 

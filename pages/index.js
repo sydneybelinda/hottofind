@@ -112,11 +112,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   grid: {
-    paddingLeft: "5px",
-    paddingRight: "5px",
+    width: 'calc(100% + 28px)',
+    margin: -14,
     [theme.breakpoints.up("sm")]: {
-      paddingLeft: "20px",
-      paddingRight: "20px"
+      width: 'calc(100% + 16px)',
+      margin: -8
     }
   },
   rootContainer: {
@@ -205,7 +205,7 @@ function Index(props) {
             </Grid>
             </Grid>
             {/* <Grid container spacing={2} className={classes.grid}> */}
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.grid}>
             {props.posts.length > 0
               ? props.posts.map(post => (
 

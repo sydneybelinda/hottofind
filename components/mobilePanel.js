@@ -9,36 +9,30 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Search from './search';
+import MenuList from './mobileMenu/menuList';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   list: {
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-    },
+    width: 250,
   },
   fullList: {
     width: 'auto',
   },
   drawer: {
-    left: "10%",
-    [theme.breakpoints.up("sm")]: {
-      left: "30%",
-      },
+    left: "25%",
   }
-}))
+});
 
 export default function TemporaryDrawer(props) {
   const classes = useStyles();
-
-
-
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
-    right: props.side,
+    right: false,
   });
+
+ 
 
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -52,12 +46,10 @@ export default function TemporaryDrawer(props) {
     <div
       className={classes.list}
       role="presentation"
-     // onClick={props.drawerClose}
-    //  onKeyDown={props.drawerClose}
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
     >
-
-      <Search />
-      {/* <List>
+      <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -73,18 +65,44 @@ export default function TemporaryDrawer(props) {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List> */}
+      </List>
     </div>
   );
 
+  const fullList = side => (
+    <div
+      className={classes.fullList}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
   return (
     <div>
 
-      <Drawer anchor="right" open={props.side} onClose={props.drawerClose} classes={{
+      <Drawer anchor="right" open={props.menu} onClose={props.menuClose} classes={{
         paperAnchorRight: classes.drawer,
    }}>
-        {sideList('right')}
+        <MenuList  user={props.user} categories={props.categories} />
       </Drawer>
     </div>
   );

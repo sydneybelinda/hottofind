@@ -216,7 +216,7 @@ export default function PrimarySearchAppBar(props) {
 
   const renderMobileMenu = (
     // <Menu >
-    <MobileMenu user={props.user} categories={props.categories} />
+    <MobileMenu user={props.user} categories={props.categories} toggleDrawer={props.toggleDrawer} toggleMenu={props.toggleMenu} />
     // </Menu>
   );
 

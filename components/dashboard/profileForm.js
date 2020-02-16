@@ -35,6 +35,12 @@ const styles = theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  container: {
+    padding: 0,
+    [theme.breakpoints.up("sm")]: {
+      padding: 16,
+    },
   }
 });
 
@@ -168,8 +174,8 @@ class ProfileForm extends React.Component {
     return (
       <React.Fragment>
         <form noValidate onSubmit={this.handleSave}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={3}>
+          <Grid container spacing={3} >
+            <Grid item xs={12} sm={3} className={classes.container}>
               Photo
               <div
                 style={{

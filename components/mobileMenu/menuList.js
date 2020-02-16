@@ -2,6 +2,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Collapse from "@material-ui/core/Collapse";
 import { deepPurple } from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 // import Context from "../../context";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
@@ -62,9 +63,9 @@ const useStyles = makeStyles(theme => ({
     float: "right"
   },
   subcat: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: "15px",
-    letterSpacing: ".12em",
+    letterSpacing: "normal",
     color: "#717171"
   },
   exicon: {
@@ -92,6 +93,7 @@ function NestedList(props) {
   const [accountOpen, setAccountOpen] = React.useState(false);
   const [employmentOpen, setEmploymentOpen] = React.useState(false);
   const [localOpen, setLocalOpen] = React.useState(false);
+  const [countryOpen, setCountryOpen] = React.useState(false);
   const [communityOpen, setCommunityOpen] = React.useState(false);
   const [tradeOpen, setTradeOpen] = React.useState(false);
   const [rentingOpen, setRentingOpen] = React.useState(false);
@@ -114,6 +116,9 @@ function NestedList(props) {
   };
   const handleLocalClick = () => {
     setLocalOpen(!localOpen);
+  };
+  const handleCountryClick = () => {
+    setCountryOpen(!countryOpen);
   };
   const handleCommunityClick = () => {
     setCommunityOpen(!communityOpen);
@@ -141,13 +146,89 @@ function NestedList(props) {
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
-    //  subheader={
-        // <ListSubheader component="div" id="nested-list-subheader">
-        //   enu
-        // </ListSubheader>
-     // }
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Menu
+        </ListSubheader>
+      }
       className={classes.root}
     >
+
+<ListItem button onClick={handleCountryClick} className={classes.cats}>
+        <div className={classes.cats}>Countries</div>
+        {countryOpen ? (
+          <ExpandLess className={classes.exicon} />
+        ) : (
+          <ExpandMore className={classes.exicon} />
+        )}
+      </ListItem>
+      <Collapse in={countryOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Link href="https://au.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>Australia</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>United States</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://ca.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>Canada</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://in.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>India</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://eu.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>Europe</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://uk.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>United Kingdom</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://za.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>South Africa</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://sq.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>Singapore</div>
+            </ListItem>
+          </Link>
+        </List>
+        <List component="div" disablePadding>
+          <Link href="https://sa.hottofind.com">
+            <ListItem button className={classes.nested}>
+              <div className={classes.subcat}>South America</div>
+            </ListItem>
+          </Link>
+        </List>
+      </Collapse>
+
+      <Divider />
 <div className={classes.butWrap}>
 <Link href="/dashboard/newpost">
 <Button size="small" variant="outlined" size="small" color="primary" className={classes.butNew}>
@@ -163,7 +244,7 @@ function NestedList(props) {
             className={classes.cats}
           >
             <div className={classes.cats}>
-              <Avatar className={classes.purpleAvatar}>OP</Avatar>
+            <AccountCircle />
             </div>
             {accountOpen ? (
               <ExpandLess className={classes.exicon} />

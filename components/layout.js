@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Footer from "./footer";
 import Head from "./head";
 import Header from "./header";
-import SearchBar from './searchBar'
+import SearchBar from './searchBar';
+import MobilePanel from './mobilePanel';
 
 
 
@@ -24,15 +25,25 @@ const useStyles = makeStyles(theme => ({
 function Layout(props) {
   const classes = useStyles();
   const [side, setSide] = React.useState(false);
+  const [menu, setMenu] = React.useState(false);
 
   const _toggleDrawer = e => {
       setSide(true)
       console.log('click: ', side)
   }
 
+  const _toggleMenu = e => {
+    setMenu(true)
+    console.log('click: ', menu)
+}
+
   const _drawerClose = e => {
     setSide(false)
   }
+  const _menuClose = e => {
+    setMenu(false)
+  }
+
 
   return (
     <>
@@ -83,10 +94,16 @@ function Layout(props) {
         }
       `}</style>
       <div className={classes.wrap}>
-        <Header {...props} toggleDrawer={_toggleDrawer} />
+        <Header {...props} toggleDrawer={_toggleDrawer} toggleMenu={_toggleMenu} />
         <SearchBar 
         side={side}
         drawerClose={_drawerClose}
+        />
+        <MobilePanel 
+        menu={menu}
+        user={props.user}
+        menuClose={_menuClose}
+        categories={props.categories}
         />
         {props.children}
         <Footer />

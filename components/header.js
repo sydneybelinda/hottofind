@@ -17,6 +17,7 @@ function Header(props) {
         categories={props.categories}
         className={classes.header}
         toggleDrawer={props.toggleDrawer}
+        toggleMenu={props.toggleMenu}
       />
     </Container>
   );

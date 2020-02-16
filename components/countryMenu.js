@@ -87,69 +87,68 @@ export default function CustomizedMenus() {
         onClose={handleClose}
         className={classes.menu}
       >
-        <Link href="https://au.hottofind.com">
-          <a>
+        
+          <a href="https://au.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="Australia" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://hottofind.com">
-          <a>
+     
+   
+          <a  href="https://hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="United States" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://ca.hottofind.com">
-          <a>
+  
+    
+          <a href="https://ca.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="Canada" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://in.hottofind.com">
-          <a>
+    
+          <a href="https://in.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="India" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://eu.hottofind.com">
-          <a>
+      
+       
+          <a href="https://eu.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="Europe" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://uk.hottofind.com">
-          <a>
+       
+     
+          <a href="https://uk.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="United Kingdom" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://za.hottofind.com">
-          <a>
+    
+    
+          <a href="https://za.hottofind.com"> 
             <StyledMenuItem>
               <ListItemText primary="South Africa" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://sa.hottofind.com">
-          <a>
+    
+      
+          <a href="https://sa.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="South America" />
             </StyledMenuItem>
           </a>
-        </Link>
-        <Link href="https://sg.hottofind.com">
-          <a>
+   
+    
+          <a href="https://sg.hottofind.com">
             <StyledMenuItem>
               <ListItemText primary="Singapore" />
             </StyledMenuItem>
           </a>
-        </Link>
+       
       </StyledMenu>
     </div>
   );
