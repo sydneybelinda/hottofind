@@ -11,6 +11,7 @@ import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 import {getSlug} from "../../components/constants";
 import Divider from "@material-ui/core/Divider";
+import config from "../../config";
 
 // const nl2br = require("react-nl2br");
 
@@ -215,7 +216,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function truncateString(str, num) {
+  return str;
+}
+
 function Post(props) {
+  
+
+  const end = ` - HotToFind ${config.COUNTRY}`;
+  const char = 160 - end.length -3
+
+  var desc = props.post.description.slice(0, char)
+
+  if(props.post.description.length > char){
+desc += ' ...'
+  }
+
+  const meta = [];
+
+  meta.title = `${props.post.title} ~ ${props.post.id} - HotToFind ${config.COUNTRY}`;
+  meta.description = `${desc} - HotToFind ${config.COUNTRY}`;
+
+
   const classes = useStyles();
 
   const router = useRouter();
@@ -251,7 +273,7 @@ function Post(props) {
   );
 
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} meta={meta}>
       <PostBreadcrumbs post={props.post} categories={props.categories} />
       <div className={classes.sections}>
         <div className={classes.mainContainer}>

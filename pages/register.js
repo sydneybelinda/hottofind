@@ -1,10 +1,8 @@
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState } from "react";
+import Head from "../components/head";
+import config from "../config";
 import { login } from "../utils/auth";
 
 function Copyright() {
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
 
   const [userData, setUserData] = useState({
@@ -68,6 +68,13 @@ export default function SignUp() {
     password: "",
     error: ""
   });
+
+  const meta = [];
+
+  meta.title = `Register a new account for free - HotToFind ${config.COUNTRY}`;
+  meta.description =
+    `Sign up to HotToFind ${config.COUNTRY} today quickly and easily for FREE!  and start buying and selling online`;
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -113,6 +120,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Head meta={meta} />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

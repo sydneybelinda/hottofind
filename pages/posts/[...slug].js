@@ -172,6 +172,8 @@ const useStyles = makeStyles(theme => ({
 function Posts(props) {
 
 
+
+
   const [data, setData] = useState({
     next: true,
     previous: true,
@@ -240,8 +242,35 @@ function Posts(props) {
 //    window.location.reload()
   };
 
+
+  const meta = [];
+
+  meta.description = `View all `
+
+  if (category) {
+  meta.title = category.maincategory
+  meta.description += category.maincategory
+  }
+
+  if(subcat){
+    meta.title += ` / ${subcat.subcategory} `;
+    meta.description += ` / ${subcat.subcategory} `; 
+  }
+
+  meta.description += `posts and items advertised for sale `
+
+  if(props.city){
+    meta.title += `in ${capitalize(props.city)}`
+    meta.description += `in ${capitalize(props.city)}`
+  }
+
+  meta.title += ` - HotToFind ${config.COUNTRY}`
+  meta.description += ` - HotToFind ${config.COUNTRY}`
+
+ 
+
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} meta={meta}>
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
           {

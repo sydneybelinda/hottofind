@@ -14,6 +14,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import fetch from "isomorphic-unfetch";
 import React, { useState } from "react";
 import { login } from "../utils/auth";
+import Head from "../components/head";
+import config from "../config";
 
 function Copyright() {
   return (
@@ -56,13 +58,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Login() {
+function Login(props) {
   const classes = useStyles();
   const [userData, setUserData] = useState({
     username: "",
     password: "",
     error: ""
   });
+
+  const meta = [];
+
+  meta.title = `Login to your Account - HotToFind ${config.COUNTRY}`;
+  meta.description =
+    `Login to your HotToFind ${config.COUNTRY} account and start buying and selling for free today!`;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -109,6 +117,7 @@ function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Head meta={meta} />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

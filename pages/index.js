@@ -10,8 +10,7 @@ import MediaCard from "../components/mediaCard";
 import config from "../config";
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
-import Search from '../components/search'
-
+import Search from "../components/search";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -60,9 +59,9 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(6),
       paddingRight: 0
     },
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    textAlign: "center",
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   mainGrid: {
     marginTop: theme.spacing(3)
@@ -112,10 +111,10 @@ const useStyles = makeStyles(theme => ({
     }
   },
   grid: {
-    width: 'calc(100% + 28px)',
+    width: "calc(100% + 28px)",
     margin: -14,
     [theme.breakpoints.up("sm")]: {
-      width: 'calc(100% + 16px)',
+      width: "calc(100% + 16px)",
       margin: -8
     }
   },
@@ -139,7 +138,7 @@ const useStyles = makeStyles(theme => ({
     padding: "41px 20px",
     fontFamily: 'Lora, "Times New Roman", Times, Baskerville, Georgia, serif'
   },
-  flex:{
+  flex: {
     justifyContent: "center"
   },
   containerRoot: {
@@ -154,9 +153,8 @@ function Index(props) {
 
   const meta = [];
 
-  meta.title = "HotToFind - Free Local Classified Ads | Buy - Sell - Trade";
-  meta.description =
-    "Free Local classified ad postings.  Buy, Sell, Trade in your city, instantly online.  Register for free";
+  meta.title = `HotToFind ${config.COUNTRY} - Free Local Classified Ads`;
+  meta.description = `Free Local classified ad postings in ${config.COUNTRY}.  Buy, Sell, Trade in your city, instantly online.  Register for free`;
   return (
     <Layout meta={meta} {...props}>
       <Paper className={classes.mainFeaturedPost}>
@@ -176,7 +174,8 @@ function Index(props) {
                 {/* <Typography component="h1" variant="h3" color="inherit" gutterBottom> */}
                 <h1 className={classes.sitename}>
                   {" "}
-                  <span className={classes.hot}>HotToFind</span>{" "} {config.COUNTRY}
+                  <span className={classes.hot}>HotToFind</span>{" "}
+                  {config.COUNTRY}
                   <span className={classes.free}>Free Classifieds</span>{" "}
                   <span>{props.country}</span>
                 </h1>
@@ -197,36 +196,33 @@ function Index(props) {
       </Paper>
       <div className={classes.mainPosts}>
         <Container maxWidth="xl">
-        <Grid container spacing={4}>
-         
+          <Grid container spacing={4}>
             <Grid item xs={12} md={12}>
               <h2 className={classes.heading}>Latest Posts</h2>
               <Divider />
             </Grid>
-            </Grid>
-            {/* <Grid container spacing={2} className={classes.grid}> */}
-            <Grid container spacing={2} className={classes.grid}>
+          </Grid>
+          {/* <Grid container spacing={2} className={classes.grid}> */}
+          <Grid container spacing={2} className={classes.grid}>
             {props.posts.length > 0
               ? props.posts.map(post => (
+                  // <PostPreview
+                  //  post={post}
+                  //  xs={12}
+                  //  sm={4}
+                  //  md={3}
+                  //  lg={2}
+                  //  key={post.id}
+                  //  />
 
-                    // <PostPreview
-                    //  post={post}
-                    //  xs={12}
-                    //  sm={4}
-                    //  md={3}
-                    //  lg={2}
-                    //  key={post.id}
-                    //  />
-
-                    <MediaCard
+                  <MediaCard
                     key={post.id}
                     post={post}
                     xs={12}
-                     sm={4}
-                     md={3}
-                     lg={2}
-                    />
-
+                    sm={4}
+                    md={3}
+                    lg={2}
+                  />
                 ))
               : ""}
           </Grid>
@@ -239,11 +235,11 @@ function Index(props) {
               <div className={classes.testimonial}>
                 <div className="classes.content">
                   <p className="classes.description">
-                    HotToFind {config.COUNTRY} is a Free online general purpose classifieds and
-                    listing site.  Browse free online
-                    classifieds and listing from various categories posted by
-                    users in {config.COUNTRY}. Buy / Sell / Trade anything online
-                    for free. <br />
+                    HotToFind {config.COUNTRY} is a Free online general purpose
+                    classifieds and listing site. Browse free online classifieds
+                    and listing from various categories posted by users in{" "}
+                    {config.COUNTRY}. Buy / Sell / Trade anything online for
+                    free. <br />
                     <br /> Sign up and post your ads instantly! <br /> <br />{" "}
                     <br />
                     NOTE: {config.URL} is not responsible for any of the ads
@@ -267,13 +263,10 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async (req,ctx) => {
+Index.getInitialProps = async (req, ctx) => {
   const { API, COUNTRYCODE } = config;
 
   //const host  = req.headers.host || window.location.hostname
-
-
-
 
   const posts = await Queries.getlatest(COUNTRYCODE);
 
