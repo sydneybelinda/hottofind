@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Breadcrumbs from "../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../components/dashboard/dashboardMenu";
-import Layout from "../../components/dashboard/layout";
+import Layout from "../../components/dashboard/layoutold";
 import PostWide from "../../components/dashboard/postWide";
 import Sort from "../../components/dashboard/sort";
 import { withAuth } from "../../utils/auth";

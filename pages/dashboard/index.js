@@ -118,6 +118,7 @@ const useStyles = makeStyles(theme => ({
   grid: {
     paddingLeft: "5px",
     paddingRight: "5px",
+    minHeight: "100vh",
     [theme.breakpoints.up("sm")]: {
       paddingLeft: "20px",
       paddingRight: "20px"

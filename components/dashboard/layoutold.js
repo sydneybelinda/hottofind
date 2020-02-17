@@ -1,21 +1,55 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Footer from "./footer";
 import Head from "./head";
-import Header from "./headernew";
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import Header from "./header";
+import Footer from "./footer";
+import SearchBar from './searchBar';
+import MobilePanel from './mobilePanel';
+
 const useStyles = makeStyles(theme => ({
   wrap: {
+
     [theme.breakpoints.up("sm")]: {
       marginTop: "94px"
     },
-    marginTop: "56px"
+    marginTop: "56px",
+    width: "100%",
+    maxWidth: "100%",
+    overflowX: "hidden"
   }
 }));
 
+
 function Layout(props) {
+  const meta = props.meta || "";
+
+  const title = meta.title || "HotToFind Local Classifieds";
+
   const classes = useStyles();
+  const [side, setSide] = React.useState(false);
+  const [menu, setMenu] = React.useState(false);
+
+  const _toggleDrawer = e => {
+      setSide(true)
+      console.log('click: ', side)
+  }
+
+  const _toggleMenu = e => {
+    setMenu(true)
+    console.log('click: ', menu)
+}
+
+  const _drawerClose = e => {
+    setSide(false)
+  }
+  const _menuClose = e => {
+    setMenu(false)
+  }
+
+
   return (
-    <>
-      <Head meta={props.meta} />
+    <React.Fragment>
+      <Head meta={props.meta} />  
       <style jsx global>{`
         *,
         *::before,
@@ -61,12 +95,23 @@ function Layout(props) {
           }
         }
       `}</style>
+      {props.children}
       <div className={classes.wrap}>
-        <Header {...props} />
+        <Header {...props} toggleDrawer={_toggleDrawer} toggleMenu={_toggleMenu} />
+        <SearchBar 
+        side={side}
+        drawerClose={_drawerClose}
+        />
+        <MobilePanel 
+        menu={menu}
+        menuClose={_menuClose}
+        categories={props.categories}
+        user={props.user}
+        />
         {props.children}
         <Footer />
       </div>
-    </>
+    </React.Fragment>
   );
 }
 
