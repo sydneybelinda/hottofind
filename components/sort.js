@@ -142,7 +142,7 @@ let endpost;
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
           <MenuItem value="lowestprice">Lowest to Highest</MenuItem>
-          <MenuItem value="lowestprice">Highest to Lowest</MenuItem>
+          <MenuItem value="highestprice">Highest to Lowest</MenuItem>
         </Select>
       </FormControl>
       </div>

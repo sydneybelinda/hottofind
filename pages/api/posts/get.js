@@ -8,6 +8,10 @@ export default async (req, res) => {
         return ["createdAt", "DESC"];
         case 'oldest':
           return ["createdAt", "ASC"];
+        case 'lowestprice':
+          return ["price", "ASC"];
+        case 'highestprice':
+          return ["price", "DESC"];
       default:
         return ["createdAt", "DESC"]
     }

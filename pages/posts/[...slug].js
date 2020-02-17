@@ -328,7 +328,7 @@ function Posts(props) {
               <Sort
                 total={total}
                 page={props.page}
-                limit={"100"}
+                limit={"50"}
                 defaultSort={props.defaultSort}
                 defaultView={props.defaultView}
                 selectListView={_selectListView}
