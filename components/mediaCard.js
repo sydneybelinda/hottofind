@@ -22,6 +22,8 @@ import {makeSlug} from "./constants"
 import Room from "@material-ui/icons/Room";
 import Link from "@material-ui/core/Link";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
+import {URL} from '../config';
+import {checkURL} from "../utils/queries";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -235,7 +237,7 @@ export default function RecipeReviewCard(props) {
 
   var image;
 
-   if (post.files[0]) {
+   if (post.files.length > 0) {
      image = "/static/uploadedimages/" + post.files[0].name;
    } else image = "/static/uploadedimages/noimage.jpg";
 

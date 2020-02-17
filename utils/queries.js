@@ -280,3 +280,8 @@ export const throw404 = () => {
   e.code = 'ENOENT'
   throw e
 }
+
+export const checkUrl = async url => {
+  const data = await fetch(url);
+  return data.status;
+};
