@@ -213,7 +213,7 @@ function NestedList(props) {
           </Link>
         </List>
         <List component="div" disablePadding>
-          <Link href="https://sq.hottofind.com">
+          <Link href="https://sg.hottofind.com">
             <ListItem button className={classes.nested}>
               <div className={classes.subcat}>Singapore</div>
             </ListItem>
