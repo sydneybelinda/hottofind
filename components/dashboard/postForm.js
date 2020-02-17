@@ -9,6 +9,8 @@ import React from "react";
 import { COUNTRYCODE } from "../../config";
 import SimpleSelect from "./simpleSelect";
 import UpdateElastic from "../updateElastic"
+import CircularProgress from '@material-ui/core/CircularProgress';
+import * as EmailValidator from 'email-validator';
 
 
 // const UploadComponent = dynamic(() => import("./uploadcomponent"), {
@@ -47,6 +49,27 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       padding: 16,
     },
+  },
+  error: {
+    color: "#ff1744",
+    margin: "24px 14px 0",
+    fontSize: "1rem",
+    textAlign: "left",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 400,
+    lineHeight: '1em',
+    letterSpacing: '0.03333em'
+
+  },
+  spinner:{
+  width: "15px !important",
+  color: "white !important",
+  height: "15px !important",
+  position: "absolute",
+  right: "20px !important",
+  },
+  formDisabled: {
+    background: "gainsboro"
   }
 });
 
@@ -86,7 +109,26 @@ class PostForm extends React.Component {
       subcategories: [],
       error: "",
       files: post ? this.props.post.files : [],
-      newfiles: []
+      newfiles: [],
+      formDisabled: false,
+      categoryError: false,
+      categoryHelper: '',
+      locationError: false,
+      locationHelper: '',
+      subError: false,
+      subHelper: '',
+      cityError: false,
+      cityHelper: '',
+      titleError: false,
+      titleHelper: '',
+      descriptionError: false,
+      descriptionHelper: '',
+      firstnameError: false,
+      firstNameHelper: '',
+      phoneError: false,
+      phoneHelper: '',
+      emailError: false,
+      emailHelper: '',
     };
   }
 
@@ -122,12 +164,12 @@ class PostForm extends React.Component {
   };
 
   _handleChangeCity = e => {
-    this.setState({ cities: e.target.value });
+    this.setState({ cities: e.target.value, cityError: false, cityHelper: ''  });
   };
 
   _handleChangeCategory = e => {
     this.setState({ keyindex: "" });
-    this.setState({ catindex: e.target.value });
+    this.setState({ catindex: e.target.value, categoryError: false, categoryHelper: '' });
 
     const filter = (tag, arr) => arr.filter(cat => cat.catindex === tag);
     const filtered = filter(e.target.value, this.props.categories);
@@ -141,7 +183,7 @@ class PostForm extends React.Component {
   };
 
   _handleChangeSubCategory = e => {
-    this.setState({ keyindex: e.target.value });
+    this.setState({ keyindex: e.target.value, subError: false, subHelper: '' });
   };
 
   onUpdateFiles(fileItems) {}
@@ -203,6 +245,210 @@ class PostForm extends React.Component {
     }
   };
 
+  chkTitle = async (e) => {
+      
+
+    if (!this.state.title){ 
+      this.setState({ titleError: true, titleHelper:  "Title is required" })
+    } else {
+      this.setState({ titleError: false, titleHelper:  ""})
+    }
+  
+  }
+
+  chkCategory = async (e) => {
+      
+
+    if (!this.state.catindex){ 
+      this.setState({ categoryError: true, categoryHelper:  "Category is required" })
+    } else {
+      this.setState({ categoryError: false, categoryHelper:  ""})
+    }
+  
+  }
+
+  chkSub = async (e) => {
+      
+
+    if (!this.state.keyindex){ 
+      this.setState({ subError: true, subHelper:  "Subcategory is required" })
+    } else {
+      this.setState({ subError: false, subHelper:  ""})
+    }
+  
+  }
+
+  chkCity = async (e) => {
+      
+
+    if (!this.state.cities){ 
+      this.setState({ cityError: true, cityHelper:  "City is required" })
+    } else {
+      this.setState({ cityError: false, cityHelper:  ""})
+    }
+  
+  }
+
+  chkLocation = async (e) => {
+      
+
+    if (!this.state.location){ 
+      this.setState({ locationError: true, locationHelper:  "Location is required" })
+    } else {
+      this.setState({ locationError: false, locationHelper:  ""})
+    }
+  
+  }
+
+  chkDescription = async (e) => {
+      
+
+    if (!this.state.description){ 
+      this.setState({ descriptionError: true, descriptionHelper:  "Description is required" })
+    } else {
+      this.setState({ descriptionError: false, descriptionHelper:  ""})
+    }
+  
+  }
+
+  
+  chkFirstname = async (e) => {
+      
+
+    if (!this.state.firstname){ 
+      this.setState({ firstnameError: true, firstnameHelper:  "Firstname is required" })
+    } else {
+      this.setState({ firstnameError: false, firstnameHelper:  ""})
+    }
+  
+  }
+
+  chkPhone = async (e) => {
+      
+
+    if (!this.state.phone){ 
+      this.setState({ phoneError: true, phoneHelper:  "Phone Number is required" })
+    } else {
+      this.setState({ phoneError: false, phoneHelper:  ""})
+    }
+  
+  }
+
+  chkEmail = async (e) => {
+      
+
+    if (!this.state.email){ 
+      this.setState({ emailError: true, emailHelper:  "Email Address is required" })
+    } else {
+      const valid = EmailValidator.validate(this.state.email);
+      if (!valid){
+          this.setState({ emailError: true, emailHelper:  "Email address is not Valid"  })
+      } else {
+
+      this.setState({ emailError: false, emailHelper:  ""})
+      }
+    }
+  
+  }
+
+  submitPost = async (e) => {
+    this.setState({loading: true, formDisabled: true}) 
+
+    var catCheck = await this.chkCategory();
+    var subCheck = await this.chkSub();
+    var locationCheck = await this.chkLocation();
+    var titleCheck = await this.chkTitle();
+    var cityCheck = await this.chkCity();
+    var descCheck = await this.chkDescription();
+    var firstnameCheck = await this.chkFirstname();
+    var phoneCheck = await this.chkPhone();
+    var emailCheck = await this.chkEmail();
+
+    if(!this.state.categoryError &&
+      !this.state.subcategoryError &&
+      !this.state.cityError &&
+      !this.state.locationError &&
+      !this.state.titleError &&
+      !this.state.descriptionError &&
+      !this.state.firstnameError &&
+      !this.state.phoneError &&
+      !this.state.emailError
+      
+      ){
+
+    this.setState({ error: "" });
+
+    var fs = [];
+
+    this.ref1
+      .getFiles()
+      .map(fileItem => fileItem.file)
+      .forEach(file => {
+        var name = file.name.split(".")[0];
+        var fileName = `${name}.jpg`;
+        fs.push({ name: fileName, owner: this.props.user.username });
+      });
+
+    this.setState(
+      {
+        uploads: fs
+      },
+      this.handleSave
+    );
+  
+
+    }
+    this.setState({loading: false, formDisabled: false})
+    // var ncheck = await this.chkName();
+    // var ucheck = await this.chkUsername();
+    // var echeck = await this.chkEmail();
+    // var pcheck = await this.chkPassword();
+  
+    // if(!this.state.titleError){
+  
+    //   const userData = {
+    //     name: this.state.name,
+    //     username: this.state.username,
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   }
+  
+    //   const url = "/api/auth/signup";
+  
+  
+  
+    //   try {
+    //     const response = await fetch(url, {
+    //       method: "POST",
+  
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ userData })
+    //     });
+    //     if (response.status === 200) {
+    //       const { token } = await response.json();
+    //       await login({ token });
+    //     } else {
+    //       console.log("Login failed.");
+    //       // https://github.com/developit/unfetch#caveats
+    //       let error = new Error(response.statusText);
+    //       error.response = response;
+    //       throw error;
+    //     }
+    //   } catch (error) {
+    //     console.error(
+    //       "You have an error in your code or there are Network issues.",
+    //       error
+    //     );
+  
+    //     const { response } = error;
+    //     this.setState({error: response ? response.statusText : error.message})
+            
+    //   }
+    // }
+    // this.setState({loading: false})
+  
+  }
+
   render() {
     const user = this.props.user;
 
@@ -212,8 +458,12 @@ class PostForm extends React.Component {
 
     return (
       <React.Fragment>
-        <form noValidate onSubmit={this.handleSubmit}>
-          <Grid container spacing={4} className={classes.container}>
+        <form noValidate  >
+          <Grid container spacing={4} 
+          
+          
+          className={this.state.formDisabled && classes.formDisabled}
+          >
             <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
                    Photos
@@ -246,29 +496,41 @@ class PostForm extends React.Component {
 
                 <Grid item xs={12}>
                   <SimpleSelect
+                  required
                     options={this.state.maincategories}
                     value={this.state.catindex}
                     placeholder="Category"
                     name="category"
                     onChange={this._handleChangeCategory}
+                    error={this.state.categoryError}
+                    helperText={this.state.categoryHelper}
+                    onBlur={this.chkCategory}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <SimpleSelect
+                  required
                     options={this.state.subcategories}
                     value={this.state.keyindex}
                     placeholder="Subcategory"
                     name="subcategory"
                     onChange={this._handleChangeSubCategory}
+                    error={this.state.subError}
+                    helperText={this.state.subHelper}
+                    onBlur={this.chkSub}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <SimpleSelect
+                  required
                     options={this.state.citydata}
                     value={this.state.cities}
                     placeholder="City"
                     name="city"
                     onChange={this._handleChangeCity}
+                    error={this.state.cityError}
+                    helperText={this.state.cityHelper}
+                    onBlur={this.chkCity}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -282,8 +544,11 @@ class PostForm extends React.Component {
                     value={this.state.location}
                     variant="outlined"
                     onChange={event =>
-                      this.setState({ location: event.target.value })
+                      this.setState({ location: event.target.value, locationError: false, locationHelper: '' })
                     }
+                    error={this.state.locationError}
+                    helperText={this.state.locationHelper}
+                    onBlur={this.chkLocation}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -292,13 +557,16 @@ class PostForm extends React.Component {
                     id="title"
                     name="title"
                     label="Title"
+                    error={this.state.titleError}
+                    helperText={this.state.titleHelper}
                     fullWidth
                     autoComplete="title"
                     value={this.state.title}
                     variant="outlined"
                     onChange={event =>
-                      this.setState({ title: event.target.value })
+                      this.setState({ title: event.target.value, titleError: false, titleHelper: '' })
                     }
+                    onBlur={this.chkTitle}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -326,8 +594,11 @@ class PostForm extends React.Component {
                     value={this.state.description}
                     variant="outlined"
                     onChange={event =>
-                      this.setState({ description: event.target.value })
+                      this.setState({ description: event.target.value, descriptionError: false, descriptionHelper: '' })
                     }
+                    error={this.state.descriptionError}
+                    helperText={this.state.descriptionHelper}
+                    onBlur={this.chkDescription}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -363,8 +634,11 @@ class PostForm extends React.Component {
                     autoComplete="firstname"
                     value={this.state.firstname}
                     onChange={event =>
-                      this.setState({ firstname: event.target.value })
+                      this.setState({ firstname: event.target.value, firstnameError: false, firstnameHelper: '' })
                     }
+                    error={this.state.firstnameError}
+                    helperText={this.state.firstnameHelper}
+                    onBlur={this.chkFirstname}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -383,7 +657,6 @@ class PostForm extends React.Component {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <TextField
-                    required
                     id="age"
                     name="age"
                     label="Age"
@@ -405,8 +678,11 @@ class PostForm extends React.Component {
                     autoComplete="phone"
                     value={this.state.phone}
                     onChange={event =>
-                      this.setState({ phone: event.target.value })
+                      this.setState({ phone: event.target.value, phoneError: false, phoneHelper: '' })
                     }
+                    error={this.state.phoneError}
+                    helperText={this.state.phoneHelper}
+                    onBlur={this.chkPhone}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -416,22 +692,25 @@ class PostForm extends React.Component {
                     name="email"
                     label="Email Address"
                     fullWidth
-                    autoComplete="email"
                     value={this.state.email}
                     onChange={event =>
-                      this.setState({ email: event.target.value })
+                      this.setState({ email: event.target.value, emailError: false, emailHelper: '' })
                     }
+                    error={this.state.emailError}
+                    helperText={this.state.emailHelper}
+                    onBlur={this.chkEmail}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <Button
-                    type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    onClick={this.submitPost}
+                    disabled={this.state.formDisabled}
                   >
-                    Submit
+                    Submit  {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
                   </Button>
                 </Grid>
               </Grid>

@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -28,7 +29,12 @@ export default function SimpleSelect(props) {
 
   return (
     <div>
-      <FormControl variant="outlined" className={classes.formControl} fullWidth>
+      <FormControl
+       variant="outlined" 
+       className={classes.formControl} 
+       fullWidth
+       error={props.error}
+       >
         <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
           {props.placeholder}
         </InputLabel>
@@ -39,9 +45,6 @@ export default function SimpleSelect(props) {
           onChange={props.onChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {props.options.map(option => {
             return (
               <MenuItem value={option.value} key={option.value}>
@@ -50,6 +53,7 @@ export default function SimpleSelect(props) {
             );
           })}
         </Select>
+        {props.helperText && <FormHelperText>{props.helperText}</FormHelperText> }
       </FormControl>
     </div>
   );
