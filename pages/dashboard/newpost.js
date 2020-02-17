@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     display: "flex",
-    padding: "15px"
+    padding: "20px"
   },
   cardDetails: {
     flex: 1
@@ -134,7 +134,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: "calc(100% - 350px)"
     },
-    width: "100%"
+    width: "100%",
+    paddingBottom: 25
   },
   cont: {
     display: "flex",

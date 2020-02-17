@@ -42,6 +42,7 @@ export default async (req, res) => {
             cities: data.city,
             currency: data.currency,
             price: data.price,
+            age: data.age,
             location: data.location,
             owner: data.owner,
             website: data.website,

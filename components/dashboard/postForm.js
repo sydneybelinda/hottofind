@@ -129,6 +129,13 @@ class PostForm extends React.Component {
       phoneHelper: '',
       emailError: false,
       emailHelper: '',
+      priceError: false,
+      priceHelper: '',
+      ageError: false,
+      ageHelper: '',
+      websiteError: false,
+      websiteHelper: '',
+      
     };
   }
 
@@ -329,8 +336,41 @@ class PostForm extends React.Component {
     if (!this.state.phone){ 
       this.setState({ phoneError: true, phoneHelper:  "Phone Number is required" })
     } else {
+      var regex = /^[0-9+ ]+$/;
+      if(!regex.test(this.state.phone)){
+        this.setState({ phoneError: true, phoneHelper:  "Incorrect format.  Use only numbers" })
+      } else {
       this.setState({ phoneError: false, phoneHelper:  ""})
+      }
     }
+  
+  }
+
+  chkPrice = async (e) => {
+
+    if (this.state.price){
+      var regex = /^[0-9]+$/;
+      if(!regex.test(this.state.price)){
+        this.setState({ priceError: true, priceHelper:  "Incorrect format.  Use only numbers" })
+      } else {
+      this.setState({ priceError: false, priceHelper:  ""})
+      }
+    }
+    
+  
+  }
+
+  chkAge = async (e) => {
+
+    if (this.state.age){
+      var regex = /^[0-9]+$/;
+      if(!regex.test(this.state.age)){
+        this.setState({ ageError: true, ageHelper:  "Incorrect format.  Use only numbers" })
+      } else {
+      this.setState({ ageError: false, ageHelper:  ""})
+      }
+    }
+    
   
   }
 
@@ -363,6 +403,8 @@ class PostForm extends React.Component {
     var firstnameCheck = await this.chkFirstname();
     var phoneCheck = await this.chkPhone();
     var emailCheck = await this.chkEmail();
+    var priceCheck = await this.chkPrice();
+    var ageCheck = await this.chkAge();
 
     if(!this.state.categoryError &&
       !this.state.subcategoryError &&
@@ -372,7 +414,9 @@ class PostForm extends React.Component {
       !this.state.descriptionError &&
       !this.state.firstnameError &&
       !this.state.phoneError &&
-      !this.state.emailError
+      !this.state.emailError &&
+      !this.state.ageError &&
+      !this.state.priceError
       
       ){
 
@@ -399,53 +443,6 @@ class PostForm extends React.Component {
 
     }
     this.setState({loading: false, formDisabled: false})
-    // var ncheck = await this.chkName();
-    // var ucheck = await this.chkUsername();
-    // var echeck = await this.chkEmail();
-    // var pcheck = await this.chkPassword();
-  
-    // if(!this.state.titleError){
-  
-    //   const userData = {
-    //     name: this.state.name,
-    //     username: this.state.username,
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   }
-  
-    //   const url = "/api/auth/signup";
-  
-  
-  
-    //   try {
-    //     const response = await fetch(url, {
-    //       method: "POST",
-  
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ userData })
-    //     });
-    //     if (response.status === 200) {
-    //       const { token } = await response.json();
-    //       await login({ token });
-    //     } else {
-    //       console.log("Login failed.");
-    //       // https://github.com/developit/unfetch#caveats
-    //       let error = new Error(response.statusText);
-    //       error.response = response;
-    //       throw error;
-    //     }
-    //   } catch (error) {
-    //     console.error(
-    //       "You have an error in your code or there are Network issues.",
-    //       error
-    //     );
-  
-    //     const { response } = error;
-    //     this.setState({error: response ? response.statusText : error.message})
-            
-    //   }
-    // }
-    // this.setState({loading: false})
   
   }
 
@@ -579,8 +576,11 @@ class PostForm extends React.Component {
                     value={this.state.price}
                     variant="outlined"
                     onChange={event =>
-                      this.setState({ price: event.target.value })
+                      this.setState({ price: event.target.value, priceError: false, priceHelper: '' })
                     }
+                    error={this.state.priceError}
+                    helperText={this.state.priceHelper}
+                    onBlur={this.chkPrice}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -664,8 +664,11 @@ class PostForm extends React.Component {
                     autoComplete="age"
                     value={this.state.age}
                     onChange={event =>
-                      this.setState({ age: event.target.value })
+                      this.setState({ age: event.target.value, ageError: false, ageHelper: '' })
                     }
+                    error={this.state.ageError}
+                    helperText={this.state.ageHelper}
+                    onBlur={this.chkAge}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
