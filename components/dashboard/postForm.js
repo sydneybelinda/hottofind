@@ -11,6 +11,7 @@ import SimpleSelect from "./simpleSelect";
 import UpdateElastic from "../updateElastic"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as EmailValidator from 'email-validator';
+import {checkUrl} from "../../utils/queries";
 
 
 // const UploadComponent = dynamic(() => import("./uploadcomponent"), {
@@ -360,6 +361,19 @@ class PostForm extends React.Component {
   
   }
 
+  chkWebsite = async (e) => {
+
+    if (this.state.website){
+      const status = await checkUrl(this.state.website);
+      if (status != 200) {
+        this.setState({ websiteError: true, websiteHelper:  "Website does not exist" })
+      }
+    } else {
+      this.setState({ websiteError: false, websiteHelper:  ""})
+      }
+    }
+    
+
   chkAge = async (e) => {
 
     if (this.state.age){
@@ -405,6 +419,7 @@ class PostForm extends React.Component {
     var emailCheck = await this.chkEmail();
     var priceCheck = await this.chkPrice();
     var ageCheck = await this.chkAge();
+    var websiteCheck = await this.chkWebsite();
 
     if(!this.state.categoryError &&
       !this.state.subcategoryError &&
@@ -611,8 +626,11 @@ class PostForm extends React.Component {
                     value={this.state.website}
                     variant="outlined"
                     onChange={event =>
-                      this.setState({ website: event.target.value })
+                      this.setState({ website: event.target.value, websiteError: false, websiteHelper: '' })
                     }
+                    error={this.state.websiteError}
+                    helperText={this.state.websiteHelper}
+                    onBlur={this.chkWebsite}
                   />
                 </Grid>
               </Grid>
