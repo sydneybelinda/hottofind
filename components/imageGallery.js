@@ -14,8 +14,9 @@ class MyGallery extends React.Component {
   render() {
     const url = `${URL}/static/uploadedimages/`;
 
-    if (this.props.files[0]) {
-      var files = [];
+var files = [];
+    if (this.props.files.length > 0) {
+      
 
       this.props.files.map(file => {
         files.push({
@@ -25,10 +26,10 @@ class MyGallery extends React.Component {
       });
       //   this.setState({ files: files });
     } else {
-      var files = {
+      files.push({
         original: `/public/uploadedimages/noimage.jpg`,
         thumbnail: `/public/uploadedimages/noimage.jpg`
-      };
+      });
       //  this.setState({ files: files });
     }
 
