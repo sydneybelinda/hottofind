@@ -138,7 +138,7 @@ console.log('submit')
         body: JSON.stringify({ username, password })
       });
 
-      r = await response.json()
+      
 
       
 
@@ -147,6 +147,7 @@ console.log('submit')
 
         await login({ token });
       } else {
+        r = await response.json()
         console.log("Login failed.");
         let error = new Error(r.response);
         error.response = r.response;
