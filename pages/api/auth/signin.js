@@ -12,14 +12,15 @@ export default async (req, res) => {
       User.findOne({
         where: { username: username }
       }).then(user => {
-        if (!user) {
-          let error = {};
-          errors.email = "No Account Found";
-          // const error = new Error(errors.email)
-          error.response = "No Account Found";
-          res.status(400).json(error);
-          //  throw error
-        }
+        // if (!user) {
+        //   let error = {};
+        //   errors.email = "No Account Found";
+        //   // const error = new Error(errors.email)
+        //   error.response = "No Account Found";
+        //   res.status(400).json(error);
+        //   //  throw error
+        // }
+        if (user) {
         bcrypt.compare(password, user.password).then(isMatch => {
           if (isMatch) {
             // const id  = user.id
@@ -34,35 +35,21 @@ export default async (req, res) => {
             let token = jwt.sign(payload, PRIVATEKEY);
             res.json({ msg: "ok", token: `${token}`, user: user });
 
-            // jwt.sign(payload, secret, { expiresIn: 36000 },
-            //         (err, token) => {
-            //           if (err) res.status(500)
-            //           .json({ error: "Error signing token",
-            //                  raw: err });
-            //            res.status(200).json({
-            //            msg: ok,
-            //            token: `Bearer ${token}` });
-            // });
           } else {
-            errors.password = "Password is incorrect";
-            error.response = "Password is incorrect";
-            res.status(400).json(error);
+            var response = "Username or Password is incorrect";
+      
+            res.status(400).json({ response: response });
           }
         });
+      } else {
+        var response = "Username or Password is incorrect";
+       
+            res.status(400).json({ response: response });
+      }
+
       });
     }
 
-    //     const response = await fetch(url)
-
-    //     if (response.ok) {
-    //       const { id } = await response.json()
-    //       return res.status(200).json({ token: id })
-    //     } else {
-    //       // https://github.com/developit/unfetch#caveats
-    //       const error = new Error(response.statusText)
-    //       error.response = response
-    //       throw error
-    //     }
   } catch (error) {
     const { response } = error;
     return response

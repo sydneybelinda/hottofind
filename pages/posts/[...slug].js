@@ -257,7 +257,7 @@ function Posts(props) {
     meta.description += ` / ${subcat.subcategory} `; 
   }
 
-  meta.description += `posts and items advertised for sale `
+  meta.description += ` posts and items advertised for sale `
 
   if(props.city){
     meta.title += `in ${capitalize(props.city)}`

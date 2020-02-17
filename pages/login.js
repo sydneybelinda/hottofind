@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -16,6 +16,7 @@ import React, { useState } from "react";
 import { login } from "../utils/auth";
 import Head from "../components/head";
 import config from "../config";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Copyright() {
   return (
@@ -30,7 +31,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   "@global": {
     body: {
       backgroundColor: theme.palette.common.white
@@ -48,38 +49,86 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(3)
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
+  title: {
+    fontSize: 38
+  },
   topMargin: {
     marginTop: 15
+  },
+  error: {
+    color: "#ff1744",
+    padding: "20px 14px",
+    borderRadius: "5px",
+    fontSize: "1rem",
+    textAlign: "left",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 400,
+    lineHeight: '1em',
+    letterSpacing: '0.03333em',
+    background: "#eaeaea",
+    border: "1px solid #dedede"
+
+  },
+  spinner:{
+  width: "15px !important",
+  color: "white !important",
+  height: "15px !important",
+  position: "absolute",
+  right: "20px !important",
   }
-}));
+});
 
-function Login(props) {
-  const classes = useStyles();
-  const [userData, setUserData] = useState({
-    username: "",
-    password: "",
-    error: ""
-  });
 
-  const meta = [];
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
 
-  meta.title = `Login to your Account - HotToFind ${config.COUNTRY}`;
-  meta.description =
-    `Login to your HotToFind ${config.COUNTRY} account and start buying and selling for free today!`;
+    this.state = {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      error: "",
+      nameError: false,
+      usernameError: false,
+      emailError: false,
+      passwordError: false,
+      nameHelper: '',
+      usernameHelper: '',
+      emailHelper: '',
+      passwordHelper: '',
+      loading: false
+    };
+  }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setUserData(Object.assign({}, userData, { error: "" }));
+  handleUsernameChange = e => {
+    this.setState({username: e.target.value, usernameError: false, usernameHelper: '', error: ''})
+  }
+  
+  handleEmailChange = e => {
+    this.setState({email: e.target.value, emailError: false, emailHelper: ''})
+  }
+  
+  handlePasswordChange = e => {
+    this.setState({password: e.target.value, passwordError: false, passwordHelper: '', error: ''})
+  }
 
-    const username = userData.username;
-    const password = userData.password;
+  submitPost = async (e) => {
+    this.setState({loading: true}) 
+    
+console.log('submit')
+
+    const username = this.state.username;
+    const password = this.state.password;
     // const url = '/api/login'
     const url = "/api/auth/signin";
+
+    let r;
 
     try {
       const response = await fetch(url, {
@@ -88,32 +137,51 @@ function Login(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
+
+      r = await response.json()
+
+      
+
       if (response.status === 200) {
         const { token } = await response.json();
 
         await login({ token });
       } else {
         console.log("Login failed.");
-
-        const res = await response.json();
-
-        let error = res.response;
-
-        throw error;
+        let error = new Error(r.response);
+        error.response = r.response;
+        console.log("r: ", r)
+        this.setState({error: r.response, loading: false})
+     //   throw error;
       }
-    } catch (error) {
-      console.error(
-        "You have an error in your code or there are Network issues.",
-        error
-      );
 
-      setUserData(
-        Object.assign({}, userData, {
-          error: error
-        })
-      );
+    
+    } catch (error) {
+      // console.error(
+      //   "You have an error in your code or there are Network issues.",
+      //   error
+      // );
+
+      console.log("e: ", error)
+
+      // const { response } = error;
+      // this.setState({error: r.response ? response.statusText : error.message})
     }
+  
+  
+ 
+ 
   }
+
+  render(){
+
+    const { classes } = this.props;
+
+  const meta = [];
+
+  meta.title = `Login to your Account - HotToFind ${config.COUNTRY}`;
+  meta.description =
+    `Login to your HotToFind ${config.COUNTRY} account and start buying and selling for free today!`;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -123,59 +191,67 @@ function Login(props) {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        <div className={classes.title}>HotToFind</div>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login to your account
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="username"
-            value={userData.username}
-            onChange={event =>
-              setUserData(
-                Object.assign({}, userData, { username: event.target.value })
-              )
-            }
-            label="Username"
-            name="email"
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="password"
-            name="password"
-            value={userData.password}
-            onChange={event =>
-              setUserData(
-                Object.assign({}, userData, { password: event.target.value })
-              )
-            }
-            placeholder="Password"
-            required
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
+        <form className={classes.form}  noValidate>
+        <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+        <TextField
+                variant="outlined"
+                error={this.state.usernameError}
+                helperText={this.state.usernameHelper}
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                value={this.state.username}
+                autoComplete="username"
+                onChange={this.handleUsernameChange}
+             onBlur={this.chkUsername}
+
+              />
+              </Grid>
+              <Grid item xs={12} sm={12}>                       <TextField
+                variant="outlined"
+                error={this.state.passwordError}
+                helperText={this.state.passwordHelper}
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={this.state.password}
+                autoComplete="current-password"
+                onChange={this.handlePasswordChange}
+                onBlur={this.chkPassword }
+              />
+              </Grid>
+              {this.state.error && 
+              <Grid item xs={12} sm={12}>  
+              <p className={classes.error} >{this.state.error}</p>
+              </Grid>
+              }
+              <Grid item xs={12} sm={12}>  
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          </Grid>
+          </Grid>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={this.submitPost}
           >
-            Sign In
+            Sign In {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
           </Button>
+          
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -194,7 +270,7 @@ function Login(props) {
               </Link>
             </Grid>
           </Grid>
-          {userData.error && <p className="error">Error: {userData.error}</p>}
+
         </form>
       </div>
       <Box mt={8}>
@@ -203,5 +279,5 @@ function Login(props) {
     </Container>
   );
 }
-
-export default Login;
+}
+export default withStyles(styles)(Login);
