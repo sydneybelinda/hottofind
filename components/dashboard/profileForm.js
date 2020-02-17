@@ -134,6 +134,7 @@ class ProfileForm extends React.Component {
     try {
       let response = await Queries.submitProfile(this.state);
       if (response.status === 200) {
+        
         Router.push("/profile");
       } else {
         console.log("Edit failed.");

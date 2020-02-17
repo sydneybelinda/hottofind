@@ -8,6 +8,7 @@ import Router from "next/router";
 import React from "react";
 import { COUNTRYCODE } from "../../config";
 import SimpleSelect from "./simpleSelect";
+import UpdateElastic from "../updateElastic"
 
 
 // const UploadComponent = dynamic(() => import("./uploadcomponent"), {
@@ -180,6 +181,8 @@ class PostForm extends React.Component {
         body: JSON.stringify(this.state)
       });
       if (response.status === 200) {
+        UpdateElastic(this.state)
+
         Router.push("/dashboard");
       } else {
         console.log("Edit failed.");

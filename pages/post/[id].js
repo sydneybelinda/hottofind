@@ -9,10 +9,11 @@ import Layout from "../../components/layout";
 import PostBreadcrumbs from "../../components/PostBreadcrumbs";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
-import {getSlug} from "../../components/constants";
+import { getSlug } from "../../components/constants";
 import Divider from "@material-ui/core/Divider";
 import config from "../../config";
-import ErrorPage from '../../pages/_error';
+import ErrorPage from "../../pages/_error";
+import { useState, useEffect } from "react";
 
 // const nl2br = require("react-nl2br");
 
@@ -200,7 +201,7 @@ const useStyles = makeStyles(theme => ({
     padding: "15px",
     borderRadius: "5px",
     "& h4": {
-      marginBottom:0,
+      marginBottom: 0,
       fontSize: 14
     }
   },
@@ -222,39 +223,49 @@ function truncateString(str, num) {
 }
 
 function Post(props) {
+  const [website, setWebsite] = useState(null);
+  const { post } = props;
+  const classes = useStyles();
+  const router = useRouter();
+  const { id } = router.query;
 
+  useEffect(() => {
+    async function checkUrl() {
+      if (post.website) {
+        const status = await Queries.checkUrl(post.website);
+        if (status == 200) {
+          setWebsite(post.website);
+        }
+      }
+    }
+    checkUrl();
+  }, []);
 
-  if(!props.post.id){
-    return <ErrorPage errorCode={404} user={props.user} categories={props.categories} />
-     }
-
-  
+  if (!props.post.id) {
+    return (
+      <ErrorPage
+        errorCode={404}
+        user={props.user}
+        categories={props.categories}
+      />
+    );
+  }
 
   const end = ` - HotToFind ${config.COUNTRY}`;
-  const char = 160 - end.length -3
+  const char = 160 - end.length - 3;
 
-  const description = props.post.description || ''
+  const description = props.post.description || "";
 
-  var desc = description.slice(0, char)
+  var desc = description.slice(0, char);
 
-  if(description.length > char){
-desc += ' ...'
+  if (description.length > char) {
+    desc += " ...";
   }
 
   const meta = [];
 
   meta.title = `${props.post.title} ~ ${props.post.id} - HotToFind ${config.COUNTRY}`;
   meta.description = `${desc} - HotToFind ${config.COUNTRY}`;
-
-
-  const classes = useStyles();
-
-  const router = useRouter();
-  const { id } = router.query;
-
-  const { post } = props;
-
-
 
   const createdAt = props.post.createdAt;
   const updatedAt = props.post.updatedAt;
@@ -278,13 +289,11 @@ desc += ' ...'
     e => e.catindex === props.query.catindex
   );
 
-
   const subcat = props.categories.find(
     e => e.keyindex === props.query.keyindex
   );
 
   return (
-    
     <Layout user={props.user} categories={props.categories} meta={meta}>
       <PostBreadcrumbs post={props.post} categories={props.categories} />
       <div className={classes.sections}>
@@ -347,11 +356,10 @@ desc += ' ...'
               <Grid item xs={12} md={4}>
                 <div className={classes.sidebar}>
                   <Grid container>
-         
-         <Grid item xs={12} md={12}>
-           <h2 className={classes.heading}>Contact Details</h2>
-           <Divider />
-         </Grid>
+                    <Grid item xs={12} md={12}>
+                      <h2 className={classes.heading}>Contact Details</h2>
+                      <Divider />
+                    </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.owner}>
                         <h4>{post.owner}</h4>
@@ -360,30 +368,50 @@ desc += ' ...'
                     <Grid item xs={12} md={12}>
                       <div className={classes.email}>
                         <h4>
-                          Name: <span className={classes.text}>{post.firstname} {post.lastname ? post.lastname : '' } </span>
+                          Name:{" "}
+                          <span className={classes.text}>
+                            {post.firstname}{" "}
+                            {post.lastname ? post.lastname : ""}{" "}
+                          </span>
                         </h4>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.email}>
                         <h4>
-                          Email: <span className={classes.text}><a href={`mailto:${post.email}`}>{post.email}</a></span>
+                          Email:{" "}
+                          <span className={classes.text}>
+                            <a href={`mailto:${post.email}`}>{post.email}</a>
+                          </span>
                         </h4>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className={classes.phone}>
                         <h4>
-                          Phone: <span className={classes.text}><a href={`tel:${post.phone}`}>{post.phone}</a></span></h4>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12} md={12}>
-                      <div className={classes.website}>
-                        <h4>
-                          Website: <span className={classes.text}><a href={post.website} target="_blank">{post.website}</a></span>
+                          Phone:{" "}
+                          <span className={classes.text}>
+                            <a href={`tel:${post.phone}`}>{post.phone}</a>
+                          </span>
                         </h4>
                       </div>
                     </Grid>
+                    {website ? (
+                      <Grid item xs={12} md={12}>
+                        <div className={classes.website}>
+                          <h4>
+                            Website:{" "}
+                            <span className={classes.text}>
+                              <a href={post.website} target="_blank">
+                                {website}
+                              </a>
+                            </span>
+                          </h4>
+                        </div>
+                      </Grid>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                 </div>
               </Grid>
@@ -403,14 +431,13 @@ Post.getInitialProps = async ctx => {
 
   let post = await Queries.getPost(id);
 
+  if (!post.id) {
+    ctx.res.statusCode = 404;
+  }
 
-  if(!post.id){ctx.res.statusCode = 404}
+  //   var obj = JSON.parse("{}")
 
-
-
-//   var obj = JSON.parse("{}")
-
-// console.log("pst: " , obj.length)
+  // console.log("pst: " , obj.length)
 
   return { query, post };
 };
