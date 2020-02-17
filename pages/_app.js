@@ -5,7 +5,11 @@ import Head from "next/head";
 import React from "react";
 import theme from "../components/theme";
 import * as Queries from "../utils/queries";
-import cookies from 'next-cookies'
+import cookies from 'next-cookies';
+import ReactGA from 'react-ga';
+import {GA} from '../config';
+
+
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -31,6 +35,9 @@ export default class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+
+    ReactGA.initialize(GA);
+ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
