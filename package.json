@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "elasticsearch": "^16.6.0",
+    "email-validator": "^2.0.4",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
     "filepond": "^4.9.4",

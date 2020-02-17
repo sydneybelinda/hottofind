@@ -285,3 +285,17 @@ export const checkUrl = async url => {
   const data = await fetch(url);
   return data.status;
 };
+
+export const checkUsername = async u => {
+  const url = `${API}/user/username/${u}`;
+  const data = await fetch(url);
+  let users = await data.json();
+  return users;
+};
+
+export const checkEmail = async u => {
+  const url = `${API}/user/email/${u}`;
+  const data = await fetch(url);
+  let users = await data.json();
+  return users;
+};
