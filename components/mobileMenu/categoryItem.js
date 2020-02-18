@@ -116,7 +116,7 @@ function CategoryItem(props) {
                       className={classes.menuItem}
                       key={`${prop.catindex}-${prop.keyindex}`}
                     >
-                      <Link href={`/posts/employment/${prop.catindex}/${prop.keyindex}`}>
+                      <Link href={`/posts/${prop.catindex}/${prop.keyindex}`}>
                         {" "}
                         <ListItem button className={classes.nested}>
                           <div className={classes.subcat}>
