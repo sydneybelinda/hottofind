@@ -16,7 +16,6 @@ import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 import Sort from "../../components/sort";
 import cookies from "next-cookies";
-import Immutable from "immutable";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
