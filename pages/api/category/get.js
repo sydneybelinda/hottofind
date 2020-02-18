@@ -2,7 +2,11 @@ import { Category } from '../../../models';
 
 export default async (req, res) => {
   try {
-    const categories = await Category.findAll({});
+    const categories = await Category.findAll({
+      order:[ 
+        ["maincategory", "ASC"]
+      ]
+    });
 
     if (!categories) {
       return res.status(404).send({

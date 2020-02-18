@@ -10,11 +10,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import HomeIcon from "@material-ui/icons/Home";
 
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import React from "react";
+import CategoryItem from "./categoryItem";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -87,7 +88,7 @@ const useStyles = makeStyles(theme => ({
   homeLink: {
     display: "flex",
     alignItems: "center",
-    width: '100%'
+    width: "100%"
   },
   homeIcon: {
     marginRight: "15px"
@@ -155,9 +156,22 @@ function NestedList(props) {
     setAdultOpen(!adultOpen);
   };
   const handleArtClick = () => {
-    setArtOpen(!adultOpen);
+    setArtOpen(!artOpen);
   };
 
+  var mainCats = [];
+  props.categories.forEach(function(item){
+  var i = mainCats.findIndex(x => x.catindex == item.catindex);
+  if(i <= -1){
+    mainCats.push(item);
+  }
+});
+
+  //   const result = props.categories.filter(item => item.catindex === "art-collectables")
+  // console.log(result);
+
+
+  console.log(mainCats)
 
   return (
     <List
@@ -170,7 +184,7 @@ function NestedList(props) {
       }
       className={classes.root}
     >
-            {props.user ? (
+      {props.user ? (
         <>
           <ListItem
             button
@@ -178,7 +192,7 @@ function NestedList(props) {
             className={classes.cats}
           >
             <div className={classes.cats}>
-            <AccountCircle />
+              <AccountCircle />
             </div>
             {accountOpen ? (
               <ExpandLess className={classes.exicon} />
@@ -186,11 +200,11 @@ function NestedList(props) {
               <ExpandMore className={classes.exicon} />
             )}
           </ListItem>
-          
+
           <Collapse in={accountOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <div className={classes.menuItem}>
-              <Link href={"/dashboard/newpost"}>
+                <Link href={"/dashboard/newpost"}>
                   <ListItem button className={classes.nested}>
                     <div className={classes.subcat}>Create New Post</div>
                   </ListItem>
@@ -227,16 +241,22 @@ function NestedList(props) {
       )}
       <Divider />
 
-            <ListSubheader component="div" id="nested-list-subheader" className={classes.subName}>
-          Pages
-        </ListSubheader>
+      <ListSubheader
+        component="div"
+        id="nested-list-subheader"
+        className={classes.subName}
+      >
+        Pages
+      </ListSubheader>
 
-      <ListItem button  className={classes.cats}>
-      <Link href={"/"} className={classes.homeLink}><HomeIcon className={classes.homeIcon}/><div className={classes.cats}>Home</div></Link>
-
+      <ListItem button className={classes.cats}>
+        <Link href={"/"} className={classes.homeLink}>
+          <HomeIcon className={classes.homeIcon} />
+          <div className={classes.cats}>Home</div>
+        </Link>
       </ListItem>
 
-<ListItem button onClick={handleCountryClick} className={classes.cats}>
+      <ListItem button onClick={handleCountryClick} className={classes.cats}>
         <div className={classes.cats}>Countries</div>
         {countryOpen ? (
           <ExpandLess className={classes.exicon} />
@@ -312,12 +332,32 @@ function NestedList(props) {
 
       <Divider />
 
-      <ListSubheader component="div" id="nested-list-subheader" className={classes.subName}>
-          Categories
-        </ListSubheader>
-     
+      <ListSubheader
+        component="div"
+        id="nested-list-subheader"
+        className={classes.subName}
+      >
+        Categories
+      </ListSubheader>
 
-        <ListItem button onClick={handleArtClick} className={classes.cats}>
+      {
+             mainCats.map((cat, key) => {
+        return(
+      <CategoryItem
+        categories={props.categories.filter(
+          item => item.catindex === cat.catindex
+        )}
+      />
+        )
+        })
+      }
+      {/* <CategoryItem
+        categories={props.categories.filter(
+          item => item.catindex === "baby-children"
+        )}
+      />
+
+      <ListItem button onClick={handleArtClick} className={classes.cats}>
         <div className={classes.cats}>Art and Collectables</div>
         {artOpen ? (
           <ExpandLess className={classes.exicon} />
@@ -650,7 +690,7 @@ function NestedList(props) {
               })
             : ""}
         </List>
-      </Collapse>
+      </Collapse> */}
     </List>
   );
 }
