@@ -166,7 +166,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     borderTop: "1px solid silver",
     padding: "5px"
-  }
+  },
+  none: {
+    padding: 40,
+    textAlign: "center",
+    width: "100%"
+    }
 }));
 
 function Posts(props) {
@@ -276,8 +281,8 @@ function Posts(props) {
           {
             <img
               style={{ display: "none" }}
-              src="https://source.unsplash.com/user/erondu"
-              alt="background"
+              src="url(/images/hottofind_hero_2.jpg)"
+              alt="HotToFind Local CLassifieds"
             />
           }
           <div className={classes.overlay} />
@@ -336,7 +341,7 @@ function Posts(props) {
               />
               <Divider />
             </Grid>
-            {props.posts.rows
+            {props.posts.rows.length > 0
               ? props.posts.rows.map(post => (
                 (post.status == "Active") ?
                  (data.view == "grid") ?
@@ -356,7 +361,8 @@ function Posts(props) {
             
 
                 ))
-              : ""}
+              : <div className={classes.none}>Sorry there are no posts in this category</div>}
+              {console.log(props.posts.rows)}
           </Grid>
           <div className={classes.pagination}>
             {props.page > 1 ? (

@@ -118,7 +118,6 @@ const useStyles = makeStyles(theme => ({
   grid: {
     paddingLeft: "5px",
     paddingRight: "5px",
-    minHeight: "100vh",
     [theme.breakpoints.up("sm")]: {
       paddingLeft: "20px",
       paddingRight: "20px"
@@ -151,7 +150,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     borderTop: "1px solid silver",
     padding: "5px"
-  }
+  },
+  none: {
+    padding: 40,
+    textAlign: "center",
+    width: "100%"
+    }
 }));
 
 function Posts(props) {
@@ -245,13 +249,13 @@ function Posts(props) {
               <Sort total={total} defaultSort={props.defaultSort} />
               <Divider />
             </Grid>
-            {props.posts.rows
+            {props.posts.rows.length > 0
               ? props.posts.rows.map(post => (
                   <Grid className={classes.gitem} item key={post.id} xs={12}>
                     <PostWide post={post} />
                   </Grid>
                 ))
-              : ""}
+              : <div className={classes.none}>You don't have any posts</div> }
           </Grid>
           <div className={classes.pagination}>
             {props.page > 1 ? (
