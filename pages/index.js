@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: "url(https://source.unsplash.com/user/erondu)",
+    backgroundImage: "url(/images/hottofind_hero.jpg)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center"
@@ -143,6 +143,9 @@ const useStyles = makeStyles(theme => ({
     width: "calc(100% + -1px)",
     paddingLeft: 10,
     paddingRight: 10
+  },
+  screen: {
+    background: "#0c22006b"
   }
 }));
 
@@ -156,12 +159,13 @@ function Index(props) {
   return (
     <Layout meta={meta} {...props}>
       <Paper className={classes.mainFeaturedPost}>
+        <div className={classes.screen}>
         <Container maxWidth="xl">
           {/* Increase the priority of the hero background image */}
           {
             <img
               style={{ display: "none" }}
-              src="https://source.unsplash.com/user/erondu"
+              src="/images/hottofind_hero.jpg"
               alt="background"
             />
           }
@@ -191,6 +195,7 @@ function Index(props) {
             </Grid>
           </Grid>
         </Container>
+        </div>
       </Paper>
       <div className={classes.mainPosts}>
         <Container maxWidth="xl">
