@@ -1,4 +1,5 @@
 import AppBar from "@material-ui/core/AppBar";
+import MenuIcon from "@material-ui/icons/Menu";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -42,6 +43,7 @@ HideOnScroll.propTypes = {
    */
   window: PropTypes.func
 };
+
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -165,6 +167,26 @@ const useStyles = makeStyles(theme => ({
   },
   butNew: {
     marginRight: 15
+  },
+  menuButton: {
+    color: "white",
+    height: 30,
+    display: "block",
+    padding: "0 10px",
+    overflow: "hidden",
+    fontSize: 12,
+    fontFamily: "'Montserrat', sans-serif",
+    fontWeight: 600,
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    letterSpacing: ".08em",
+    textTransform: "uppercase",
+    textDecoration: "none",
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  more:{
+    marginRight: 5
   }
 }));
 
@@ -178,6 +200,7 @@ export default function PrimarySearchAppBar(props) {
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
+    document.body.style="overflow:hidden"
   };
 
   const handleMobileMenuClose = () => {
@@ -246,13 +269,27 @@ export default function PrimarySearchAppBar(props) {
         >
           <Container maxWidth="xl">
             <Toolbar>
-              <Link href="/">
+            <Link href="/">
                 <a className={classes.link}>
                   <Typography className={classes.title} variant="h6" noWrap>
                     HotToFind
                   </Typography>
                 </a>
               </Link>
+             
+              {/* <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div> */}
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
               <Link href="/dashboard/newpost">
@@ -301,6 +338,7 @@ export default function PrimarySearchAppBar(props) {
                     </Link>
                   </>
                 )}
+
                 <CountryMenu />
               </div>
               <div className={classes.sectionMobile}>
@@ -359,6 +397,14 @@ export default function PrimarySearchAppBar(props) {
                   categories={props.categories}
                   url="adult"
                 ></Dropdown>
+                <IconButton 
+                size="small"
+className={classes.menuButton}
+    //onClick={toggleDrawer('right', true)}
+    onClick={props.toggleMenu}
+    ><span className={classes.more}>more</span> <MenuIcon 
+    className={classes.menuIcon}
+    /></IconButton>
               </Toolbar>
             </Container>
           </div>
@@ -369,3 +415,4 @@ export default function PrimarySearchAppBar(props) {
     </div>
   );
 }
+

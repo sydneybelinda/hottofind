@@ -86,7 +86,8 @@ const useStyles = makeStyles(theme => ({
   },
   homeLink: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    width: '100%'
   },
   homeIcon: {
     marginRight: "15px"
@@ -231,7 +232,7 @@ function NestedList(props) {
         </ListSubheader>
 
       <ListItem button  className={classes.cats}>
-      <Link href={"/"} className={classes.homeLink}><HomeIcon /><div className={classes.cats}>Home</div></Link>
+      <Link href={"/"} className={classes.homeLink}><HomeIcon className={classes.homeIcon}/><div className={classes.cats}>Home</div></Link>
 
       </ListItem>
 
