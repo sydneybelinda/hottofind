@@ -57,21 +57,21 @@ class MyGallery extends React.Component {
 
     var files = [];
     
-    
+console.log(this.props.files)    
     
         if (this.props.files.length > 0) {
           
     
           this.props.files.map(async file => {
-           const f = await checkUrl(`${url}${file.name}`)
+          // const f = await checkUrl(`${url}${file.name}`)
     
-           if(f == 200 ){
+          // if(f == 200 ){
     
             files.push({
               original: `${url}${file.name}`,
               thumbnail: `${url}${file.name}`
             });
-          }
+          // }
           });
           //   this.setState({ files: files });
         } else {
