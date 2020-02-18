@@ -431,7 +431,8 @@ class PostForm extends React.Component {
       !this.state.phoneError &&
       !this.state.emailError &&
       !this.state.ageError &&
-      !this.state.priceError
+      !this.state.priceError &&
+      !this.state.websiteError
       
       ){
 
