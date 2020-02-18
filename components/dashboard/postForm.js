@@ -364,7 +364,11 @@ class PostForm extends React.Component {
   chkWebsite = async (e) => {
 
     if (this.state.website){
+
+      
       const status = await checkUrl(this.state.website);
+
+      
       if (status != 200) {
         this.setState({ websiteError: true, websiteHelper:  "Website does not exist" })
       }
@@ -431,8 +435,8 @@ class PostForm extends React.Component {
       !this.state.phoneError &&
       !this.state.emailError &&
       !this.state.ageError &&
-      !this.state.priceError &&
-      !this.state.websiteError
+      !this.state.priceError 
+  //    !this.state.websiteError
       
       ){
 
@@ -475,7 +479,7 @@ class PostForm extends React.Component {
           <Grid container spacing={4} 
           
           
-          className={this.state.formDisabled && classes.formDisabled}
+          className={this.state.formDisabled ? classes.formDisabled : classes.formEnabled}
           >
             <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
@@ -629,9 +633,9 @@ class PostForm extends React.Component {
                     onChange={event =>
                       this.setState({ website: event.target.value, websiteError: false, websiteHelper: '' })
                     }
-                    error={this.state.websiteError}
-                    helperText={this.state.websiteHelper}
-                    onBlur={this.chkWebsite}
+                    // error={this.state.websiteError}
+                    // helperText={this.state.websiteHelper}
+                    // onBlur={this.chkWebsite}
                   />
                 </Grid>
               </Grid>

@@ -282,8 +282,14 @@ export const throw404 = () => {
 }
 
 export const checkUrl = async url => {
-  const data = await fetch(url);
-  return data.status;
+  const data = await fetch(url,{
+    headers:{
+      'Access-Control-Allow-Origin':'*'
+  },
+  mode: 'no-cors'
+});
+
+  return data;
 };
 
 export const checkUsername = async u => {

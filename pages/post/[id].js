@@ -238,7 +238,7 @@ function Post(props) {
         }
       }
     }
-    checkUrl();
+  //  checkUrl();
   }, []);
 
   if (!props.post.id) {
@@ -396,14 +396,14 @@ function Post(props) {
                         </h4>
                       </div>
                     </Grid>
-                    {website ? (
+                    {post.website ? (
                       <Grid item xs={12} md={12}>
                         <div className={classes.website}>
                           <h4>
                             Website:{" "}
                             <span className={classes.text}>
                               <a href={post.website} target="_blank">
-                                {website}
+                                {post.website}
                               </a>
                             </span>
                           </h4>
