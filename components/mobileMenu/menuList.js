@@ -8,6 +8,7 @@ import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import HomeIcon from "@material-ui/icons/Home";
 
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
@@ -79,6 +80,16 @@ const useStyles = makeStyles(theme => ({
   butWrap: {
     padding: 16,
     textAlign: "center"
+  },
+  subName: {
+    color: "#27ac9f"
+  },
+  homeLink: {
+    display: "flex",
+    alignItems: "center"
+  },
+  homeIcon: {
+    marginRight: "15px"
   }
   // login: {
   //   float: "right"
@@ -101,6 +112,7 @@ function NestedList(props) {
   const [servicesOpen, setServicesOpen] = React.useState(false);
   const [automotiveOpen, setAutomotiveOpen] = React.useState(false);
   const [adultOpen, setAdultOpen] = React.useState(false);
+  const [artOpen, setArtOpen] = React.useState(false);
 
   // const cats = categories()
 
@@ -141,6 +153,10 @@ function NestedList(props) {
   const handleAdultClick = () => {
     setAdultOpen(!adultOpen);
   };
+  const handleArtClick = () => {
+    setArtOpen(!adultOpen);
+  };
+
 
   return (
     <List
@@ -153,6 +169,71 @@ function NestedList(props) {
       }
       className={classes.root}
     >
+            {props.user ? (
+        <>
+          <ListItem
+            button
+            onClick={handleAccountClick}
+            className={classes.cats}
+          >
+            <div className={classes.cats}>
+            <AccountCircle />
+            </div>
+            {accountOpen ? (
+              <ExpandLess className={classes.exicon} />
+            ) : (
+              <ExpandMore className={classes.exicon} />
+            )}
+          </ListItem>
+          
+          <Collapse in={accountOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <div className={classes.menuItem}>
+              <Link href={"/dashboard/newpost"}>
+                  <ListItem button className={classes.nested}>
+                    <div className={classes.subcat}>Create New Post</div>
+                  </ListItem>
+                </Link>
+                <Link href={"/dashboard"}>
+                  <ListItem button className={classes.nested}>
+                    <div className={classes.subcat}>My Posts</div>
+                  </ListItem>
+                </Link>
+              </div>
+              <div className={classes.menuItem}>
+                <Link href={"/logout"}>
+                  <ListItem button className={classes.nested}>
+                    <div className={classes.subcat}>Logout</div>
+                  </ListItem>
+                </Link>
+              </div>
+            </List>
+          </Collapse>
+        </>
+      ) : (
+        <>
+          <ListItem button className={classes.lcats}>
+            <Link href={"/login"}>
+              <div>Login</div>
+            </Link>
+          </ListItem>
+          <ListItem button className={classes.rcats}>
+            <Link href={"/register"}>
+              <div>Register</div>
+            </Link>
+          </ListItem>
+        </>
+      )}
+      <Divider />
+
+            <ListSubheader component="div" id="nested-list-subheader" className={classes.subName}>
+          Pages
+        </ListSubheader>
+
+      <ListItem button  className={classes.cats}>
+      <Link href={"/"} className={classes.homeLink}><HomeIcon /><div className={classes.cats}>Home</div></Link>
+
+      </ListItem>
 
 <ListItem button onClick={handleCountryClick} className={classes.cats}>
         <div className={classes.cats}>Countries</div>
@@ -229,68 +310,45 @@ function NestedList(props) {
       </Collapse>
 
       <Divider />
-<div className={classes.butWrap}>
-<Link href="/dashboard/newpost">
-<Button size="small" variant="outlined" size="small" color="primary" className={classes.butNew}>
-          New Post
-        </Button>
-        </Link>
-</div>
-      {props.user ? (
-        <>
-          <ListItem
-            button
-            onClick={handleAccountClick}
-            className={classes.cats}
-          >
-            <div className={classes.cats}>
-            <AccountCircle />
-            </div>
-            {accountOpen ? (
-              <ExpandLess className={classes.exicon} />
-            ) : (
-              <ExpandMore className={classes.exicon} />
-            )}
-          </ListItem>
-          
-          <Collapse in={accountOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <div className={classes.menuItem}>
-                <Link href={"/dashboard"}>
-                  <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>My Posts</div>
-                  </ListItem>
-                </Link>
-              </div>
-              <div className={classes.menuItem}>
-                <Link href={"/logout"}>
-                  <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>Logout</div>
-                  </ListItem>
-                </Link>
-              </div>
-            </List>
-          </Collapse>
-        </>
-      ) : (
-        <>
-          <ListItem button className={classes.lcats}>
-            <Link href={"/login"}>
-              <div>Login</div>
-            </Link>
-          </ListItem>
-          <ListItem button className={classes.rcats}>
-            <Link href={"/register"}>
-              <div>Register</div>
-            </Link>
-          </ListItem>
-        </>
-      )}
-      <Divider />
-      <ListItem button  className={classes.cats}>
-      <Link href={"/"}><div className={classes.cats}>Home</div></Link>
 
+      <ListSubheader component="div" id="nested-list-subheader" className={classes.subName}>
+          Categories
+        </ListSubheader>
+     
+
+        <ListItem button onClick={handleArtClick} className={classes.cats}>
+        <div className={classes.cats}>Art and Collectables</div>
+        {artOpen ? (
+          <ExpandLess className={classes.exicon} />
+        ) : (
+          <ExpandMore className={classes.exicon} />
+        )}
       </ListItem>
+      <Collapse in={artOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {categories
+            ? categories.map((prop, key) => {
+                if (prop.catindex == "art-collectables") {
+                  return (
+                    <div
+                      className={classes.menuItem}
+                      key={prop.catindex + "-" + prop.keyindex}
+                    >
+                      <Link href={"/posts/art-collectables/" + prop.keyindex}>
+                        {" "}
+                        <ListItem button className={classes.nested}>
+                          <div className={classes.subcat}>
+                            {prop.subcategory}
+                          </div>
+                        </ListItem>
+                      </Link>
+                    </div>
+                  );
+                }
+              })
+            : ""}
+        </List>
+      </Collapse>
       <ListItem button onClick={handleEmploymentClick} className={classes.cats}>
         <div className={classes.cats}>Employment</div>
         {employmentOpen ? (

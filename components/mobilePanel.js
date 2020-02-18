@@ -11,17 +11,24 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuList from './mobileMenu/menuList';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   list: {
     width: 250,
+    [theme.breakpoints.up("sm")]: {
+      width: 300,
+    }
   },
   fullList: {
     width: 'auto',
   },
   drawer: {
     left: "25%",
-  }
-});
+    [theme.breakpoints.up("sm")]: {
+      left: "auto",
+      width: 300
+    }
+  },
+}));
 
 export default function TemporaryDrawer(props) {
   const classes = useStyles();

@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: 0,
-    backgroundImage: "url(https://source.unsplash.com/user/erondu)",
+    backgroundImage: "url(/images/hottofind_hero_2.jpg)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center"

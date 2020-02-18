@@ -21,6 +21,7 @@ import MobileMenu from "./mobileMenu";
 import Button from '@material-ui/core/Button';
 import CountryMenu from "../components/countryMenu";
 
+
 function HideOnScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -166,6 +167,26 @@ const useStyles = makeStyles(theme => ({
   },
   butNew: {
     marginRight: 15
+  },
+  menuButton: {
+    color: "white",
+    height: 30,
+    display: "block",
+    padding: "0 10px",
+    overflow: "hidden",
+    fontSize: 12,
+    fontFamily: "'Montserrat', sans-serif",
+    fontWeight: 600,
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    letterSpacing: ".08em",
+    textTransform: "uppercase",
+    textDecoration: "none",
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  more:{
+    marginRight: 5
   }
 }));
 
@@ -376,6 +397,14 @@ export default function PrimarySearchAppBar(props) {
                   categories={props.categories}
                   url="adult"
                 ></Dropdown>
+                <IconButton 
+                size="small"
+className={classes.menuButton}
+    //onClick={toggleDrawer('right', true)}
+    onClick={props.toggleMenu}
+    ><span className={classes.more}>more</span> <MenuIcon 
+    className={classes.menuIcon}
+    /></IconButton>
               </Toolbar>
             </Container>
           </div>
