@@ -33,6 +33,53 @@ export const deletePost = async id => {
   }
 };
 
+export const disablePost = async (id,username) => {
+  const url = `/api/post/disable`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, username: username })
+    });
+    if (response.status === 200) {
+      return { status: "Success" };
+    } else {
+      return { status: "Failed" };
+    }
+  } catch (error) {
+    console.error(
+      "You have an error in your code or there are Network issues.",
+      error
+    );
+  }
+};
+
+export const enablePost = async (id,username) => {
+  const url = `/api/post/enable`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, username: username })
+    });
+    if (response.status === 200) {
+      return { status: "Success" };
+    } else {
+      return { status: "Failed" };
+    }
+  } catch (error) {
+    console.error(
+      "You have an error in your code or there are Network issues.",
+      error
+    );
+  }
+};
+
+
 export const deleteFile = async name => {
   const url = `/api/dashboard/file/delete`;
 

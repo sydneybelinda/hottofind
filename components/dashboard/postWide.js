@@ -8,6 +8,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import PauseIcon from "@material-ui/icons/Pause";
+import PlayIcon from "@material-ui/icons/PlayArrow";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import Room from "@material-ui/icons/Room";
 import * as React from "react";
@@ -241,6 +243,12 @@ const styles = theme => ({
   butDelete: {
     color: "red"
   },
+  butPause: {
+    color: 'blue'
+  },
+  butPlay: {
+    color: 'grey'
+  },
   link: {
     width: "calc(100% - 55px)",
     minWidth: "calc(100% - 55px)",
@@ -253,13 +261,43 @@ const styles = theme => ({
 });
 
 class PostPreview extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      enabled: this.props.post.status == "Active" ? true : false
+    }
+  }
+
+
+
   _handleViewPost = id => {
     window.location.href = `/post/${id}`;
   };
 
+  disablePost = async(id) => {
+    const result = await Queries.disablePost(id, this.props.user.username)
+
+
+    if (result.status == "Success") {
+      this.setState({enabled: false})
+    }
+
+  }
+
+  enablePost = async(id) => {
+    const result = await Queries.enablePost(id, this.props.user.username)
+
+    if (result.status == "Success") {
+      this.setState({enabled: true})
+    }
+
+  }
+
   render() {
     const { classes } = this.props;
     const { post } = this.props;
+    const { username } = this.props.user;
 
     var image;
 
@@ -351,6 +389,15 @@ class PostPreview extends React.Component {
       <IconButton color="primary" aria-label="add to shopping cart">
         <AddShoppingCartIcon />
       </IconButton> */}
+      {this.state.enabled ?
+      <IconButton aria-label="disable" className={classes.butPause} onClick={() => this.disablePost(post.id)}>
+        <PauseIcon />
+      </IconButton>
+      : 
+      <IconButton aria-label="enable" className={classes.butPlay} onClick={() => this.enablePost(post.id)}>
+        <PlayIcon />
+      </IconButton>
+  }
       <IconButton aria-label="delete" className={classes.butDelete} onClick={() => Queries.deletePost(post.id)}>
         <DeleteIcon />
       </IconButton>

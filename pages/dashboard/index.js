@@ -252,7 +252,7 @@ function Posts(props) {
             {props.posts.rows.length > 0
               ? props.posts.rows.map(post => (
                   <Grid className={classes.gitem} item key={post.id} xs={12}>
-                    <PostWide post={post} />
+                    <PostWide post={post} user={props.user} />
                   </Grid>
                 ))
               : <div className={classes.none}>You don't have any posts</div> }
