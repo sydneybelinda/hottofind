@@ -15,7 +15,8 @@ import Room from "@material-ui/icons/Room";
 import * as React from "react";
 import Moment from "react-moment";
 import * as Queries from "../../utils/queries";
-import {makeSlug} from "../constants"
+import {makeSlug} from "../constants";
+import Tooltip from '@material-ui/core/Tooltip';
 
 function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -378,9 +379,11 @@ class PostPreview extends React.Component {
             <div className={classes.actions}>
             <div className={classes.root}>
             <Link href={`/dashboard/editpost/${post.id}`}>
+              <Tooltip title="edit post" >
             <IconButton color="secondary" aria-label="edit post">
         <EditIcon />
       </IconButton>
+      </Tooltip>
       </Link>
       {/* <IconButton aria-label="delete" disabled color="primary">
         <DeleteIcon />
@@ -390,17 +393,23 @@ class PostPreview extends React.Component {
         <AddShoppingCartIcon />
       </IconButton> */}
       {this.state.enabled ?
+      <Tooltip title="disable post" >
       <IconButton aria-label="disable" className={classes.butPause} onClick={() => this.disablePost(post.id)}>
         <PauseIcon />
       </IconButton>
+      </Tooltip>
       : 
+      <Tooltip title="enable post" >
       <IconButton aria-label="enable" className={classes.butPlay} onClick={() => this.enablePost(post.id)}>
         <PlayIcon />
       </IconButton>
+      </Tooltip>
   }
+  <Tooltip title="delete post" >
       <IconButton aria-label="delete" className={classes.butDelete} onClick={() => Queries.deletePost(post.id)}>
         <DeleteIcon />
       </IconButton>
+      </Tooltip>
     </div>
           </div>
           </div>

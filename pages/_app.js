@@ -16,6 +16,7 @@ export default class MyApp extends App {
     const categories = await Queries.getCategories();
 
 
+
     let pageProps = {};
 
     if (Component.getInitialProps) {
