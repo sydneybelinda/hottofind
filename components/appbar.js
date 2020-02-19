@@ -393,9 +393,9 @@ export default function PrimarySearchAppBar(props) {
                   url="services"
                 ></Dropdown>
                 <Dropdown
-                  name="Adult"
+                  name="Buy / Sell"
                   categories={props.categories}
-                  url="adult"
+                  url="buy-sell-trade"
                 ></Dropdown>
                 <IconButton 
                 size="small"
