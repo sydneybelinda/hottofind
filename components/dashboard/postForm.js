@@ -11,7 +11,7 @@ import SimpleSelect from "./simpleSelect";
 import UpdateElastic from "../updateElastic"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as EmailValidator from 'email-validator';
-import {checkUrl} from "../../utils/queries";
+import {checkUrl, checkTitle} from "../../utils/queries";
 
 
 // const UploadComponent = dynamic(() => import("./uploadcomponent"), {
@@ -259,6 +259,7 @@ class PostForm extends React.Component {
     if (!this.state.title){ 
       this.setState({ titleError: true, titleHelper:  "Title is required" })
     } else {
+
       this.setState({ titleError: false, titleHelper:  ""})
     }
   
@@ -409,6 +410,14 @@ class PostForm extends React.Component {
   
   }
 
+  checkDup = async e =>{
+    var tc = await checkTitle(`${this.state.title}-${this.props.user.username}`)
+
+    if(tc.length > 0){
+      this.setState({ error: "Oops!  Looks like you have already posted this."})
+    }
+  }
+
   submitPost = async (e) => {
     this.setState({loading: true, formDisabled: true}) 
 
@@ -424,6 +433,7 @@ class PostForm extends React.Component {
     var priceCheck = await this.chkPrice();
     var ageCheck = await this.chkAge();
     var websiteCheck = await this.chkWebsite();
+    var cDup = await this.checkDup();
 
     if(!this.state.categoryError &&
       !this.state.subcategoryError &&
@@ -435,7 +445,8 @@ class PostForm extends React.Component {
       !this.state.phoneError &&
       !this.state.emailError &&
       !this.state.ageError &&
-      !this.state.priceError 
+      !this.state.priceError&&
+      !this.state.error
   //    !this.state.websiteError
       
       ){
@@ -461,8 +472,10 @@ class PostForm extends React.Component {
     );
   
 
+    } else {
+      this.setState({loading: false, formDisabled: false})
     }
-    this.setState({loading: false, formDisabled: false})
+  
   
   }
 

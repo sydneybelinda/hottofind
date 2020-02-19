@@ -352,3 +352,10 @@ export const checkEmail = async u => {
   let users = await data.json();
   return users;
 };
+
+export const checkTitle = async u => {
+  const url = `${API}/dashboard/post/checktitle/${u}`;
+  const data = await fetch(url);
+  let posts = await data.json();
+  return posts;
+};
