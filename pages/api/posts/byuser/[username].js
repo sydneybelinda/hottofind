@@ -6,6 +6,10 @@ case 'latest':
   return ["createdAt", "DESC"];
   case 'oldest':
     return ["createdAt", "ASC"];
+  case 'active':
+    return ["status", "ASC"];
+    case 'disabled':
+      return ["status", "DESC"];    
 default:
   return ["createdAt", "DESC"]
 }

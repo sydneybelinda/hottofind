@@ -203,17 +203,6 @@ function Posts(props) {
   //   }
   pLock += `?`;
 
-  //   if (props.city) {
-  //     pLock += `city=${props.city}`;
-  //   }
-
-  //   if (category) {
-  //     var cat = category.maincategory;
-  //   } else {
-  //     var cat = "All Posts";
-  //   }
-
-  //   var sub = `All Posts in ${config.COUNTRYCODE}`;
 
   return (
     <Layout user={props.user} categories={props.categories}>
@@ -246,7 +235,7 @@ function Posts(props) {
         <div className={classes.right}>
           <Grid container spacing={4} className={classes.grid}>
             <Grid item xs={12} md={12}>
-              <Sort total={total} defaultSort={props.defaultSort} />
+              <Sort total={total} defaultDashSort={props.defaultDashSort} />
               <Divider />
             </Grid>
             {props.posts.rows.length > 0
@@ -294,7 +283,9 @@ function Posts(props) {
 }
 
 Posts.getInitialProps = async ctx => {
-  const defaultSort = cookies(ctx).defaultSort;
+  const defaultDashSort = await cookies(ctx).defaultDashSort;
+
+
 
   let user = await Queries.checkUserLogin(ctx);
   if (user) {
@@ -304,7 +295,7 @@ Posts.getInitialProps = async ctx => {
       posts,
       //        page: data.page,
       query: ctx.query,
-      defaultSort: defaultSort
+      defaultDashSort: defaultDashSort
     };
   }
 };

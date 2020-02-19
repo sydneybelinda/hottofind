@@ -110,7 +110,7 @@ export const deleteFile = async name => {
 
 export const getUserPosts = async (username,ctx) => {
 
-  const sort = cookies(ctx).defaultSort;
+  const sort = cookies(ctx).defaultDashSort;
   const res = await fetch(`${API}/posts/byuser/${username}?sort=${sort}`);
   let posts = await res.json();
 

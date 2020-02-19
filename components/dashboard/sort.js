@@ -35,11 +35,13 @@ const useStyles = makeStyles(theme => ({
 export default function Sort(props) {
   const classes = useStyles();
 
-  const defaultSort =  props.defaultSort || 'latest'
 
+  const defaultDashSort =  props.defaultDashSort || 'latest'
+
+ 
   
 
-  const [sort, setSort] = React.useState(defaultSort);
+  const [sort, setSort] = React.useState(defaultDashSort);
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -49,7 +51,7 @@ export default function Sort(props) {
 
   const handleChange = event => {
     setSort(event.target.value);
-    document.cookie = `defaultSort=${event.target.value}; path=/`;
+    document.cookie = `defaultDashSort=${event.target.value}; path=/`;
     window.location.reload()
   };
 
@@ -88,11 +90,10 @@ export default function Sort(props) {
           onChange={handleChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
+          <MenuItem value="active">Active</MenuItem>
+          <MenuItem value="disabled">Disabled</MenuItem>
         </Select>
       </FormControl>
       </div>
