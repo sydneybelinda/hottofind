@@ -83,7 +83,7 @@ const Footer = props => {
   return (
     <footer className={classes.footer}>
       <div className={classes.topFooter}>
-        <Container maxWidth="lg" spacing={3}>
+        <Container maxWidth="xl" spacing={3}>
           <Grid container>
             <Grid item sm={4} xs={12}>
               <div className={classes.company}>

@@ -49,7 +49,11 @@ const useStyles = makeStyles(theme => ({
   appbar: {
     background: "white",
     color: "black",
-    boxShadow: "0 3px 6px 3px rgba(0, 0, 0, .06)"
+    boxShadow: "0 3px 6px 3px rgba(0, 0, 0, .06)",
+    // border: "3px solid #e5e5e5",
+    // borderTopLeftRadius: "5px",
+    // borderTopRightRadius: "5px",
+    borderBottom: '1px solid #b6b6b6'
   },
   grow: {
     flexGrow: 1
@@ -187,6 +191,9 @@ const useStyles = makeStyles(theme => ({
   },
   more:{
     marginRight: 5
+  },
+  tb:{
+    minHeight: "50px"
   }
 }));
 
@@ -268,7 +275,7 @@ export default function PrimarySearchAppBar(props) {
           className={classes.appbar}
         >
           <Container maxWidth="xl">
-            <Toolbar>
+            <Toolbar className={classes.tb}>
             <Link href="/">
                 <a className={classes.link}>
                   <Typography className={classes.title} variant="h6" noWrap>

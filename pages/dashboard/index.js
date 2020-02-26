@@ -2,6 +2,7 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import cookies from "next-cookies";
@@ -14,6 +15,7 @@ import PostWide from "../../components/dashboard/postWide";
 import Sort from "../../components/dashboard/sort";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
+import Modal from "../../components/dashboard/modal"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -163,7 +165,8 @@ function Posts(props) {
     next: true,
     previous: true,
     limit: 100,
-    sort: "latest"
+    sort: "latest",
+    openModal: false,
   });
 
   const classes = useStyles();
@@ -173,11 +176,6 @@ function Posts(props) {
   const acount = props.page * data.limit;
 
   const router = useRouter();
-
-  //   var prevpage = parseInt(props.page) - 1;
-  //  var nextpage = parseInt(props.page) + 1;
-
-  //  console.log('nextpage: ', nextpage)
 
   const capitalize = s => {
     if (typeof s !== "string") return "";
@@ -202,6 +200,25 @@ function Posts(props) {
   //     pLock += `/${keyindex}`;
   //   }
   pLock += `?`;
+
+  const openModal = (o,id) => {
+    setData({postId: id, openModal: true})
+  }
+
+  const closeModal = o => {
+    setData({openModal: false})
+  }
+
+//   const modalContent = (
+//   <>
+//   <h2 id="simple-modal-title">Delete Photo</h2>
+//      <p id="simple-modal-description">
+//        Do you really wish to delete photo?
+//      </p>
+//      <Button variant="outlined" onClick={Queries.deletePost(data.postId)}>Delete</Button>
+// </>
+//   )
+  
 
 
   return (
@@ -241,7 +258,7 @@ function Posts(props) {
             {props.posts.rows.length > 0
               ? props.posts.rows.map(post => (
                   <Grid className={classes.gitem} item key={post.id} xs={12}>
-                    <PostWide post={post} user={props.user} />
+                    <PostWide post={post} user={props.user} openModal={openModal} closeModal={closeModal} />
                   </Grid>
                 ))
               : <div className={classes.none}>You don't have any posts</div> }
@@ -277,6 +294,7 @@ function Posts(props) {
             )}
           </div>
         </div>
+        {/* <Modal open={data.openModal} closeModal={closeModal} content={modalContent}/> */}
       </Container>
     </Layout>
   );
