@@ -113,6 +113,7 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
     textTransform: "uppercase",
     margin: "0 25px",
+    marginLeft: 10,
     fontSize: "12px",
     fontWeight: "600",
     letterSpacing: ".12em",
