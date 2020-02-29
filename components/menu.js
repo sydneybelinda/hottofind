@@ -85,6 +85,12 @@ export default function MenuListComposition(props) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuItem onClick={handleClose}>
+                     <a href={`/posts/${props.catindex}`}
+                     className={classes.link}
+                     >All {props.name}</a> 
+                        
+                </MenuItem>
                   {props.categories.length > 0
             ? props.categories.map((prop, key) => {
                   return (

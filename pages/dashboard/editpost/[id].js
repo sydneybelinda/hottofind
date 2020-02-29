@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Breadcrumbs from "../../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../../components/dashboard/dashboardMenu";
-import Layout from "../../../components/dashboard/layout";
+import Layout from "../../../components/layout";
 import PostForm from "../../../components/dashboard/postForm";
 import config from "../../../config";
 import { useRouter } from "next/router";
@@ -61,6 +61,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
+      marginTop: 35,
       paddingRight: 0
     }
   },
