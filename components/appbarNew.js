@@ -349,6 +349,7 @@ export default function HideAppBar(props) {
                       <a className={classes.lnk}>Register</a>
                     </Link>
                     <span className={classes.dividerb}>-</span>
+                    
                     <CountryMenu />
                   </>
                 )}
