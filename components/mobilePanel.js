@@ -106,7 +106,7 @@ export default function TemporaryDrawer(props) {
   return (
     <div>
 
-      <Drawer anchor="right" open={props.menu} onClose={props.menuClose} classes={{
+      <Drawer anchor="left" open={props.menu} onClose={props.menuClose} classes={{
         paperAnchorRight: classes.drawer,
    }}>
         <MenuList  user={props.user} categories={props.categories} />

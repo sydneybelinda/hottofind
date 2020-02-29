@@ -5,7 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Link from "next/link";
-import "./styles.css";
+// import "./styles.css";
 
 
 const styles = theme => ({

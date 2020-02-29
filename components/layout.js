@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
   wrap: {
 
     [theme.breakpoints.up("sm")]: {
-      marginTop: "79px"
+      marginTop: "0"
     },
-    marginTop: "50px",
+    marginTop: "0",
     width: "100%",
     maxWidth: "100%",
     overflowX: "hidden"

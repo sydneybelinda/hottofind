@@ -1,6 +1,6 @@
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import Appbar from "../components/appbar";
+import Appbar from "../components/appbarNew";
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -10,8 +10,8 @@ const useStyles = makeStyles(theme => ({
 
 function Header(props) {
   const classes = useStyles();
-  return (
-    <Container maxWidth="xl">
+   return (
+  //   <Container maxWidth="xl">
       <Appbar
         user={props.user}
         categories={props.categories}
@@ -19,7 +19,7 @@ function Header(props) {
         toggleDrawer={props.toggleDrawer}
         toggleMenu={props.toggleMenu}
       />
-    </Container>
+    // </Container>
   );
 }
 

@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const useStyles = makeStyles(theme => ({
   cButton: {
-    marginLeft: 30,
+    marginLeft: 25,
     color: "white",
     backgroundColor: "#8e8e8e"
   },
