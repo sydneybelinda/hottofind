@@ -58,6 +58,12 @@ const useStyles = makeStyles(theme => ({
       display: "block"
     }
   },
+  but: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
+  },
   butNewB: {
     display: "block",
     [theme.breakpoints.up("sm")]: {
@@ -211,11 +217,12 @@ export default function HideAppBar(props) {
             </div>
           )
         :
-        <ButtonGroup color="inherit" aria-label="text primary button group" variant="text">
-  <Link href="/login"><Button color="inherit">Login</Button></Link>
-  <Link href="/register"><Button color="inherit">Register</Button></Link>
- 
-</ButtonGroup>
+        <>
+    
+   <Link href="/login"><Button color="inherit" className={classes.but}>Login</Button></Link>
+  <Link href="/register"><Button color="inherit" className={classes.but}>Register</Button></Link> 
+ </>
+
         }
         <span className={classes.divider}>-</span>
          <CountryMenu />
