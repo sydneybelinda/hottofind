@@ -18,7 +18,7 @@ export default async (req, res) => {
           as: "files"
         }
       ],
-      order: [["createdAt", "DESC"]],
+      order: [["id", "DESC"]],
       limit: 40
     });
 
