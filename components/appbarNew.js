@@ -117,6 +117,7 @@ export default function HideAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleChange = event => {
