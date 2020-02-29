@@ -97,6 +97,7 @@ class Search extends Component {
           <List component="nav" aria-label="main mailbox folders">
             {this.state.data
               ? this.state.data.map(post => (
+              
                   <Link href={`/post/${makeSlug(post._source.title, post._source.id)}`} key={post._source.id}>
                     {" "}
                     <ListItem button>{post._source.title}</ListItem>

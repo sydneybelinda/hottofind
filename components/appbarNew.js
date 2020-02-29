@@ -228,6 +228,7 @@ export default function HideAppBar(props) {
                   <MenuDropdown
                     name={cat.name}
                     catindex={cat.catindex}
+                    key={cat.catindex}
                     categories={props.categories.filter(
                       item => item.catindex === cat.catindex
                     )}

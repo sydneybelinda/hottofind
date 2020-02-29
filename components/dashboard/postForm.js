@@ -34,10 +34,6 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1)
@@ -92,7 +88,6 @@ class PostForm extends React.Component {
       country: post.country || COUNTRYCODE,
       age: post.age || "",
       email: post.email || user.email,
-      avatar: post.files || "",
       catindex: post.catindex || "",
       keyindex: post.keyindex || "",
       cities: post.cities || "",
@@ -231,7 +226,15 @@ class PostForm extends React.Component {
         body: JSON.stringify(this.state)
       });
       if (response.status === 200) {
-        UpdateElastic(this.state)
+
+
+        const post = await response.json()
+
+
+        this.setState({id: post.id})
+
+          console.log(this.state.id)
+         UpdateElastic(this.state)
 
         Router.push("/dashboard");
       } else {
@@ -499,13 +502,6 @@ class PostForm extends React.Component {
                    Photos
                   </Typography>
               <div
-                style={{
-                  // backgroundImage: `url('${user.avatar}')`,
-                  // backgroundSize: "cover",
-                  // backgroundPosition: "center top",
-                  // maxHeight: "490px",
-                  minHeight: "0"
-                }}
               >
                 {/* <UploadComponent user={user} /> */}
                 <FilePond
