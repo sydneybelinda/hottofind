@@ -45,7 +45,7 @@ const styles = theme => ({
     fontWeight: "400",
     lineHeight: "1.43",
     letterSpacing: "0.01071em",
-    padding: "16px",
+    padding: "4px 16px",
     paddingBottom: "2px",
     color: "rgba(0, 0, 0, 0.87)",
     paddingTop: "8px",
@@ -56,24 +56,24 @@ const styles = theme => ({
   date: {
     paddingLeft: "16px",
     paddingRight: "16px",
-    paddingBottom: "8px",
-    color: "rgba(0, 0, 0, 0.54)",
+    paddingBottom: "4px",
+    color: "#96663c",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: "400",
-    fontSize: "10px",
+    fontSize: "9px",
     lineHeight: "1.43",
     letterSpacing: "0.01071em",
     [theme.breakpoints.up("sm")]: {
-      fontSize: "11px"
+      fontSize: "9px"
     }
   },
   cardLeft: {
     display: "flex",
-    background: "#e6e6e6",
+    background: "#e6e6e673",
     textAlign: "right",
     height: "50px",
     [theme.breakpoints.up("sm")]: {
-      background: "#e6e6e6",
+      background: "#e6e6e673",
       textAlign: "left",
       width: "100%"
     }
@@ -163,7 +163,7 @@ const styles = theme => ({
   location: {
     // paddingLeft: '16px',
     //  paddingBottom: '16px',
-    color: "rgba(0, 0, 0, 0.54)",
+     color: "rgb(0, 148, 135)",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: "400",
     fontSize: "11px",
@@ -177,9 +177,8 @@ const styles = theme => ({
   roomIcon: {
     height: "11px",
     width: "11px",
-    color: "rgba(0, 0, 0, 0.54)",
+    color: "rgb(0, 148, 135)",
     lineHeight: "1.43",
-    color: "rgba(0, 0, 0, 0.54)",
     width: "11px",
     height: "11px",
     lineHeight: "1.43",

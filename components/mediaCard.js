@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '56.25%', // 16:9
   },
   cat: {
-    fontSize: "11px",
+    fontSize: "10px",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: "400",
     lineHeight: "1.43",
@@ -98,14 +98,14 @@ const useStyles = makeStyles(theme => ({
     // paddingLeft: "16px",
     // paddingRight: "16px",
     // paddingBottom: "8px",
-    color: "rgba(0, 0, 0, 0.54)",
+    color: "#96663c",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: "400",
     fontSize: "10px",
     lineHeight: "1.43",
     letterSpacing: "0.01071em",
     [theme.breakpoints.up("sm")]: {
-      fontSize: "11px"
+      fontSize: "9px"
     }
   },
   title: {
@@ -117,14 +117,14 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: "0.01071em",
     color: "black",
     [theme.breakpoints.up("sm")]: {
-    marginBottom: "0.35em",
+    marginBottom: "0.10em",
     marginTop:0
     }
   },
   location: {
     // paddingLeft: '16px',
     //  paddingBottom: '16px',
-    color: "rgba(0, 0, 0, 0.54)",
+    color: "rgb(0, 148, 135)",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: "400",
     fontSize: "11px",
@@ -140,9 +140,8 @@ const useStyles = makeStyles(theme => ({
   roomIcon: {
     height: "11px",
     width: "11px",
-    color: "rgba(51, 0, 255, 0.51)",
     lineHeight: "1.43",
-    color: "rgba(0, 0, 0, 0.54)",
+    color: "rgb(0, 148, 135)",
     width: "11px",
     height: "11px",
     lineHeight: "1.43",
@@ -157,10 +156,8 @@ const useStyles = makeStyles(theme => ({
   },
   headerRoot: {
     background: "#00000012",
-    paddingTop: 8,
-    paddingBottom: 8,
+    padding: "4px 8px",
     order: 1,
-    height: 50,
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
         width: "100%"
@@ -171,12 +168,12 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     bottom: 0,
     right: 0,
-    height: 70,
+    height: 53,
     paddingTop: "0 !IMPORTANT",
     paddingBottom: "0 !important",
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
-      padding: "16px !important",
+      padding: "8px !important",
       width: "100%",
       position: "relative"
     }
