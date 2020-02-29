@@ -40,6 +40,11 @@ async function run() {
   const categories = await responseb.json();
   var line = '';
   var num = 0;
+
+  
+  const url = `${config.API}/city/get/${config.COUNTRYCODE}`;
+  const res = await fetch(url);
+  let cities = await res.json();
   
 
 
@@ -63,6 +68,12 @@ async function run() {
 
     num++
 
+    cities.map((cit, key) => {
+      line += `<url><loc>${config.URL}/posts/${cat.catindex}?city=${cit.city.toLowerCase()}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>`;
+
+    num++
+
+    });
 
 
   });
@@ -72,6 +83,14 @@ async function run() {
     line += `<url><loc>${config.URL}/posts/${catb.catindex}/${catb.keyindex}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>`;
 
       num++
+
+      cities.map((cit, key) => {
+        line += `<url><loc>${config.URL}/posts/${catb.catindex}/${catb.keyindex}?city=${cit.city.toLowerCase()}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>`;
+  
+      num++
+  
+      });
+
    });
 
        posts.map((post, key) => {
