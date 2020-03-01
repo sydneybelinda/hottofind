@@ -158,9 +158,11 @@ const useStyles = makeStyles(theme => ({
     background: "#00000012",
     padding: "4px 8px",
     order: 1,
+    alignItems: "unset",
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
-        width: "100%"
+        width: "100%",
+        
         }
 
   },
@@ -168,14 +170,15 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     bottom: 0,
     right: 0,
-    height: 53,
+    height: 66,
     paddingTop: "0 !IMPORTANT",
     paddingBottom: "0 !important",
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
       padding: "8px !important",
       width: "100%",
-      position: "relative"
+      position: "relative",
+      height: 53
     }
   },
   price: {
