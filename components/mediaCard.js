@@ -158,7 +158,7 @@ const useStyles = makeStyles(theme => ({
     background: "#00000012",
     padding: "4px 8px",
     order: 1,
-    alignItems: "unset",
+    alignItems: "unset !important",
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
         width: "100%",
