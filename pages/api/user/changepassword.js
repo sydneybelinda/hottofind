@@ -17,13 +17,15 @@ export default async (req, res) => {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
 
-      console.log(req.body);
+     
 
       const user = await User.findOne({
         where: {
           passwordreset: serial
         }
       });
+
+      console.log(user);
 
       if (!user) {
         return res.status(404).json({error: "user not found"});

@@ -206,7 +206,7 @@ console.log('submit')
                 required
                 fullWidth
                 id="username"
-                label="Username"
+                label="Email Address or Username"
                 name="username"
                 value={this.state.username}
                 autoComplete="username"

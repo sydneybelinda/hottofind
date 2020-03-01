@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import { PRIVATEKEY } from "../../../config";
 import { User } from "../../../models";
 
+const { Op } = require("sequelize");
+
 export default async (req, res) => {
   try {
     let errors = {};
@@ -10,7 +12,12 @@ export default async (req, res) => {
     if (req.method === "POST") {
       const { username, password } = req.body;
       User.findOne({
-        where: { username: username }
+        where: {
+          [Op.or]: [
+            { username: username },
+            { email: username }
+          ]
+        }
       }).then(user => {
         // if (!user) {
         //   let error = {};
