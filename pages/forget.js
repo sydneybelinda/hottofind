@@ -17,6 +17,9 @@ import { login } from "../utils/auth";
 import Head from "../components/head";
 import config from "../config";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import * as EmailValidator from 'email-validator';
+import {sendPasswordReset, checkEmail} from '../utils/queries';
+
 
 function Copyright() {
   return (
@@ -74,6 +77,20 @@ const styles = theme => ({
     border: "1px solid #ffe9e9"
 
   },
+  message: {
+    color: "#007e15",
+    padding: "20px 14px",
+    borderRadius: "5px",
+    fontSize: "1rem",
+    textAlign: "left",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 400,
+    lineHeight: '1em',
+    letterSpacing: '0.03333em',
+    background: "#0f6f3a0f",
+    border: "1px solid #c8e0d0"
+
+  },
   spinner:{
   width: "15px !important",
   color: "white !important",
@@ -89,26 +106,35 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
       email: "",
-      username: "",
       password: "",
-      error: "",
-      nameError: false,
-      usernameError: false,
       emailError: false,
-      passwordError: false,
-      nameHelper: '',
-      usernameHelper: '',
       emailHelper: '',
-      passwordHelper: '',
-      loading: false
+      error: '',
+      disabled: false
     };
   }
 
-  handleUsernameChange = e => {
-    this.setState({username: e.target.value, usernameError: false, usernameHelper: '', error: ''})
+  chkEmail = async (e) => {
+
+    if(this.state.email){
+      const valid = EmailValidator.validate(this.state.email);
+      if (!valid){
+        this.setState({ emailError: true, emailHelper:  "Email address is not Valid"  })
+      } else {
+  
+  const ech = await checkEmail(this.state.email)
+  this.setState({disabled:false, loading: false}) 
+
+      }
+  
+  } else {
+    this.setState({ emailError: true, emailHelper:  "Email address is required"  })
+    this.setState({disabled:false, loading: false}) 
   }
+  
+  }
+
   
   handleEmailChange = e => {
     this.setState({email: e.target.value, emailError: false, emailHelper: ''})
@@ -119,55 +145,74 @@ class Login extends React.Component {
   }
 
   submitPost = async (e) => {
-    this.setState({loading: true}) 
-    
-console.log('submit')
+    this.setState({loading: true, disabled: true,  error: ''}) 
 
-    const username = this.state.username;
-    const password = this.state.password;
-    // const url = '/api/login'
-    const url = "/api/auth/signin";
+    var echeck = await this.chkEmail();
 
-    let r;
+    if(!this.state.emailError){
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
+    const result = await sendPasswordReset(this.state);
 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
+    // console.log("res:", res)
 
-      
-
-      
-
-      if (response.status === 200) {
-        const { token } = await response.json();
-
-        await login({ token });
-      } else {
-        r = await response.json()
-        console.log("Login failed.");
-        let error = new Error(r.response);
-        error.response = r.response;
-        console.log("r: ", r)
-        this.setState({error: r.response, loading: false})
-     //   throw error;
-      }
-
-    
-    } catch (error) {
-      // console.error(
-      //   "You have an error in your code or there are Network issues.",
-      //   error
-      // );
-
-      console.log("e: ", error)
-
-      // const { response } = error;
-      // this.setState({error: r.response ? response.statusText : error.message})
+    if(result.error){
+        this.setState({error: result.error, disabled:false, loading: false}) 
     }
+
+    if(result.status && result.status == "email successful"){
+        const message = "Password reset successful.  Check Email account for reset link"
+        this.setState({message: message, loading: false}) 
+    }
+
+    }
+    
+// console.log('submit')
+
+//     const username = this.state.username;
+//     const password = this.state.password;
+//     // const url = '/api/login'
+//     const url = "/api/auth/signin";
+
+//     let r;
+
+//     try {
+//       const response = await fetch(url, {
+//         method: "POST",
+
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ username, password })
+//       });
+
+      
+
+      
+
+//       if (response.status === 200) {
+//         const { token } = await response.json();
+
+//         await login({ token });
+//       } else {
+//         r = await response.json()
+//         console.log("Login failed.");
+//         let error = new Error(r.response);
+//         error.response = r.response;
+//         console.log("r: ", r)
+//         this.setState({error: r.response, loading: false})
+//      //   throw error;
+//       }
+
+    
+//     } catch (error) {
+//       // console.error(
+//       //   "You have an error in your code or there are Network issues.",
+//       //   error
+//       // );
+
+//       console.log("e: ", error)
+
+//       // const { response } = error;
+//       // this.setState({error: r.response ? response.statusText : error.message})
+//     }
   
   
  
@@ -180,9 +225,9 @@ console.log('submit')
 
   const meta = [];
 
-  meta.title = `Login to your Account - HotToFind ${config.COUNTRY}`;
+  meta.title = `Reset your Password - HotToFind ${config.COUNTRY}`;
   meta.description =
-    `Login to your HotToFind ${config.COUNTRY} account and start buying and selling for free today!`;
+    `Reset the passowrd on your HotToFind ${config.COUNTRY} account.`;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -194,41 +239,27 @@ console.log('submit')
         </Avatar>
         <div className={classes.title}>HotToFind</div>
         <Typography component="h1" variant="h5">
-          Login to your account
+          Reset your password
         </Typography>
-        <form className={classes.form}  noValidate>
+        <form className={classes.form}  noValidate  autoComplete="new-password" disabled={this.state.disabled}>
+        <input type="hidden" value="something" />
         <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
         <TextField
                 variant="outlined"
-                error={this.state.usernameError}
-                helperText={this.state.usernameHelper}
+                error={this.state.emailError}
+                helperText={this.state.emailHelper}
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                value={this.state.username}
-                autoComplete="username"
-                onChange={this.handleUsernameChange}
-             onBlur={this.chkUsername}
-
-              />
-              </Grid>
-              <Grid item xs={12} sm={12}>                       <TextField
-                variant="outlined"
-                error={this.state.passwordError}
-                helperText={this.state.passwordHelper}
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                value={this.state.password}
-                autoComplete="current-password"
-                onChange={this.handlePasswordChange}
-                onBlur={this.chkPassword }
+                id="liame"
+                label="Enter your Email address"
+                name="liame"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+             onBlur={this.chkEmail}
+             autoComplete="new-password"
+             onFocus={this.onFocus}
+             disabled={this.state.disabled}
               />
               </Grid>
               {this.state.error && 
@@ -236,12 +267,11 @@ console.log('submit')
               <p className={classes.error} >{this.state.error}</p>
               </Grid>
               }
+                {this.state.message && 
               <Grid item xs={12} sm={12}>  
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          </Grid>
+              <p className={classes.message} >{this.state.message}</p>
+              </Grid>
+              }
           </Grid>
           <Button
             fullWidth
@@ -249,14 +279,15 @@ console.log('submit')
             color="primary"
             className={classes.submit}
             onClick={this.submitPost}
+            disabled={this.state.disabled}
           >
-            Sign In {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
+            Reset Password {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
           </Button>
           
           <Grid container>
             <Grid item xs>
-              <Link href="/forget" variant="body2">
-                Forgot password?
+              <Link href="/login" variant="body2">
+                Login
               </Link>
             </Grid>
 

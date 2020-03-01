@@ -61,13 +61,16 @@ const styles = theme => ({
   },
   error: {
     color: "#ff1744",
-    margin: "24px 14px 0",
+    padding: "20px 14px",
+    borderRadius: "5px",
     fontSize: "1rem",
     textAlign: "left",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: 400,
     lineHeight: '1em',
-    letterSpacing: '0.03333em'
+    letterSpacing: '0.03333em',
+    background: "#fff8f8",
+    border: "1px solid #ffe9e9"
 
   },
   spinner:{

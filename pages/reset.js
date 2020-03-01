@@ -17,6 +17,9 @@ import { login } from "../utils/auth";
 import Head from "../components/head";
 import config from "../config";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import * as EmailValidator from 'email-validator';
+import {sendPasswordReset, checkSerial, changePassword} from '../utils/queries';
+import ErrorPage from "./_error";
 
 function Copyright() {
   return (
@@ -74,6 +77,20 @@ const styles = theme => ({
     border: "1px solid #ffe9e9"
 
   },
+  message: {
+    color: "#007e15",
+    padding: "20px 14px",
+    borderRadius: "5px",
+    fontSize: "1rem",
+    textAlign: "left",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 400,
+    lineHeight: '1em',
+    letterSpacing: '0.03333em',
+    background: "#0f6f3a0f",
+    border: "1px solid #c8e0d0"
+
+  },
   spinner:{
   width: "15px !important",
   color: "white !important",
@@ -84,105 +101,96 @@ const styles = theme => ({
 });
 
 
-class Login extends React.Component {
+class Reset extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
-      email: "",
-      username: "",
       password: "",
-      error: "",
-      nameError: false,
-      usernameError: false,
-      emailError: false,
+      serial: this.props.query ? this.props.query.serial : '',
+      username: this.props.user ? this.props.user.username : '',
       passwordError: false,
-      nameHelper: '',
-      usernameHelper: '',
-      emailHelper: '',
       passwordHelper: '',
-      loading: false
+      error: '',
+      disabled: false,
+      complete: false,
+      message: '',
+      mainmessage: '',
+      mainerror: ''
     };
   }
 
-  handleUsernameChange = e => {
-    this.setState({username: e.target.value, usernameError: false, usernameHelper: '', error: ''})
-  }
+
+
+
+  chkPassword = async (e) => {
+      
+
+    if (!this.state.password){ 
+      this.setState({ passwordError: true, passwordHelper:  "Password must not be empty", loading: false, disabled: false,  })
+    } else {
+      this.setState({ passwordError: false, passwordHelper:  "" })
+    }
   
-  handleEmailChange = e => {
-    this.setState({email: e.target.value, emailError: false, emailHelper: ''})
   }
+
+  
   
   handlePasswordChange = e => {
     this.setState({password: e.target.value, passwordError: false, passwordHelper: '', error: ''})
   }
 
   submitPost = async (e) => {
-    this.setState({loading: true}) 
-    
-console.log('submit')
+    this.setState({loading: true, disabled: true,  error: ''}) 
 
-    const username = this.state.username;
-    const password = this.state.password;
-    // const url = '/api/login'
-    const url = "/api/auth/signin";
+    var echeck = await this.chkPassword();
 
-    let r;
+    if(!this.state.passwordError){
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
+        const data = {
+            username: this.state.username,
+            serial: this.state.serial,
+            password: this.state.password
+        }
 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
+    const result = await changePassword(data);
 
-      
+    // console.log("res:", res)
 
-      
-
-      if (response.status === 200) {
-        const { token } = await response.json();
-
-        await login({ token });
-      } else {
-        r = await response.json()
-        console.log("Login failed.");
-        let error = new Error(r.response);
-        error.response = r.response;
-        console.log("r: ", r)
-        this.setState({error: r.response, loading: false})
-     //   throw error;
-      }
-
-    
-    } catch (error) {
-      // console.error(
-      //   "You have an error in your code or there are Network issues.",
-      //   error
-      // );
-
-      console.log("e: ", error)
-
-      // const { response } = error;
-      // this.setState({error: r.response ? response.statusText : error.message})
+    if(result.error){
+        this.setState({error: result.error, disabled:false, loading: false}) 
     }
-  
-  
+
+    if(result.status && result.status == "successful"){
+        const message = "Password reset successful."
+        this.setState({message: message, loading: false}) 
+    }
+
+    }
+
  
  
   }
 
   render(){
 
-    const { classes } = this.props;
+    const { classes, query } = this.props;
+
+    if (!query.serial) {
+        return (
+          <ErrorPage
+            errorCode={401}
+            user={this.props.user}
+            categories={this.props.categories}
+          />
+        );
+      }
 
   const meta = [];
 
-  meta.title = `Login to your Account - HotToFind ${config.COUNTRY}`;
+  meta.title = `Reset your Password - HotToFind ${config.COUNTRY}`;
   meta.description =
-    `Login to your HotToFind ${config.COUNTRY} account and start buying and selling for free today!`;
+    `Reset the passowrd on your HotToFind ${config.COUNTRY} account.`;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -194,41 +202,29 @@ console.log('submit')
         </Avatar>
         <div className={classes.title}>HotToFind</div>
         <Typography component="h1" variant="h5">
-          Login to your account
+          Change your password
         </Typography>
-        <form className={classes.form}  noValidate>
+
+        { this.props.user.length > 0 ?
+        <form className={classes.form}  noValidate  autoComplete="new-password" disabled={this.state.disabled} onSubmit={e=>e.preventDefault()}>
+        <input type="hidden" value="something" />
         <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
         <TextField
-                variant="outlined"
-                error={this.state.usernameError}
-                helperText={this.state.usernameHelper}
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                value={this.state.username}
-                autoComplete="username"
-                onChange={this.handleUsernameChange}
-             onBlur={this.chkUsername}
-
-              />
-              </Grid>
-              <Grid item xs={12} sm={12}>                       <TextField
                 variant="outlined"
                 error={this.state.passwordError}
                 helperText={this.state.passwordHelper}
                 required
                 fullWidth
-                name="password"
-                label="Password"
+                id="drowssap"
+                label="Enter a new Password"
                 type="password"
-                id="password"
+                name="drowssap"
                 value={this.state.password}
-                autoComplete="current-password"
                 onChange={this.handlePasswordChange}
-                onBlur={this.chkPassword }
+             onBlur={this.chkPassword}
+             autoComplete="new-password"
+             disabled={this.state.disabled}
               />
               </Grid>
               {this.state.error && 
@@ -236,12 +232,11 @@ console.log('submit')
               <p className={classes.error} >{this.state.error}</p>
               </Grid>
               }
+                {this.state.message && 
               <Grid item xs={12} sm={12}>  
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          </Grid>
+              <p className={classes.message} >{this.state.message}</p>
+              </Grid>
+              }
           </Grid>
           <Button
             fullWidth
@@ -249,14 +244,15 @@ console.log('submit')
             color="primary"
             className={classes.submit}
             onClick={this.submitPost}
+            disabled={this.state.disabled}
           >
-            Sign In {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
+            Reset Password {this.state.loading ? <CircularProgress className={classes.spinner} /> : '' }
           </Button>
           
           <Grid container>
             <Grid item xs>
-              <Link href="/forget" variant="body2">
-                Forgot password?
+              <Link href="/login" variant="body2">
+                Login
               </Link>
             </Grid>
 
@@ -273,6 +269,15 @@ console.log('submit')
           </Grid>
 
         </form>
+        : 
+        <>
+        <Grid item xs={12} sm={12}>  
+        <p className={classes.error} >Sorry the User Can't be found.  Are you clicking on an old link?</p>
+        </Grid>
+        </>
+
+
+            }
       </div>
       <Box mt={8}>
         {/* <Copyright /> */}
@@ -281,4 +286,29 @@ console.log('submit')
   );
 }
 }
-export default withStyles(styles)(Login);
+
+
+
+Reset.getInitialProps = async ctx => {
+    const {query} = ctx 
+    let user;
+
+    if (!query.serial) {
+        ctx.res.statusCode = 401;
+     
+} 
+if (query.serial) {        
+      user = await checkSerial(query.serial)
+}  
+      
+
+    
+
+  
+    return {
+      query: ctx.query,
+      user: user
+    };
+  };
+
+export default withStyles(styles)(Reset);

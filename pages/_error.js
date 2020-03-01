@@ -44,7 +44,7 @@ class ErrorPage extends React.Component {
             <Layout {...this.props}>
                   <div className={classes.mainPosts}>
         <Container maxWidth="sm">
-              <h1 className="display-4">Page Not Found</h1>
+              <h1 className="display-4">404 Page Not Found</h1>
               <p>The page <strong>{ this.props.router.pathname }</strong> does not exist.</p>
               <p><Link href="/"><a>Home</a></Link></p>
             </Container>
@@ -57,13 +57,25 @@ class ErrorPage extends React.Component {
             <Layout {...this.props}>
             <div className={classes.mainPosts}>
         <Container maxWidth="xs">
-              <h1 className="display-4">Internal Server Error!!</h1>
+              <h1 className="display-4">500 Internal Server Error!!</h1>
               <p>An internal server error occurred.</p>
             </Container>
             </div>
          </Layout>
         )
         break
+        case 401:
+          response = (
+              <Layout {...this.props}>
+              <div className={classes.mainPosts}>
+          <Container maxWidth="xs">
+                <h1 className="display-4">401 Unauthorised!</h1>
+                <p>You are not authorised to access this page.</p>
+              </Container>
+              </div>
+           </Layout>
+          )
+          break
       default:
         response = (
             <Layout {...this.props}>

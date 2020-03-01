@@ -1,9 +1,19 @@
 import fetch from "isomorphic-unfetch";
 import nextCookie from "next-cookies";
-import { API, COUNTRYCODE } from "../config";
+import { URL, API, COUNTRYCODE } from "../config";
 import Router from "next/router";
 import cookies from 'next-cookies'
 import Error from 'next/error'
+
+export const makeSerial = (length) => {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 export const deletePost = async id => {
   const url = `/api/post/delete`;
@@ -360,3 +370,91 @@ export const checkTitle = async u => {
   return posts;
 };
 
+export const sendPasswordReset = async d => {
+    
+
+  const serial = await makeSerial(30)
+
+  var user = {
+    email: d.email,
+    passwordreset: serial
+  } 
+
+  const url = `${API}/user/resetpassword`;
+  const data = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+  let status = await data;
+  const sta = await status.json()
+
+  if (sta.status == "successful"){
+
+    const html = `<b>HotToFind Password Reset</b>
+    <br />
+    <p>A password reset request has been generated for ${user.email}.<br />  If you were the one who requested it - click the link below to reset your password.  If not simply ignore this message.</p>
+    <br />
+    Reset Link: <a href="${URL}/reset?serial=${serial}">${URL}/reset?serial=${serial}</a>
+    `
+
+    const body = {
+      to: user.email,
+      subject: "Reset your HotToFind password",
+      html: html
+    }
+
+    const url = `${API}/sendemail`;
+    const edata = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    let estatus = await edata;
+    status = await estatus.json();
+
+    
+
+    return status
+  }
+
+  
+
+  else {
+    status = sta;
+    return ({error: status.error})
+  }
+
+
+
+
+
+  
+
+}
+
+export const checkSerial = async u => {
+  let data = [];
+  let user = [];
+  const url = `${API}/user/serial/${u}`;
+  data = await fetch(url);
+  if (data.status == 200){
+    user = await data.json();
+  }
+  return user;
+};
+
+export const changePassword = async e => {
+  const url = `${API}/user/changepassword`;
+
+  const data = await fetch(url, {
+    method: "POST",
+
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(e)
+  });
+
+  let submit = await data.json();
+  return submit;
+};

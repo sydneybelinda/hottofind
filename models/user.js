@@ -58,7 +58,11 @@ module.exports = (sequelize, DataTypes) => {
       salt: {
         type: DataTypes.STRING,
         allowNull: false
-      }
+      },
+      passwordreset: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
     },
     {
       timestamps: false
