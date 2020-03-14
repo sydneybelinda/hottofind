@@ -2,6 +2,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Collapse from "@material-ui/core/Collapse";
 import { deepPurple } from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
+import Box from '@material-ui/core/Box';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 // import Context from "../../context";
 import Link from "@material-ui/core/Link";
@@ -9,7 +10,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import HomeIcon from "@material-ui/icons/Home";
-
+import LocationIcon from "@material-ui/icons/MyLocation";
+import { shadows } from '@material-ui/system';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandLess from "@material-ui/icons/ExpandLess";
@@ -22,11 +24,45 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper
   },
+  pageMenu: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: 0,
+    // border: "2px solid #1a283978",
+    borderRadius: "5px",
+    paddingBottom: "10px"
+  },
+  userMenu: {
+    width: "100%",
+    backgroundColor: "#ddedeb",
+    paddingBottom: 0,
+    // border: "2px solid #bac5c3",
+    borderRadius: "5px",
+    paddingBottom: "10px"
+  },
+  username: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    marginLeft: 10,
+    position: "relative",
+    top: "-5px"
+  },
+  logbuts: {
+    color: "#1e5954",
+    fontSize: "15px",
+    letterSpacing: "normal",
+  },
+  catMenu: {
+    width: "100%",
+    backgroundColor: "#e0e0e0",
+    // border: "2px solid #a1a1a1",
+    borderRadius: "5px",
+    paddingBottom: "10px"
+  },
   nested: {
     paddingLeft: theme.spacing(4),
     fontSize: "15px",
     letterSpacing: ".12em",
-    color: "#0b0b0b",
+    color: "#1e5954",
     fontFamily: "'Montserrat', sans-serif !important"
   },
   cats: {
@@ -92,7 +128,11 @@ const useStyles = makeStyles(theme => ({
   },
   homeIcon: {
     marginRight: "15px"
-  }
+  },
+  locationIcon: {
+    fill: "#5293cb",
+    marginRight: "15px"
+  },
   // login: {
   //   float: "right"
   // },
@@ -167,13 +207,10 @@ function NestedList(props) {
   }
 });
 
-  //   const result = props.categories.filter(item => item.catindex === "art-collectables")
-  // console.log(result);
-
-
-  console.log(mainCats)
 
   return (
+    <>
+    <Box boxShadow={3} >
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -182,7 +219,7 @@ function NestedList(props) {
           Menu
         </ListSubheader>
       }
-      className={classes.root}
+      className={classes.userMenu}
     >
       {props.user ? (
         <>
@@ -193,6 +230,7 @@ function NestedList(props) {
           >
             <div className={classes.cats}>
               <AccountCircle />
+             <span className={classes.username}> {props.user && props.user.username }</span>
             </div>
             {accountOpen ? (
               <ExpandLess className={classes.exicon} />
@@ -206,19 +244,19 @@ function NestedList(props) {
               <div className={classes.menuItem}>
                 <Link href={"/dashboard/newpost"}>
                   <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>Create New Post</div>
+                    <div className={classes.logbuts}>Create New Post</div>
                   </ListItem>
                 </Link>
                 <Link href={"/dashboard"}>
                   <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>My Posts</div>
+                    <div className={classes.logbuts}>My Posts</div>
                   </ListItem>
                 </Link>
               </div>
               <div className={classes.menuItem}>
                 <Link href={"/logout"}>
                   <ListItem button className={classes.nested}>
-                    <div className={classes.subcat}>Logout</div>
+                    <div className={classes.logbuts}>Logout</div>
                   </ListItem>
                 </Link>
               </div>
@@ -229,18 +267,24 @@ function NestedList(props) {
         <>
           <ListItem button className={classes.lcats}>
             <Link href={"/login"}>
-              <div>Login</div>
+              <div className={classes.logbuts}>Login</div>
             </Link>
           </ListItem>
           <ListItem button className={classes.rcats}>
             <Link href={"/register"}>
-              <div>Register</div>
+              <div className={classes.logbuts}>Register</div>
             </Link>
           </ListItem>
         </>
       )}
-      <Divider />
-
+   
+</List>
+</Box>
+<Box boxShadow={3}>
+    <List
+    component="nav"
+    aria-labelledby="nested-list-subheader"
+    subheader={
       <ListSubheader
         component="div"
         id="nested-list-subheader"
@@ -248,6 +292,10 @@ function NestedList(props) {
       >
         Pages
       </ListSubheader>
+    }
+    className={classes.pageMenu}
+  >
+
 
       <ListItem button className={classes.cats}>
         <Link href={"/"} className={classes.homeLink}>
@@ -257,6 +305,7 @@ function NestedList(props) {
       </ListItem>
 
       <ListItem button onClick={handleCountryClick} className={classes.cats}>
+      <LocationIcon className={classes.locationIcon} />
         <div className={classes.cats}>Countries</div>
         {countryOpen ? (
           <ExpandLess className={classes.exicon} />
@@ -330,15 +379,24 @@ function NestedList(props) {
         </List>
       </Collapse>
 
-      <Divider />
-
-      <ListSubheader
+</List>
+</Box>
+<Box boxShadow={3}>
+<List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader
         component="div"
         id="nested-list-subheader"
         className={classes.subName}
       >
         Categories
       </ListSubheader>
+      }
+      className={classes.catMenu}
+    >
+
 
       {
              mainCats.map((cat, key) => {
@@ -353,6 +411,8 @@ function NestedList(props) {
       }
 
     </List>
+    </Box>
+    </>
   );
 }
 

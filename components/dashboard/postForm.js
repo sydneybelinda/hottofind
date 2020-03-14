@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from "@material-ui/core/Typography";
 import dynamic from "next/dynamic";
 import Router from "next/router";
@@ -603,6 +604,7 @@ class PostForm extends React.Component {
                     fullWidth
                     autoComplete="price"
                     value={this.state.price}
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
                     variant="outlined"
                     onChange={event =>
                       this.setState({ price: event.target.value, priceError: false, priceHelper: '' })
@@ -611,6 +613,7 @@ class PostForm extends React.Component {
                     helperText={this.state.priceHelper}
                     onBlur={this.chkPrice}
                   />
+                  
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <TextField

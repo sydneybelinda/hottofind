@@ -83,8 +83,7 @@ const useStyles = makeStyles(theme => ({
       overflow: 'hidden',
       order: 0,
       borderRadius: 4,
-      borderTop: "1px solid #ebebeb",
-      borderBottom: "1px solid #ebebeb",
+      border: "1px solid #ebebeb",
       position: "relative",
       alignItems: "center",
     display: "flex",
@@ -155,14 +154,14 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left"
   },
   headerRoot: {
-    background: "#00000012",
+    background: "#ffffff",
     padding: "4px 8px",
     order: 1,
     alignItems: "unset !important",
     width: "calc(100% - 120px)",
     [theme.breakpoints.up("sm")]: {
         width: "100%",
-        
+        background: "#00000012",
         }
 
   },
