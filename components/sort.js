@@ -1,13 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import ListIcon from '@material-ui/icons/List';
+import { makeStyles } from '@material-ui/core/styles';
 import GridIcon from '@material-ui/icons/GridOn';
+import ListIcon from '@material-ui/icons/List';
+import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -136,13 +135,12 @@ let endpost;
           onChange={handleChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
           <MenuItem value="lowestprice">Lowest to Highest</MenuItem>
           <MenuItem value="highestprice">Highest to Lowest</MenuItem>
+          <MenuItem value="mostviewed">Most Viewed</MenuItem>
+          <MenuItem value="leastviewed">Least Viewed</MenuItem>
         </Select>
       </FormControl>
       </div>

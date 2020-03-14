@@ -12,6 +12,10 @@ export default async (req, res) => {
           return ["price", "ASC"];
         case 'highestprice':
           return ["price", "DESC"];
+          case 'mostviewed':
+            return ["views", "DESC"];
+            case 'leastviewed':
+              return ["views", "ASC"];
       default:
         return ["createdAt", "DESC"]
     }
