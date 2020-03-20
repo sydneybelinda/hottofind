@@ -10,6 +10,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import MailIcon from "@material-ui/icons/MailOutline";
 import HomeIcon from "@material-ui/icons/Home";
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -119,6 +120,14 @@ export default function LocationMenu(props) {
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary="Posts" />
+        </ListItem>
+    </Link>
+    <Link href="/dashboard/messages">
+        <ListItem button>
+          <ListItemIcon>
+            <MailIcon />
+          </ListItemIcon>
+          <ListItemText primary="Messages" />
         </ListItem>
     </Link>
     <Link href="/dashboard/editprofile">

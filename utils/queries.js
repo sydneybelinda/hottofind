@@ -127,6 +127,15 @@ export const getUserPosts = async (username,ctx) => {
   return posts;
 };
 
+export const getUserMessages = async (username,ctx) => {
+
+  const sort = cookies(ctx).defaultMessageSort;
+  const res = await fetch(`${API}/messages/byuser/${username}?sort=${sort}`);
+  let messages = await res.json();
+
+  return messages;
+};
+
 export const checkUserLogin = async ctx => {
   const { token } = nextCookie(ctx);
 

@@ -18,7 +18,7 @@ export default async (req, res) => {
             secure: false, // true for 465, false for other ports
             auth: {
               user: "hottofind", // generated ethereal user
-              pass: "YWd3dWRic3Y1bTkw" // generated ethereal password
+              pass: "HTGRFrfrTGFrfTYHRfedewssdw6" // generated ethereal password
             }
           });
         

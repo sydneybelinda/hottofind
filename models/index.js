@@ -25,6 +25,8 @@ db.Category = sequelize.import(process.cwd() + "/models/category.js");
 db.Post = sequelize.import(process.cwd() + "/models/post.js");
 db.File = sequelize.import(process.cwd() + "/models/file.js");
 db.City = sequelize.import(process.cwd() + "/models/city.js");
+db.Message = sequelize.import(process.cwd() + "/models/message.js");
+db.MessageFile = sequelize.import(process.cwd() + "/models/messagefile.js");
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
