@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Layout from "../components/layout";
-import MediaCard from "../components/mediaCard";
+import LatestMediaCard from "../components/latestMediaCard";
 import config from "../config";
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
@@ -211,7 +211,7 @@ function Index(props) {
             {props.posts.length > 0
               ? props.posts.map(post => (
                 (post.status == "Active") ?
-                  <MediaCard
+                  <LatestMediaCard
                     key={post.id}
                     post={post}
                     xs={12}
