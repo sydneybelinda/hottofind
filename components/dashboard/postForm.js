@@ -234,7 +234,6 @@ class PostForm extends React.Component {
 
         this.setState({id: post.id})
 
-          console.log(this.state.id)
          UpdateElastic(this.state)
 
         Router.push("/dashboard");

@@ -27,7 +27,7 @@ export default class MyDocument extends Document {
 
 MyDocument.getInitialProps = async (ctx) => {
 
-  console.log(ctx.req.connection.remoteAddress)
+  // console.log(ctx.req.connection.remoteAddress)
   // Resolution order
   //
   // On the server:

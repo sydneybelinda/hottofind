@@ -4,6 +4,10 @@ export default async (req, res) => {
 
   async function getSort(p) {
         switch(p) {
+      case 'latestupdated':
+        return ["updatedAt", "DESC"];
+      case 'oldestupdated':
+        return ["updatedAt", "ASC"];
       case 'latest':
         return ["createdAt", "DESC"];
         case 'oldest':
@@ -32,7 +36,7 @@ export default async (req, res) => {
   const offset = (limit * page) - limit
   const order = await getSort(sort)
 
-  console.log("offset: ", offset)
+  // console.log("offset: ", offset)
 
   let where = { country: countrycode };
 

@@ -50,7 +50,7 @@ class Search extends Component {
         })
         .then(result => {
           //this.setState({ data: result })
-          console.log(result);
+          // console.log(result);
         });
     }
 

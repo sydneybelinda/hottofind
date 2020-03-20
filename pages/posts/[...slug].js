@@ -184,7 +184,7 @@ function Posts(props) {
     next: true,
     previous: true,
     limit: 100,
-    sort: "latest",
+    sort: "latestupdated",
     view: props.defaultView || 'grid',
   });
 
@@ -363,7 +363,7 @@ function Posts(props) {
 
                 ))
               : <div className={classes.none}>Sorry there are no posts in this category</div>}
-              {console.log(props.posts.rows)}
+    
           </Grid>
           <div className={classes.pagination}>
             {props.page > 1 ? (

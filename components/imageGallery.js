@@ -57,7 +57,6 @@ class MyGallery extends React.Component {
 
     var files = [];
     
-console.log(this.props.files)    
     
         if (this.props.files.length > 0) {
           

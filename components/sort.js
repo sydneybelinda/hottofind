@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
 export default function Sort(props) {
   const classes = useStyles();
 
-  const defaultSort =  props.defaultSort || 'latest'
+  const defaultSort =  props.defaultSort || 'latestupdated'
   const defaultView =  props.defaultView || 'grid'
 
   
@@ -135,8 +135,8 @@ let endpost;
           onChange={handleChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value="latest">Latest</MenuItem>
-          <MenuItem value="oldest">Oldest</MenuItem>
+          <MenuItem value="latestupdated">Latest Updated</MenuItem>
+          <MenuItem value="oldestupdated">Oldest Updated</MenuItem>
           <MenuItem value="lowestprice">Lowest to Highest</MenuItem>
           <MenuItem value="highestprice">Highest to Lowest</MenuItem>
           <MenuItem value="mostviewed">Most Viewed</MenuItem>
