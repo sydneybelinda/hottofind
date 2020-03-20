@@ -1,4 +1,8 @@
 "use strict";
+
+import {MAILUSER, MAILPASSWORD} from "../../config"
+
+
 const nodemailer = require("nodemailer");
 
 export default async (req, res) => {
@@ -17,8 +21,8 @@ export default async (req, res) => {
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-              user: "hottofind", // generated ethereal user
-              pass: "HTGRFrfrTGFrfTYHRfedewssdw6" // generated ethereal password
+              user: MAILUSER, // generated ethereal user
+              pass: MAILPASSWORD // generated ethereal password
             }
           });
         
