@@ -59,6 +59,16 @@ const styles = theme => ({
     letterSpacing: '0.03333em'
 
   },
+  success: {
+    display: 'block',
+    marginTop: 50,
+    marginBottom: 10,
+    padding: 15,
+    color: 'green',
+    background: '#00800024',
+    border: '#005d0026 1px solid',
+    borderRadius: 5
+  },
   spinner:{
   width: "15px !important",
   color: "white !important",

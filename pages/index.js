@@ -250,9 +250,14 @@ function Index(props) {
                     <h4>
                       <a href="#">CEO of HotToFind {config.COUNTRY}</a>
                     </h4>
+                    <br></br><br></br>
+                <a href="https://sydneylawsolutions.com.au">Sydney Law Solutions</a>
                   </div>
                 </div>
               </div>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              
             </Grid>
           </Grid>
         </Container>

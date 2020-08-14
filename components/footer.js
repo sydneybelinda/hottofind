@@ -107,6 +107,7 @@ const Footer = props => {
                 </p>
                 <a href="mailto:info@hottofind.com">info@hottofind.com</a><br/>
                 <a href={URL}>{URL}</a>
+
               </div>
             </Grid>
             <Grid item sm={2} xs={12}></Grid>

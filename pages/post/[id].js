@@ -1,12 +1,15 @@
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import { useRouter } from "next/router";
+import TextField from "@material-ui/core/TextField";
 import Moment from "react-moment";
 import nl2br from "react-nl2br";
 import ImageGallery from "../../components/imageGallery";
 import Layout from "../../components/layout";
 import PostBreadcrumbs from "../../components/PostBreadcrumbs";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 import { getSlug } from "../../components/constants";
@@ -216,7 +219,53 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 30,
     color: "#000000",
     fontWeight: "400"
-  }
+  },
+  form: {
+    marginTop: 50,
+    marginBottom: 10,
+    padding: 15,
+    background: 'beige'
+  },
+  submit: {
+    marginTop: 10
+  },
+  logbox: {
+    marginTop: 50,
+    marginBottom: 10,
+    textAlign: 'center',
+    width: '100%',
+    background: 'beige',
+    padding: 15,
+    borderRadius: 5
+  },
+  spinner:{
+    width: "15px !important",
+    color: "white !important",
+    height: "15px !important",
+    position: "absolute",
+    right: "20px !important",
+    },
+    error: {
+      color: "#ff1744",
+      margin: "24px 14px 0",
+      fontSize: "1rem",
+      textAlign: "left",
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontWeight: 400,
+      lineHeight: '1em',
+      letterSpacing: '0.03333em'
+  
+    },
+    success: {
+      display: 'block',
+      marginTop: 50,
+      marginBottom: 10,
+      padding: 15,
+      color: 'green',
+      background: '#00800024',
+      border: '#005d0026 1px solid',
+      borderRadius: 5
+    },
 }));
 
 function truncateString(str, num) {
@@ -225,10 +274,19 @@ function truncateString(str, num) {
 
 function Post(props) {
   const [website, setWebsite] = useState(null);
+  const [message, setMessage] = useState('');
+  const [hideFormVar, setHideFormVar] = useState(null);
+  const [hideSuccessVar, setHideSuccessVar] = useState({display: 'none'});
+  const [messageError, setMessageError] = useState(null);
+  const [messageHelper, setMessageHelper] = useState(null);
+  const [formDisabled, setFormDisabled] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
   const { post } = props;
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
+
 
   useEffect(() => {
     async function checkUrl() {
@@ -293,6 +351,108 @@ function Post(props) {
   const subcat = props.categories.find(
     e => e.keyindex === props.query.keyindex
   );
+
+  const chkMessage = async (e) => {
+      
+
+    if (!message){ 
+      setMessageError(true)
+      setMessageHelper("Message is required")
+    } else {
+      setMessageError(false)
+      setMessageHelper("")
+    }
+  
+  }
+
+  const onMessageChange = (event)  => {
+    setMessage(event.target.value)
+    setMessageError(false)
+    setMessageHelper("") 
+  }
+
+
+  const success = async () => {
+    setHideFormVar({display: 'none'})
+    setHideSuccessVar({display: 'block'})
+}
+
+  const submitMessage = async event => {
+    setLoading(true)
+    setFormDisabled(true) 
+
+    var messageCheck = await chkMessage();
+
+    console.log(messageError)
+
+
+    if(message){
+
+    var data = {
+      content: message,
+      subject: `Enquiry about ${post.title}`,
+      from_username: props.user.username,
+      to_username: post.owner,
+      read: 'unread'
+
+    }
+
+    let send = await Queries.sendMessage(data)
+
+    if (send.status == "Success") {
+      const s = await success()
+      setLoading(false)
+      setFormDisabled(false) 
+    } else {
+      setError("An error has occured.  Message not sent")
+    }
+
+
+
+  } else {
+    setLoading(false)
+    setFormDisabled(false) 
+  }
+    
+
+
+    // const url = "/api/dashboard/post/edit";
+
+    // try {
+    //   const response = await fetch(url, {
+    //     method: "POST",
+
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(this.state)
+    //   });
+    //   if (response.status === 200) {
+
+
+    //     const post = await response.json()
+
+
+    //     this.setState({id: post.id})
+
+
+    //     Router.push("/dashboard");
+    //   } else {
+    //     console.log("Edit failed.");
+    //     // https://github.com/developit/unfetch#caveats
+    //     let error = new Error(response.statusText);
+    //     error.response = response;
+    //     throw error;
+    //   }
+    // } catch (error) {
+    //   console.error(
+    //     "You have an error in your code or there are Network issues.",
+    //     error
+    //   );
+
+    //   const { response } = error;
+
+    //   this.setState({ error: response ? response.statusText : error.message });
+    // }
+  };
 
   return (
     <Layout user={props.user} categories={props.categories} meta={meta}>
@@ -397,7 +557,7 @@ function Post(props) {
                         </h4>
                       </div>
                     </Grid>
-                    {post.website ? (
+                    {post.website && (
                       <Grid item xs={12} md={12}>
                         <div className={classes.website}>
                           <h4>
@@ -410,9 +570,49 @@ function Post(props) {
                           </h4>
                         </div>
                       </Grid>
-                    ) : (
-                      ""
                     )}
+                      {props.user && (props.user != post.owner) ? (
+                    <Grid item xs={12} md={12}>
+                    <form noValidate className={classes.form} style={hideFormVar}>
+                    <TextField
+                    id="message"
+                    label={`Send Message to ${post.owner}`}
+                    name="message"
+                    multiline
+                    fullWidth
+                    rows="10"
+                    value={message}
+                    variant="outlined"
+                    helperText={messageHelper}
+                    onChange={event =>
+                      onMessageChange(event)
+                    }
+                    error={messageError}
+                  />
+                                    <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={submitMessage}
+                    disabled={formDisabled}
+                  >
+                    Submit  {loading ? <CircularProgress className={classes.spinner} /> : '' }
+                  </Button>
+                      </form>
+                      <div className={classes.success} style={hideSuccessVar}>
+                        Message Sent Successfully
+                      </div>
+                    </Grid>
+                      ) : (
+                        <div className={classes.logbox}>
+                      <a href="/login">Login to your account to send message to user</a>
+                      </div>
+                      )}
+
+{error && (
+            <p className="error">Error: {error}</p>
+          )}
                   </Grid>
                 </div>
               </Grid>

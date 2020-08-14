@@ -66,6 +66,29 @@ export const disablePost = async (id,username) => {
   }
 };
 
+export const sendMessage = async (data) => {
+  const url = `/api/messages/postmessage`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (response.status === 200) {
+      return { status: "Success" };
+    } else {
+      return { status: "Failed" };
+    }
+  } catch (error) {
+    console.error(
+      "You have an error in your code or there are Network issues.",
+      error
+    );
+  }
+};
+
 export const enablePost = async (id,username) => {
   const url = `/api/post/enable`;
 
