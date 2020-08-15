@@ -1,6 +1,6 @@
 "use strict";
 
-import {MAILUSER, MAILPASSWORD} from "../../config"
+import {MAILUSER, MAILPASSWORD} from "../../../config"
 
 
 const nodemailer = require("nodemailer");
