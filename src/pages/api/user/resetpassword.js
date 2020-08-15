@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { PRIVATEKEY } from "../../../config";
+import { PRIVATEKEY } from "../../../../config";
 import { User } from "../../../models";
 
 export default async (req, res) => {
