@@ -2,5 +2,7 @@ uploadedimages
 node_modules
 .next
 config.js
-config.json
+dbconfig.json
 .next/*
+.vscode/*
+.vscode
