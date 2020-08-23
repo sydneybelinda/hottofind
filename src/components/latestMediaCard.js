@@ -232,13 +232,22 @@ export default function LatestMediaCard(props) {
 
   const { post } = props;
 
-  
 
-  var image;
 
    if (post.files.length > 0) {
-     image = "/static/uploadedimages/" + post.files[0].name;
-   } else image = "/static/uploadedimages/noimage.jpg";
+    try {
+      var image = "https://hottofind.com/uploadedimages/" + post.files[0].name;
+      // do stuff
+  } catch (ex) {
+    var image = "https://hottofind.com/uploadedimages/noimage.jpg";
+  }
+     
+   } 
+   
+   else image = "/static/uploadedimages/noimage.jpg";
+
+
+var noimage = "https://hottofind.com/uploadedimages/noimage.jpg";
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -273,7 +282,7 @@ export default function LatestMediaCard(props) {
 
        <Img
               className="img-responsive"
-              src={[image, "/static/uploadedimages/noimage.jpg"]}
+              src={[image, noimage]}
               alt={props.post.title}
               style={{
                 width: "100%",

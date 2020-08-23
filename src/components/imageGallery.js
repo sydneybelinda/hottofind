@@ -53,7 +53,7 @@ class MyGallery extends React.Component {
 
 
   render() {
-    const url = `${URL}/static/uploadedimages/`;
+    const url = `https://hottofind.com/uploadedimages/`;
 
     var files = [];
     

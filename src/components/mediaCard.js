@@ -237,8 +237,8 @@ export default function RecipeReviewCard(props) {
   var image;
 
    if (post.files.length > 0) {
-     image = "/static/uploadedimages/" + post.files[0].name;
-   } else image = "/static/uploadedimages/noimage.jpg";
+     image = "https://hottofind.com/uploadedimages/" + post.files[0].name;
+   } else image = "https://hottofind.com/uploadedimages/noimage.jpg";
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
