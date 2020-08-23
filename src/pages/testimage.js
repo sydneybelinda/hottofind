@@ -12,7 +12,7 @@ export default class Main extends Component {
 	render() {
 		return (
             <div>
-<img src={require("/data/uploadedimages/noimage.jpg") } />
+<img src={require("../../../../data/uploadedimages/noimage.jpg") } />
 </div>
 		);
 	}
