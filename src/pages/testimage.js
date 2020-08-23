@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 export default class Main extends Component {
 	static async getInitialProps() {
 		return {
+<<<<<<< HEAD
 
 		};
     }
@@ -26,6 +27,16 @@ export default class Main extends Component {
     return (
 <div>
     <img src={image} />
+=======
+		
+		};
+	}
+
+	render() {
+		return (
+            <div>
+<img src={require("../../../../data/uploadedimages/noimage.jpg") } />
+>>>>>>> 4eb8749e3e733ada39ac15aeee8f457a197481a4
 </div>
 		);
 	}
