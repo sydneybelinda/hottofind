@@ -251,7 +251,7 @@ function Index(props) {
                       <a href="#">CEO of HotToFind {config.COUNTRY}</a>
                     </h4>
                     <br></br><br></br>
-                <a href="https://sydneylawsolutions.com.au">Sydney Law Solutions</a>
+                <a href="https://sydneylawsolutions.com.au">Lawyers Sydney</a>
                   </div>
                 </div>
               </div>
