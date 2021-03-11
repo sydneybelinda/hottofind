@@ -5,76 +5,104 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       username: {
         type: DataTypes.STRING,
         allowNull: true,
         unique: true,
         validate: {
-          is: /^[a-z0-9\_\-]+$/i
-        }
+          is: /^[a-z0-9\_\-]+$/i,
+        },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          isEmail: true
-        }
+          isEmail: true,
+        },
       },
       avatar: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       address1: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       address2: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       state: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       postcode: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       salt: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+      },
+      mustChangePassword: {
+        type: DataTypes.CHAR,
+        allowNull: true,
+      },
+      profilesId: {
+        type: DataTypes.CHAR,
+        allowNull: true,
+      },
+      banned: {
+        type: DataTypes.CHAR,
+        allowNull: true,
+      },
+      suspended: {
+        type: DataTypes.CHAR,
+        allowNull: true,
+      },
+      active: {
+        type: DataTypes.CHAR,
+        allowNull: true,
       },
       passwordreset: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
         allowNull: true
       },
     },
     {
-      timestamps: false
+      timestamps: false,
     }
   );
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
   };
 
   User.sync()
     .then(() => console.log("User table created successfully"))
-    .catch(err =>
+    .catch((err) =>
       console.log("BTW, did you enter wrong database credentials?")
     );
 

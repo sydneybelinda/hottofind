@@ -1,5 +1,5 @@
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 import theme from "../components/theme";
 import { extractCritical } from 'emotion-server';
@@ -7,7 +7,7 @@ import { extractCritical } from 'emotion-server';
 export default class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

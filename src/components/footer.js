@@ -71,7 +71,7 @@ function Copyright() {
     <Typography variant="body2" align="center" className={classes.bottomText}>
       {"Copyright © "} {new Date().getFullYear()} -{" "}
       <Link color="inherit" href={URL}>
-        {URL}
+        <a href="https://chicit.com.au">Chic IT and Website Design</a>
       </Link>
     </Typography>
   );

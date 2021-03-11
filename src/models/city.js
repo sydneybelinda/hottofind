@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "city",
     {
       id: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
       },
@@ -28,5 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   City.associate = function(models) {
     // associations can be defined here
   };
+  City.sync()
+  .then(() => console.log("City table created successfully"))
   return City;
 };

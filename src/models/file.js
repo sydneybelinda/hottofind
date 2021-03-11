@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "file",
     {
       id: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
@@ -32,5 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
   };
+  File.sync()
+  .then(() => console.log("FIle table created successfully"))
   return File;
 };

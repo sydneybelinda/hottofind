@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "category",
     {
       id: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
       },
@@ -32,5 +32,10 @@ module.exports = (sequelize, DataTypes) => {
   Category.associate = function(models) {
     // associations can be defined here
   };
+  Category.sync()
+  .then(() => console.log("Category table created successfully"))
+  .catch(err =>
+    console.log("error: " + err)
+  );
   return Category;
 };

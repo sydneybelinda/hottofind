@@ -134,5 +134,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
   };
+  Post.sync()
+    .then(() => console.log("Post table created successfully"))
   return Post;
 };
