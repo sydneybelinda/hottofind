@@ -67,28 +67,34 @@ export default async (req, res) => {
   }
 
   try {
-    const posts = await Post.findAndCountAll({
-      limit,
-      offset,
-      where: where,
-      include: [
+    // const posts = await Post.findAndCountAll({
+    //   limit,
+    //   offset,
+    //   where: where,
+    //   include: [
+    //     {
+    //       model: File,
+    //       as: "files"
+    //     }
+    //   ],
+    //   distinct:true,
+    //   order: [order],
+    // //  limit: limit,
+    // //  offset: offset,
+    // });
+
+      const posts = await Post.findAndCountAll({
+        where: where,
+        order: [['createdAt', 'DESC']],
+              include: [
         {
           model: File,
           as: "files"
         }
       ],
-      distinct:true,
-      order: [order],
-     limit: limit,
-     offset: offset,
-    });
-
-    //   const posts = await Post.findAndCountAll({
-    //     where: where,
-    //     order: [['createdAt', 'DESC']],
-    //     limit: 40,
-    //     offset: offset,
-    // })
+        limit: 40,
+        offset: offset,
+    })
 
     if (!posts) {
       return res.status(404).send({
