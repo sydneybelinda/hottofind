@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import Link from "../components/link";
 import ProTip from "../components/proTip";
 
-export default function About() {
+export default function About(props) {
   return (
     <Layout>
       <Box my={4}>

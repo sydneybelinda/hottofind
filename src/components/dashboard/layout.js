@@ -91,6 +91,7 @@ function Layout(props) {
         <SearchBar 
         side={side}
         drawerClose={_drawerClose}
+        
         />
         <MobilePanel 
         menu={menu}

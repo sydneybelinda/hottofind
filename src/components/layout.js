@@ -44,6 +44,8 @@ function Layout(props) {
     setMenu(false)
   }
 
+  console.log(side)
+
 
   return (
     <>

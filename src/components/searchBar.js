@@ -11,6 +11,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Search from './search';
 
+
 const useStyles = makeStyles(theme => ({
   list: {
     width: "100%",
@@ -40,7 +41,16 @@ export default function TemporaryDrawer(props) {
     right: props.side,
   });
 
-  const toggleDrawer = (side, open) => event => {
+  const [side, setSide] = React.useState(props.side)
+
+ 
+
+  const toggleDrawer = () => event => {
+
+    setDrawerClose(false)
+  };
+
+  const closeDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
@@ -56,7 +66,7 @@ export default function TemporaryDrawer(props) {
     //  onKeyDown={props.drawerClose}
     >
 
-      <Search />
+      <Search drawerClose={props.drawerClose} />
       {/* <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>

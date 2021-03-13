@@ -4,6 +4,8 @@ import { URL, API, COUNTRYCODE } from "../../config";
 import Router from "next/router";
 import cookies from 'next-cookies'
 import Error from 'next/error'
+import Axios from "../../node_modules/axios/index";
+import { CompareArrowsOutlined } from "../../node_modules/@material-ui/icons/index";
 
 export const makeSerial = (length) => {
   var result           = '';
@@ -204,6 +206,17 @@ export const getPost = async id => {
    
   
 
+};
+
+export const searchPosts = async search => {
+  const url = `${API}/posts/search?search=${search}`;
+  const data = await Axios.get(url);
+ // console.log('data: ', data.Response)
+
+ console.log(data);
+ 
+    //const post = await data.json();
+      return data;
 };
 
 export const getCities = async countrycode => {

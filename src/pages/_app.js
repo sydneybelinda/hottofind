@@ -8,12 +8,17 @@ import * as Queries from "../utils/queries";
 import cookies from 'next-cookies';
 import ReactGA from 'react-ga';
 import {GA} from '../../config';
+import '../Theme.css';
+import '../App.css';
+import '../App.mobile.css';
+import 'components/instasearch/widgets/Pagination.css';
+import 'components/instasearch/widgets/PriceSlider.css';
 
 
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    const categories = await Queries.getCategories();
+  
 
 
 
@@ -22,12 +27,14 @@ export default class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
       //   pageProps.config = config
-    }
+      const categories = await Queries.getCategories();
+   
 
-
+    if (categories.length != 0){
     pageProps.categories = categories;
+    }
     pageProps.defaultSort = cookies(ctx).defaultSort || ''
-
+  }
     return { pageProps };
   }
   componentDidMount() {
@@ -51,7 +58,8 @@ ReactGA.pageview(window.location.pathname + window.location.search);
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
-          />\<link rel="icon" type="image/icon" href="/favicon.ico"></link>
+          /><link rel="icon" type="image/icon" href="/favicon.ico"></link>
+          
         </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

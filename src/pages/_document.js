@@ -27,6 +27,8 @@ export default class MyDocument extends Document {
 
 MyDocument.getInitialProps = async (ctx) => {
 
+  if(ctx){}
+
   // console.log(ctx.req.connection.remoteAddress)
   // Resolution order
   //
@@ -73,4 +75,7 @@ MyDocument.getInitialProps = async (ctx) => {
      // style
     ]
   };
+
+
+
 };
