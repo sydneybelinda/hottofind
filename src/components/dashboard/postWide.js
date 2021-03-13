@@ -297,7 +297,7 @@ class PostPreview extends React.Component {
   }
 
   deletePost = async(id) => {
-    const deleteElastic = await DeleteElastic(id)
+   // const deleteElastic = await DeleteElastic(id)
     const result = await Queries.deletePost(id)
     
   }
