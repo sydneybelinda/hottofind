@@ -6,15 +6,7 @@ import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import {makeSlug} from "./constants";
 import withStyles from "@material-ui/core/styles/withStyles";
-import * as Queries from "../utils/queries";
-//const client = new Client({ node: 'http://db.hottofind.com:9200' })
 
-// var client = new Client({
-//   // default is fine for me, change as you see fit
-//   host: "elasticsearch.hottofind.com",
-//   log: "trace",
-//   apiVersion: "7.5"
-// });
 
 const styles = theme => ({
 search: {
