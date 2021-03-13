@@ -354,7 +354,7 @@ class PostPreview extends React.Component {
           <div className={classes.cardLeft}>
             <div className={classes.cats}>
             <div className={classes.cat}>
-              {this.props.post.catindex} > {this.props.post.keyindex}
+              {`${this.props.post.catindex} > ${this.props.post.keyindex}`}
             </div>
             <div className={classes.date}>
               <Moment date={dateToFormat} format="D MMMM YY - HH:mm" />
