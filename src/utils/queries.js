@@ -213,7 +213,7 @@ export const searchPosts = async search => {
   const data = await Axios.get(url);
  // console.log('data: ', data.Response)
 
- console.log(data);
+ 
  
     //const post = await data.json();
       return data;

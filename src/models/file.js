@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
   };
-  File.sync()
-  .then(() => console.log("FIle table created successfully"))
+
   return File;
 };

@@ -31,11 +31,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   Category.associate = function(models) {
     // associations can be defined here
-  };
-  Category.sync()
-  .then(() => console.log("Category table created successfully"))
-  .catch(err =>
-    console.log("error: " + err)
-  );
+  }
   return Category;
 };

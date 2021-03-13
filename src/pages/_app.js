@@ -8,11 +8,6 @@ import * as Queries from "../utils/queries";
 import cookies from 'next-cookies';
 import ReactGA from 'react-ga';
 import {GA} from '../../config';
-import '../Theme.css';
-import '../App.css';
-import '../App.mobile.css';
-import 'components/instasearch/widgets/Pagination.css';
-import 'components/instasearch/widgets/PriceSlider.css';
 
 
 

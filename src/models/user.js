@@ -100,11 +100,6 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
 
-  User.sync()
-    .then(() => console.log("User table created successfully"))
-    .catch((err) =>
-      console.log("BTW, did you enter wrong database credentials?")
-    );
 
   return User;
 };

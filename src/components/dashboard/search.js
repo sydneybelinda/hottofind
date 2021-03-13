@@ -1,113 +1,87 @@
-import React, { Component } from "react";
+import React,{useState} from 'react';
 import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Button from "@material-ui/core/Button";
-const { Client } = require("elasticsearch");
 import Link from "@material-ui/core/Link";
-import {makeSlug} from "../constants";
-import withStyles from "@material-ui/core/styles/withStyles";
-//const client = new Client({ node: 'http://db.hottofind.com:9200' })
+import {makeSlug} from "./constants";
+import { makeStyles } from "@material-ui/core/styles";
+import * as Queries from "../utils/queries";
 
-var client = new Client({
-  // default is fine for me, change as you see fit
-  host: "elasticsearch.hottofind.com",
-  log: "trace",
-  apiVersion: "7.5"
-});
-
-const styles = theme => ({
-search: {
-  padding: "15px"
-}
-});
-
-
-class Search extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      search: "",
-      data: ""
-    };
+const useStyles = makeStyles(theme => ({
+    search: {
+        padding: "40px",
+        ".MuiFormControl-fullWidth": {
+          width: `calc('100% - 100px')`
+      },
+      },
+}));
+ 
+const Search = () => {
+  const [search, setSearch] = React.useState('');
+  const [data, setData] = React.useState([]);
+  const classes = useStyles();
+ 
+  function changeValue(event) {
+    setSearch(event.target.value);
+  }
+ 
+  function handleAdd(item) {
+    const newList = data.concat({ });
+ 
+    setList(newList);
+ 
+    setName('');
   }
 
-  render() {
+  async function getSearch(){
+    // if (this.state.search.length <= 3){
+    const posts = await Queries.searchPosts(search)
+    if(posts){
 
-    const { classes } = this.props;
+        setData(posts.data);
 
-    async function search() {
-      const posts = await client
-        .search({
-          index: "hottofind",
-          // type: '_doc', // uncomment this line if you are using {es} ≤ 6
-          body: {
-            query: {
-              match: { title: "anna" }
-            }
-          }
-        })
-        .then(result => {
-          //this.setState({ data: result })
-          // console.log(result);
-        });
+        console.log(posts)
+
     }
+  //   }
+ }
+ 
 
-    const searchPosts = async e => {
-      await client
-        .search({
-          index: "hottofind",
-          // type: '_doc', // uncomment this line if you are using {es} ≤ 6
-          body: {
-            query: {
-              match: { title: e }
-            }
-          }
-        })
-        .then(result => {
-          this.setState({ data: result.hits.hits });
-          console.log(result.hits.hits);
-        });
-    };
+ 
+  return (
 
-    const changeValue = event => {
-      this.setState({ search: event.target.value });
-      searchPosts(event.target.value);
-    };
+    <div className={classes.search}>
+    <form id="form" noValidate autoComplete="off" className={classes.form} onSubmit={e => e.preventDefault()}>
+      <TextField
+        id="search"
+        name="search"
+        label="enter search query..."
+        fullWidth
+        autoComplete="off"
+        value={search}
+        onChange={event => changeValue(event)}
+      />
+      <Button type="submit"          variant="contained"
+    className={classes.sButton} onClick={getSearch}>
+            Search
+        </Button>
+    </form>
+    <div>
+      <List component="nav" aria-label="main mailbox folders">
+          { data.length != 0 ? data.map((post) => (
+              <Link href={`/post/${makeSlug(post.title, post.id)}`} key={post.id}>
+                {" "}
+                <ListItem button>{post.title}</ListItem>
+              </Link>
+            )): ''}
+      </List>
+    </div>
+  </div>
 
-    // search();
 
-    // console.log(posts)
 
-    return (
-      <div className={classes.search}>
-        <form noValidate autoComplete="off">
-          <TextField
-            id="search"
-            name="search"
-            label="Search"
-            fullWidth
-            autoComplete="name"
-            value={this.state.search}
-            onChange={event => changeValue(event)}
-          />
-        </form>
-        <div>
-          <List component="nav" aria-label="main mailbox folders">
-            {this.state.data
-              ? this.state.data.map(post => (
-                  <Link href={`/post/${makeSlug(post._source.title, post._source.id)}`} key={post._source.id}>
-                    {" "}
-                    <ListItem button>{post._source.title}</ListItem>
-                  </Link>
-                ))
-              : ""}
-          </List>
-        </div>
-      </div>
-    );
-  }
-}
+  );
+};
 
-export default withStyles(styles)(Search);
+export default Search;
