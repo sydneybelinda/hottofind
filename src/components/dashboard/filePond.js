@@ -47,7 +47,7 @@ class FileUploader extends React.Component {
       var files = [];
       this.props.files.map(file => {
         files.push({
-          source: `https://hottofind.com/uploadedimages/${file.name}`,
+          source: `${URL}/uploadedimages/${file.name}`,
           options: {
             type: "local"
           }
