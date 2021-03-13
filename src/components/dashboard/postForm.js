@@ -9,7 +9,6 @@ import Router from "next/router";
 import React from "react";
 import { COUNTRYCODE } from "../../../config";
 import SimpleSelect from "./simpleSelect";
-import UpdateElastic from "../updateElastic"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as EmailValidator from 'email-validator';
 import {checkUrl, checkTitle} from "../../utils/queries";
@@ -244,7 +243,6 @@ class PostForm extends React.Component {
 
         this.setState({id: post.id})
 
-         UpdateElastic(this.state)
 
         Router.push("/dashboard");
       } else {

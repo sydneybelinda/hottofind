@@ -17,7 +17,7 @@ import Moment from "react-moment";
 import * as Queries from "../../utils/queries";
 import {makeSlug} from "../constants";
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteElastic from '../deleteElastic';
+
 
 function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -296,7 +296,7 @@ class Message extends React.Component {
   }
 
   deletePost = async(id) => {
-    const deleteElastic = await DeleteElastic(id)
+
     const result = await Queries.deletePost(id)
     
   }
