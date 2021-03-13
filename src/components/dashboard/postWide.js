@@ -310,12 +310,12 @@ class PostPreview extends React.Component {
     var image;
 
     if (post.files[0]) {
-      image = "/static/uploadedimages/" + post.files[0].name;
+      image = "https://hottofind.com/uploadedimages/" + post.files[0].name;
 
       // if (!fs.existsSync(image)) {
       //  image = "/uploadedimages/noimage.jpg";
       // }
-    } else image = "/static/uploadedimages/noimage.jpg";
+    } else image = "https://hottofind.com/uploadedimages/noimage.jpg";
 
     const dateToFormat = this.props.post.updatedAt;
 
