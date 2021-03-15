@@ -190,7 +190,7 @@ export default function HideAppBar(props) {
       }
 
    
-
+if (window.outerWidth > 600) {
         var windowHeight = window.outerHeight
       
          var someDiv = document.getElementById('footer');
@@ -204,7 +204,7 @@ export default function HideAppBar(props) {
       
          console.log(windowHeight - distanceToTop);
          }
-
+        }
       
       
   }
