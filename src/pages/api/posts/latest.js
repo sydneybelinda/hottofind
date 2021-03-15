@@ -1,9 +1,10 @@
 import { File, Post } from "../../../models";
+import getConfig from "../../../../confignew";
+
 
 export default async (req, res) => {
-  const {
-    query: { countrycode }
-  } = req;
+  const {config} = getConfig(req);
+  const countrycode = config.COUNTRYCODE;
 
   let where = {
     country: countrycode

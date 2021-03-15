@@ -132,7 +132,8 @@ class ProfileForm extends React.Component {
     this.setState({ error: "" });
 
     try {
-      let response = await Queries.submitProfile(this.state);
+      let response = await Queries.submitProfile(this.state, this.props.config);
+      Router.push("/profile");
       if (response.status === 200) {
         
         Router.push("/profile");
@@ -193,6 +194,7 @@ class ProfileForm extends React.Component {
                   //    files={this.props.post.files}
                   handleUploadImages={this.handleUploadImages}
                   user={this.props.userdata}
+                  config={config}
                 />
               </div>
             </Grid>

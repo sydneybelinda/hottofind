@@ -45,9 +45,9 @@ export default function SimpleSelect(props) {
           onChange={props.onChange}
           labelWidth={labelWidth}
         >
-          {props.options.map(option => {
+          {props.options.map((option, key) => {
             return (
-              <MenuItem value={option.value} key={option.value}>
+              <MenuItem value={option.value} key={key}>
                 {option.label}
               </MenuItem>
             );

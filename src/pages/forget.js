@@ -1,24 +1,20 @@
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import fetch from "isomorphic-unfetch";
-import React, { useState } from "react";
-import { login } from "../utils/auth";
+import React from "react";
 import Head from "../components/head";
-import config from "../../config";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as EmailValidator from 'email-validator';
 import {sendPasswordReset, checkEmail} from '../utils/queries';
+
 
 
 function Copyright() {
@@ -102,6 +98,12 @@ const styles = theme => ({
 
 
 class Login extends React.Component {
+  static async getInitialProps(ctx) {
+
+
+
+    return { };
+  }
   constructor(props) {
     super(props);
 
@@ -123,7 +125,7 @@ class Login extends React.Component {
         this.setState({ emailError: true, emailHelper:  "Email address is not Valid"  })
       } else {
   
-  const ech = await checkEmail(this.state.email)
+  const ech = await checkEmail(this.state.email, this.props.config)
   this.setState({disabled:false, loading: false}) 
 
       }
@@ -151,7 +153,7 @@ class Login extends React.Component {
 
     if(!this.state.emailError){
 
-    const result = await sendPasswordReset(this.state);
+    const result = await sendPasswordReset(this.state, this.props.config);
 
     // console.log("res:", res)
 
@@ -221,7 +223,8 @@ class Login extends React.Component {
 
   render(){
 
-    const { classes } = this.props;
+
+    const { classes, config } = this.props;
 
   const meta = [];
 

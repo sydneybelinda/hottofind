@@ -15,8 +15,10 @@ import FilePondPluginImageValidateSize from "filepond-plugin-image-validate-size
 import "filepond/dist/filepond.min.css";
 import React from "react";
 import { FilePond, registerPlugin } from "react-filepond";
-import { URL } from "../../../config";
+// import { URL } from "../../../config";
 import * as Queries from "../../utils/queries";
+
+
 
 // Register the plugins
 registerPlugin(
@@ -43,6 +45,7 @@ class FileUploader extends React.Component {
   }
 
   componentDidMount = () => {
+    const URL = this.props.config.URL
     if (this.props.files) {
       var files = [];
       this.props.files.map(file => {
@@ -76,6 +79,8 @@ class FileUploader extends React.Component {
   render() {
     var n;
 
+    const URL = this.props.config.URL;
+
     return (
       <div className="App">
         <FilePond
@@ -95,7 +100,7 @@ class FileUploader extends React.Component {
             remove: (source, load, error) => {
               var name = source.replace(`${URL}/static/uploadedimages/`, "");
 
-              Queries.deleteFile(name);
+              Queries.deleteFile(name,props.config);
 
               error("oh my goodness");
 

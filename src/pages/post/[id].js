@@ -14,9 +14,9 @@ import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 import { getSlug } from "../../components/constants";
 import Divider from "@material-ui/core/Divider";
-import config from "../../../config";
 import ErrorPage from "../../pages/_error";
 import { useState, useEffect } from "react";
+import getConfig from "../../../confignew";
 
 // const nl2br = require("react-nl2br");
 
@@ -282,7 +282,7 @@ function Post(props) {
   const [formDisabled, setFormDisabled] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
-  const { post } = props;
+  const { post, config } = props;
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
@@ -397,7 +397,7 @@ function Post(props) {
 
     }
 
-    let send = await Queries.sendMessage(data)
+    let send = await Queries.sendMessage(data,props.config)
 
     if (send.status == "Success") {
       const s = await success()
@@ -628,9 +628,11 @@ Post.getInitialProps = async ctx => {
   const { query } = ctx;
   const id = getSlug(query.id);
 
-  let viewCount = await Queries.incrementViewCount(id);
+  const {config} = getConfig(ctx.req) ;
 
-  let post = await Queries.getPost(id);
+  let viewCount = await Queries.incrementViewCount(id,config);
+
+  let post = await Queries.getPost(id,config);
 
   if (!post.id) {
     ctx.res.statusCode = 404;

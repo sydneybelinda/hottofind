@@ -2,7 +2,6 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import cookies from "next-cookies";
@@ -15,7 +14,7 @@ import PostWide from "../../components/dashboard/postWide";
 import Sort from "../../components/dashboard/sort";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
-import Modal from "../../components/dashboard/modal"
+import getConfig from "../../../confignew";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -223,7 +222,7 @@ function Posts(props) {
 
 
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} {...props}>
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
           {
@@ -259,7 +258,7 @@ function Posts(props) {
             {props.posts.rows.length > 0
               ? props.posts.rows.map(post => (
                   <Grid className={classes.gitem} item key={post.id} xs={12}>
-                    <PostWide post={post} user={props.user} openModal={openModal} closeModal={closeModal} />
+                    <PostWide post={post} user={props.user} openModal={openModal} closeModal={closeModal} {...props} />
                   </Grid>
                 ))
               : <div className={classes.none}>You don't have any posts</div> }
@@ -302,13 +301,14 @@ function Posts(props) {
 }
 
 Posts.getInitialProps = async ctx => {
+  const {config} = getConfig(ctx.req) ;
   const defaultDashSort = await cookies(ctx).defaultDashSort;
 
 
 
-  let user = await Queries.checkUserLogin(ctx);
+  let user = await Queries.checkUserLogin(ctx,config);
   if (user) {
-    let posts = await Queries.getUserPosts(user.username, ctx);
+    let posts = await Queries.getUserPosts(user.username, ctx, config);
     return {
       user,
       posts,

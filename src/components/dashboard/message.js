@@ -277,7 +277,7 @@ class Message extends React.Component {
   };
 
   disablePost = async(id) => {
-    const result = await Queries.disablePost(id, this.props.user.username)
+    const result = await Queries.disablePost(id, this.props.user.username, this.props.config)
 
 
     if (result.status == "Success") {
@@ -287,7 +287,7 @@ class Message extends React.Component {
   }
 
   enablePost = async(id) => {
-    const result = await Queries.enablePost(id, this.props.user.username)
+    const result = await Queries.enablePost(id, this.props.user.username,this.props.config)
 
     if (result.status == "Success") {
       this.setState({enabled: true})
@@ -297,7 +297,7 @@ class Message extends React.Component {
 
   deletePost = async(id) => {
 
-    const result = await Queries.deletePost(id)
+    const result = await Queries.deletePost(id, this.props.config)
     
   }
 

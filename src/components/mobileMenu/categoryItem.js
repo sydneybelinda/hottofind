@@ -99,7 +99,7 @@ function CategoryItem(props) {
 
   return (
     <>
-      <ListItem button onClick={handleItemClick} className={classes.cats}>
+      <ListItem button onClick={handleItemClick} className={classes.cats} key={props.categories[0].id}>
         <div className={classes.cats}>{props.categories[0].maincategory}</div>
         {itemOpen ? (
           <ExpandLess className={classes.exicon} />

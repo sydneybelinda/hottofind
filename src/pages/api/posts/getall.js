@@ -1,5 +1,5 @@
 import { File, Post, sequelize} from "../../../models";
-import {COUNTRYCODE} from "../../../../config";
+import getConfig from "../../../../confignew";
 
 const s = require('sequelize');
 

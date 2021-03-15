@@ -22,7 +22,7 @@ import {makeSlug} from "./constants"
 import Room from "@material-ui/icons/Room";
 import Link from "@material-ui/core/Link";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
-import {URL} from '../../config';
+// import {URL} from '../../config';
 import {checkURL} from "../utils/queries";
 
 const useStyles = makeStyles(theme => ({

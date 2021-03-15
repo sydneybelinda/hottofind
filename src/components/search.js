@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
       },
 }));
  
-const Search = () => {
+const Search = (props) => {
   const [search, setSearch] = React.useState('');
   const [data, setData] = React.useState([]);
   const classes = useStyles();
@@ -36,7 +36,7 @@ const Search = () => {
 
   async function getSearch(){
     // if (this.state.search.length <= 3){
-    const posts = await Queries.searchPosts(search)
+    const posts = await Queries.searchPosts(search, props.config)
     if(posts){
 
         setData(posts.data);

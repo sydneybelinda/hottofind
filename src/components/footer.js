@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import {URL, COUNTRY} from '../../config'
+//import {URL, COUNTRY} from '../../config'
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -65,12 +65,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Copyright() {
+function Copyright(props) {
   const classes = useStyles();
   return (
     <Typography variant="body2" align="center" className={classes.bottomText}>
       {"Copyright © "} {new Date().getFullYear()} -{" "}
-      <Link color="inherit" href={URL}>
+      <Link color="inherit" href="https://chicit.com.au">
          Chic IT and Website Design
       </Link>
     </Typography>
@@ -79,6 +79,7 @@ function Copyright() {
 
 const Footer = props => {
   const classes = useStyles();
+  const {URL, COUNTRY} = props;
 
   return (
     <footer className={classes.footer}>

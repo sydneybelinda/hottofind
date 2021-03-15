@@ -9,10 +9,10 @@ import Breadcrumbs from "../../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../../components/dashboard/dashboardMenu";
 import Layout from "../../../components/layout";
 import PostForm from "../../../components/dashboard/postForm";
-import config from "../../../../config";
 import { useRouter } from "next/router";
 import { withAuth } from "../../../utils/auth";
 import * as Queries from "../../../utils/queries";
+import getConfig from "../../../../confignew";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -175,7 +175,7 @@ function EditPost(props) {
 
 
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} {...props}>
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
           {
@@ -211,6 +211,7 @@ function EditPost(props) {
                     categories={props.categories}
                     citydata={props.citydata}
                     post={props.post}
+                    config={props.config}
                   />
                   </Card>
             </Grid>
@@ -225,15 +226,20 @@ function EditPost(props) {
 
 EditPost.getInitialProps = async ctx => {
 
-  let user = await Queries.checkUserLogin(ctx);
+  const {config} = getConfig(ctx.req) ;
+  let user = await Queries.checkUserLogin(ctx, config);
+
+ 
   const { COUNTRYCODE } = config;
-  let citydata = await Queries.getCities(COUNTRYCODE);
+
+  let citydata = await Queries.getCities(COUNTRYCODE,config);
+  console.log(citydata)
 
   const {query} = ctx;
 
   const { id } = ctx.query;
 
-  let post = await Queries.getPost(id);
+  let post = await Queries.getPost(id, config);
 
   return { citydata, query, post };
 };

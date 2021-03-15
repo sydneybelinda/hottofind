@@ -91,16 +91,17 @@ function Layout(props) {
         <SearchBar 
         side={side}
         drawerClose={_drawerClose}
-        
+        {...props}
         />
         <MobilePanel 
         menu={menu}
         menuClose={_menuClose}
         categories={props.categories}
         user={props.user}
+        {...props}
         />
         {props.children}
-        <Footer />
+        <Footer {...props} />
       </div>
     </>
   );

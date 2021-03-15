@@ -6,9 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Layout from "../components/layout";
 import LatestMediaCard from "../components/latestMediaCard";
-import config from "../../config";
+
 import { withAuth } from "../utils/auth";
 import * as Queries from "../utils/queries";
+import getConfig from "../../confignew";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -155,8 +156,8 @@ function Index(props) {
 
   const meta = [];
 
-  meta.title = `HotToFind ${config.COUNTRY} - Free Local Classified Ads`;
-  meta.description = `Free Local classified ad postings in ${config.COUNTRY}.  Buy, Sell, Trade in your city, instantly online.  Register for free`;
+  meta.title = `HotToFind ${props.config.COUNTRY} - Free Local Classified Ads`;
+  meta.description = `Free Local classified ad postings in ${props.config.COUNTRY}.  Buy, Sell, Trade in your city, instantly online.  Register for free`;
   return (
     <Layout meta={meta} {...props}>
       <Paper className={classes.mainFeaturedPost}>
@@ -178,9 +179,9 @@ function Index(props) {
                 <h1 className={classes.sitename}>
                   {" "}
                   <span className={classes.hot}>HotToFind</span>{" "}
-                  {config.COUNTRY}
+                  {props.config.COUNTRY}
                   <span className={classes.free}>Free Classifieds</span>{" "}
-                  <span>{props.country}</span>
+                  
                 </h1>
                 {/* </Typography> */}
                 <p className={classes.subtext}>
@@ -218,6 +219,7 @@ function Index(props) {
                     sm={4}
                     md={3}
                     lg={2}
+                    {...props}
                   />
                   :
                   ''
@@ -233,14 +235,14 @@ function Index(props) {
               <div className={classes.testimonial}>
                 <div className="classes.content">
                   <p className="classes.description">
-                    HotToFind {config.COUNTRY} is a Free online general purpose
+                    HotToFind {props.config.COUNTRY} is a Free online general purpose
                     classifieds and listing site. Browse free online classifieds
                     and listing from various categories posted by users in{" "}
-                    {config.COUNTRY}. Buy / Sell / Trade anything online for
+                    {props.config.COUNTRY}. Buy / Sell / Trade anything online for
                     free. <br />
                     <br /> Sign up and post your ads instantly! <br /> <br />{" "}
                     <br />
-                    NOTE: {config.URL} is not responsible for any of the ads
+                    NOTE: {props.config.URL} is not responsible for any of the ads
                     posted online so browse carefully.
                   </p>
                   <div className="classes.infoText">
@@ -248,7 +250,7 @@ function Index(props) {
                       <a href="#">Lisa</a>
                     </h2>
                     <h4>
-                      <a href="#">CEO of HotToFind {config.COUNTRY}</a>
+                      <a href="#">CEO of HotToFind {props.config.COUNTRY}</a>
                     </h4>
                     <br></br><br></br>
                 <a href="https://sydneylawsolutions.com.au">Lawyers Sydney</a>
@@ -266,12 +268,12 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async (req, ctx) => {
-  const { API, COUNTRYCODE } = config;
+Index.getInitialProps = async (ctx) => {
+  const {config} = getConfig(ctx.req) ;
 
   //const host  = req.headers.host || window.location.hostname
 
-  const posts = await Queries.getlatest(COUNTRYCODE);
+  const posts = await Queries.getlatest(config);
 
   return { posts: posts };
 };

@@ -1,5 +1,5 @@
 import ImageGallery from "react-image-gallery";
-import { URL } from "../../config";
+//import { URL } from "../../config";
 import { checkUrl} from "../utils/queries";
 
 async function imageExists(image_url){

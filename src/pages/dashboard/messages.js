@@ -2,7 +2,6 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import cookies from "next-cookies";
@@ -15,7 +14,6 @@ import Message from "../../components/dashboard/message";
 import Sort from "../../components/dashboard/sort";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
-import Modal from "../../components/dashboard/modal"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -209,7 +207,7 @@ function Messages(props) {
 
 
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} {...props}>
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
           {
@@ -291,12 +289,12 @@ function Messages(props) {
 
 Messages.getInitialProps = async ctx => {
   const defaultMessageSort = await cookies(ctx).defaultMessageSort;
+  const {config} = getConfig(ctx.req) ;
 
 
-
-  let user = await Queries.checkUserLogin(ctx);
+  let user = await Queries.checkUserLogin(ctx, config);
   if (user) {
-    let messages = await Queries.getUserMessages(user.username, ctx);
+    let messages = await Queries.getUserMessages(user.username, ctx, config);
 
     return {
       user,

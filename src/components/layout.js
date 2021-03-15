@@ -7,6 +7,7 @@ import MobilePanel from './mobilePanel';
 
 
 
+
 const useStyles = makeStyles(theme => ({
   wrap: {
 
@@ -26,6 +27,8 @@ function Layout(props) {
   const classes = useStyles();
   const [side, setSide] = React.useState(false);
   const [menu, setMenu] = React.useState(false);
+
+
 
   const _toggleDrawer = e => {
       setSide(true)
@@ -100,6 +103,8 @@ function Layout(props) {
         <SearchBar 
         side={side}
         drawerClose={_drawerClose}
+        {...props}
+        
         />
         <MobilePanel 
         menu={menu}
@@ -108,7 +113,7 @@ function Layout(props) {
         categories={props.categories}
         />
         {props.children}
-        <Footer />
+        <Footer {...props} />
       </div>
     </>
   );

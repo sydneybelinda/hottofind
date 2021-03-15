@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState } from "react";
 import Head from "../components/head";
-import config from "../../config";
 import { login } from "../utils/auth";
 import {checkUsername, checkEmail} from "../utils/queries";
 import * as EmailValidator from 'email-validator';
@@ -84,6 +83,13 @@ const styles = theme => ({
 
 
 class Register extends React.Component {
+  static async getInitialProps(ctx) {
+
+
+
+    return { };
+  }
+
   constructor(props) {
     super(props);
 
@@ -247,7 +253,7 @@ submitPost = async (e) => {
   
 render() {
 
-  const { classes } = this.props;
+  const { classes, config } = this.props;
 
 
   const meta = [];

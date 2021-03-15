@@ -191,12 +191,12 @@ class LocationMenu extends React.Component {
               label="ALL CITIES"
               key="ALL CITIES"
             />
-            {this.props.cities.map(city => (
+            {this.props.cities.map((city,key) => (
               <FormControlLabel
                 value={city.city.toLowerCase()}
                 control={<StyledRadio />}
                 label={city.city}
-                key={city.city}
+                key={key}
               />
             ))}
           </RadioGroup>

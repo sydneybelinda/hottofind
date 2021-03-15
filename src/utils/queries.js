@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import nextCookie from "next-cookies";
-import { URL, API, COUNTRYCODE } from "../../config";
+//import { URL, API, COUNTRYCODE } from "../../config";
 import Router from "next/router";
 import cookies from 'next-cookies'
 import Error from 'next/error'
@@ -17,7 +17,8 @@ export const makeSerial = (length) => {
   return result;
 }
 
-export const deletePost = async id => {
+export const deletePost = async (id,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `/api/post/delete`;
 
   try {
@@ -45,7 +46,8 @@ export const deletePost = async id => {
   }
 };
 
-export const disablePost = async (id,username) => {
+export const disablePost = async (id,username,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `/api/post/disable`;
 
   try {
@@ -68,7 +70,8 @@ export const disablePost = async (id,username) => {
   }
 };
 
-export const sendMessage = async (data) => {
+export const sendMessage = async (data,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `/api/messages/postmessage`;
 
   try {
@@ -91,7 +94,8 @@ export const sendMessage = async (data) => {
   }
 };
 
-export const enablePost = async (id,username) => {
+export const enablePost = async (id,username,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `/api/post/enable`;
 
   try {
@@ -115,7 +119,8 @@ export const enablePost = async (id,username) => {
 };
 
 
-export const deleteFile = async name => {
+export const deleteFile = async (name,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `/api/dashboard/file/delete`;
 
   try {
@@ -143,7 +148,8 @@ export const deleteFile = async name => {
   }
 };
 
-export const getUserPosts = async (username,ctx) => {
+export const getUserPosts = async (username,ctx,config) => {
+  const {API, COUNTRYCODE} = config
 
   const sort = cookies(ctx).defaultDashSort;
   const res = await fetch(`${API}/posts/byuser/${username}?sort=${sort}`);
@@ -152,7 +158,8 @@ export const getUserPosts = async (username,ctx) => {
   return posts;
 };
 
-export const getUserMessages = async (username,ctx) => {
+export const getUserMessages = async (username,ctx,config) => {
+  const {API, COUNTRYCODE} = config
 
   const sort = cookies(ctx).defaultMessageSort;
   const res = await fetch(`${API}/messages/byuser/${username}?sort=${sort}`);
@@ -161,7 +168,8 @@ export const getUserMessages = async (username,ctx) => {
   return messages;
 };
 
-export const checkUserLogin = async ctx => {
+export const checkUserLogin = async (ctx,config) => {
+  const {API, COUNTRYCODE} = config
   const { token } = nextCookie(ctx);
 
   const apiUrl = `${API}/profile`;
@@ -195,7 +203,8 @@ export const checkUserLogin = async ctx => {
   }
 };
 
-export const getPost = async id => {
+export const getPost = async (id,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/post/id/${id}`;
   const data = await fetch(url);
  // console.log('data: ', data.Response)
@@ -208,7 +217,8 @@ export const getPost = async id => {
 
 };
 
-export const searchPosts = async search => {
+export const searchPosts = async (search,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/posts/search?search=${search}`;
   const data = await Axios.get(url);
  // console.log('data: ', data.Response)
@@ -219,42 +229,48 @@ export const searchPosts = async search => {
       return data;
 };
 
-export const getCities = async countrycode => {
+export const getCities = async (countrycode,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/city/get/${countrycode}`;
   const data = await fetch(url);
   let cities = await data.json();
   return cities;
 };
 
-export const getAllCities = async () => {
+export const getAllCities = async (config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/city/get`;
   const data = await fetch(url);
   let cities = await data.json();
   return cities;
 };
 
-export const getCategories = async () => {
+export const getCategories = async (config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/category/get`;
   const data = await fetch(url);
   let categories = await data.json();
   return categories;
 };
 
-export const getlatest = async c => {
-  const url = `${API}/posts/latest?countrycode=${c}`;
+export const getlatest = async (config) => {
+  const {API, COUNTRYCODE} = config
+  const url = `${API}/posts/latest?countrycode=${COUNTRYCODE}`;
   const data = await fetch(url);
   let posts = await data.json();
 
   return posts;
 };
 
-export const getPage = async (ctx) => {
-
+export const getPage = async (ctx,config) => {
+  
+  const {API, COUNTRYCODE} = config
 
   const sort = cookies(ctx).defaultSort;
   const view = cookies(ctx).defaultView;
 
   const {query} = ctx
+  
 
   const { slug, city, page = 1 } = query 
 
@@ -294,7 +310,8 @@ export const getPage = async (ctx) => {
   };
 }
 
-export const submitProfile = async e => {
+export const submitProfile = async (e, config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/dashboard/profile/edit`;
 
   const data = await fetch(url, {
@@ -308,7 +325,8 @@ export const submitProfile = async e => {
   return submit;
 };
 
-export const uploadProfilePhoto = async e => {
+export const uploadProfilePhoto = async (e, config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/dashboard/profile/changeavatar`;
 
   try {
@@ -333,7 +351,8 @@ export const uploadProfilePhoto = async e => {
   }
 };
 
-export const deleteAvatar = async e => {
+export const deleteAvatar = async (e,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/dashboard/profile/deleteavatar`;
 
   try {
@@ -358,7 +377,8 @@ export const deleteAvatar = async e => {
   }
 };
 
-export const incrementViewCount = async c => {
+export const incrementViewCount = async (c,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/post/increment/${c}`;
   const data = await fetch(url);
   let post = await data.json();
@@ -366,7 +386,8 @@ export const incrementViewCount = async c => {
   return post;
 };
 
-export const getAllPosts = async c => {
+export const getAllPosts = async (c,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/posts/getall`;
   const data = await fetch(url);
   let posts = await data.json();
@@ -394,29 +415,32 @@ export const checkUrl = async url => {
   return data;
 };
 
-export const checkUsername = async u => {
+export const checkUsername = async (u,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/user/username/${u}`;
   const data = await fetch(url);
   let users = await data.json();
   return users;
 };
 
-export const checkEmail = async u => {
+export const checkEmail = async (u,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/user/email/${u}`;
   const data = await fetch(url);
   let users = await data.json();
   return users;
 };
 
-export const checkTitle = async u => {
+export const checkTitle = async (u,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/dashboard/post/checktitle/${u}`;
   const data = await fetch(url);
   let posts = await data.json();
   return posts;
 };
 
-export const sendPasswordReset = async d => {
-    
+export const sendPasswordReset = async (d,config) => {
+  const {API, COUNTRYCODE} = config
 
   const serial = await makeSerial(30)
 
@@ -479,7 +503,8 @@ export const sendPasswordReset = async d => {
 
 }
 
-export const checkSerial = async u => {
+export const checkSerial = async (u,config) => {
+  const {API, COUNTRYCODE} = config
   let data = [];
   let user = [];
   const url = `${API}/user/serial/${u}`;
@@ -490,7 +515,8 @@ export const checkSerial = async u => {
   return user;
 };
 
-export const changePassword = async e => {
+export const changePassword = async (e,config) => {
+  const {API, COUNTRYCODE} = config
   const url = `${API}/user/changepassword`;
 
   const data = await fetch(url, {

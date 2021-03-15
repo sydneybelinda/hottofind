@@ -227,6 +227,7 @@ function NestedList(props) {
             button
             onClick={handleAccountClick}
             className={classes.cats}
+            key='0'
           >
             <div className={classes.cats}>
               <AccountCircle />
@@ -243,19 +244,19 @@ function NestedList(props) {
             <List component="div" disablePadding>
               <div className={classes.menuItem}>
                 <Link href={"/dashboard/newpost"}>
-                  <ListItem button className={classes.nested}>
+                  <ListItem button className={classes.nested}  key='1'>
                     <div className={classes.logbuts}>Create New Post</div>
                   </ListItem>
                 </Link>
                 <Link href={"/dashboard"}>
-                  <ListItem button className={classes.nested}>
+                  <ListItem button className={classes.nested}  key='2'>
                     <div className={classes.logbuts}>My Posts</div>
                   </ListItem>
                 </Link>
               </div>
               <div className={classes.menuItem}>
                 <Link href={"/logout"}>
-                  <ListItem button className={classes.nested}>
+                  <ListItem button className={classes.nested}  key='3'>
                     <div className={classes.logbuts}>Logout</div>
                   </ListItem>
                 </Link>
@@ -265,12 +266,12 @@ function NestedList(props) {
         </>
       ) : (
         <>
-          <ListItem button className={classes.lcats}>
+          <ListItem button className={classes.lcats}  key='4'>
             <Link href={"/login"}>
               <div className={classes.logbuts}>Login</div>
             </Link>
           </ListItem>
-          <ListItem button className={classes.rcats}>
+          <ListItem button className={classes.rcats}  key='5'>
             <Link href={"/register"}>
               <div className={classes.logbuts}>Register</div>
             </Link>
@@ -404,7 +405,8 @@ function NestedList(props) {
       <CategoryItem
         categories={props.categories.filter(
           item => item.catindex === cat.catindex
-        )}
+        )  }
+        key={key}
       />
         )
         })

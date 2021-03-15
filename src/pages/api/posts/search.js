@@ -1,9 +1,12 @@
 import * as post from "models/post";
 import { Post } from "../../../models";
-import {COUNTRYCODE} from "../../../../config"
+import getConfig from "../../../../confignew";
 const { Op } = require("sequelize");
 
 export default async (req, res) => {
+  const {config} = getConfig(req);
+  const countrycode = config.COUNTRYCODE;
+
 
     const posts = [];
     const rows = [];
@@ -13,7 +16,7 @@ export default async (req, res) => {
       } = req;
 
 
-    let where = { country: COUNTRYCODE}
+    let where = { country: countrycode}
       let d = {
         [Op.or]: [
           {  description: {[Op.like]: '%' + search + '%'  } },

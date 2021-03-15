@@ -1,6 +1,14 @@
+import getConfig from "../../../../confignew";
+
+
 import { File, Post } from "../../../models";
 
 export default async (req, res) => {
+
+  const {config} = getConfig(req);
+  const countrycode = config.COUNTRYCODE;
+
+
 
   async function getSort(p) {
         switch(p) {
@@ -29,7 +37,7 @@ export default async (req, res) => {
 
 
   const {
-    query: { catindex, keyindex, countrycode, city, sort, page = 1 }
+    query: { catindex, keyindex, city, sort, page = 1 }
   } = req;
 
   const limit = 50;

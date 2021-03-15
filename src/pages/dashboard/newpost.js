@@ -1,6 +1,5 @@
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,7 +8,7 @@ import Breadcrumbs from "../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../components/dashboard/dashboardMenu";
 import Layout from "../../components/layout";
 import PostForm from "../../components/dashboard/postForm";
-import config from "../../../config";
+import getConfig from "../../../confignew";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 
@@ -169,13 +168,16 @@ const useStyles = makeStyles(theme => ({
 function NewPost(props) {
   const user = props.user;
   const post = [];
+  const {config} = props;
 
   const classes = useStyles();
+
+  
 
 
 
   return (
-    <Layout user={props.user} categories={props.categories}>
+    <Layout user={props.user} categories={props.categories} {...props}>
       <Paper className={classes.mainFeaturedPost}>
         <Container maxWidth="xl">
           {
@@ -213,6 +215,7 @@ function NewPost(props) {
                     categories={props.categories}
                     citydata={props.citydata}
                     post={post}
+                    config={config}
                   />
                   </Card>
             </Grid>
@@ -226,10 +229,12 @@ function NewPost(props) {
 }
 
 NewPost.getInitialProps = async ctx => {
-  let user = await Queries.checkUserLogin(ctx);
-
+  const {config} = getConfig(ctx.req) ;
+  let user = await Queries.checkUserLogin(ctx,config);
+ 
   const { COUNTRYCODE } = config;
-  let citydata = await Queries.getCities(COUNTRYCODE);
+
+  let citydata = await Queries.getCities(COUNTRYCODE, config);
 
   return { citydata };
 };

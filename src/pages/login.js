@@ -15,7 +15,7 @@ import fetch from "isomorphic-unfetch";
 import React, { useState } from "react";
 import { login } from "../utils/auth";
 import Head from "../components/head";
-import config from "../../config";
+// import config from "../../config";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Copyright() {
@@ -85,6 +85,14 @@ const styles = theme => ({
 
 
 class Login extends React.Component {
+  static async getInitialProps(ctx) {
+
+
+
+    return { };
+  }
+
+
   constructor(props) {
     super(props);
 
@@ -176,7 +184,9 @@ console.log('submit')
 
   render(){
 
-    const { classes } = this.props;
+    const { classes, config } = this.props;
+
+    
 
   const meta = [];
 

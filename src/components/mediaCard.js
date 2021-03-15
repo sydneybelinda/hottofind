@@ -1,29 +1,17 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import CardHeader from '@material-ui/core/CardHeader';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
+import Link from "@material-ui/core/Link";
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
+import Room from "@material-ui/icons/Room";
+import React from 'react';
 import Img from "react-image";
 import Moment from "react-moment";
-import {makeSlug} from "./constants"
-import Room from "@material-ui/icons/Room";
-import Link from "@material-ui/core/Link";
-import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
-import {URL} from '../../config';
-import {checkURL} from "../utils/queries";
+import { makeSlug } from "./constants";
 
 const useStyles = makeStyles(theme => ({
   root: {

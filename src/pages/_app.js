@@ -7,22 +7,33 @@ import theme from "../components/theme";
 import * as Queries from "../utils/queries";
 import cookies from 'next-cookies';
 import ReactGA from 'react-ga';
-import {GA} from '../../config';
+//import {GA} from '../../config';
 
-
+import getConfig from "../../confignew";
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-  
 
+    const {config} = getConfig(ctx.req) ;
 
+    // const router = useRouter();
+
+    // console.log(router)
 
     let pageProps = {};
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
       //   pageProps.config = config
-      const categories = await Queries.getCategories();
+      const categories = await Queries.getCategories(config);
+
+     
+
+      
+     // console.log(config);
+
+      pageProps.config = config;
+    
    
 
     if (categories.length != 0){
@@ -39,12 +50,15 @@ export default class MyApp extends App {
       jssStyles.parentElement.removeChild(jssStyles);
     }
 
-    ReactGA.initialize(GA);
+    ReactGA.initialize(this.props.pageProps.config.GA);
 ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
     const { Component, pageProps } = this.props;
+
+ 
+
 
     return (
       <React.Fragment>

@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import React from "react";
-import { COUNTRYCODE } from "../../../config";
 import SimpleSelect from "./simpleSelect";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as EmailValidator from 'email-validator';
@@ -88,6 +87,8 @@ class PostForm extends React.Component {
 
     const post = this.props.post || [];
 
+    // const config = this.props.config;
+
     this.ref1 = React.createRef();
 
     this.state = {
@@ -95,12 +96,12 @@ class PostForm extends React.Component {
       owner: post.owner || user.username,
       firstname: post.firstname || "",
       lastname: post.lastname || "",
-      country: post.country || COUNTRYCODE,
+      country: post.country || this.props.config.COUNTRYCODE,
       age: post.age || "",
       email: post.email || user.email,
       catindex: post.catindex || "",
       keyindex: post.keyindex || "",
-      cities: post.cities || "",
+      cities: post.cities || '',
       location: post.location || "",
       title: post.title || "",
       phone: post.phone || "",
@@ -146,6 +147,8 @@ class PostForm extends React.Component {
   }
 
   componentDidMount = () => {
+   
+
     var mc = [];
     var mainCats = [];
     this.props.categories.map(cat => {
@@ -169,11 +172,14 @@ class PostForm extends React.Component {
     }
 
     var cities = [];
+  
     this.props.citydata.map(ct => {
       cities.push({ label: ct.city, value: ct.city.toLowerCase() });
     });
 
     this.setState({ citydata: cities });
+
+    
   };
 
   _handleChangeCity = e => {
@@ -422,7 +428,7 @@ class PostForm extends React.Component {
   }
 
   checkDup = async e =>{
-    var tc = await checkTitle(`${this.state.title}-${this.props.user.username}`)
+    var tc = await checkTitle(`${this.state.title}-${this.props.user.username}`, this.props.config)
 
     if(tc.length > 0){
       this.setState({ error: "Oops!  Looks like you have already posted this."})
@@ -495,7 +501,11 @@ class PostForm extends React.Component {
 
     const post = this.props.post || [];
 
-    const { classes } = this.props;
+    const { classes, config } = this.props;
+
+    console.log(this.state.cities);
+
+
 
     return (
       <React.Fragment>
@@ -517,6 +527,7 @@ class PostForm extends React.Component {
                   setRef={ref => (this.ref1 = ref)}
                   files={this.props.post.files}
                   handleUploadImages={this.handleUploadImages}
+                  config={config}
                 />
               </div>
             </Grid>
@@ -611,7 +622,7 @@ class PostForm extends React.Component {
                     fullWidth
                     autoComplete="price"
                     value={this.state.price}
-                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    startadornment={<InputAdornment position="start">$</InputAdornment>}
                     variant="outlined"
                     onChange={event =>
                       this.setState({ price: event.target.value, priceError: false, priceHelper: '' })

@@ -82,7 +82,7 @@ class UserPosts extends React.Component {
                   {/* <a href="#" onClick={() => del(post.id)} value={post.id}> */}
                   <a
                     href="#"
-                    onClick={() => Queries.deletePost(post.id)}
+                    onClick={() => Queries.deletePost(post.id, this.props.config)}
                     value={post.id}
                   >
                     delete

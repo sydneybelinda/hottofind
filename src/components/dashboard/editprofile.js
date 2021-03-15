@@ -109,7 +109,7 @@ const EditProfile = props => {
                 minHeight: "310px"
               }}
             >
-              <UploadComponent user={user} />
+              <UploadComponent user={user} config={props.config} />
             </div>
           </Grid>
           <Grid item xs={12} sm={9}>

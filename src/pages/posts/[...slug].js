@@ -11,11 +11,11 @@ import Layout from "../../components/layout";
 import LocationMenu from "../../components/LocationMenu";
 import MediaCard from "../../components/mediaCard";
 import PostWide from "../../components/postWide";
-import config from "../../../config";
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
 import Sort from "../../components/sort";
 import cookies from "next-cookies";
+import getConfig from "../../../confignew";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -177,7 +177,7 @@ const useStyles = makeStyles(theme => ({
 
 function Posts(props) {
 
-
+const {config} = props;
 
 
   const [data, setData] = useState({
@@ -404,7 +404,11 @@ function Posts(props) {
 }
 
 Posts.getInitialProps = async ctx => {
-  const data = await Queries.getPage(ctx);
+
+  const {config} = getConfig(ctx.req) ;
+
+
+  const data = await Queries.getPage(ctx,config);
 
   const defaultSort = await cookies(ctx).defaultSort;
   const defaultView = await cookies(ctx).defaultView;

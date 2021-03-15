@@ -103,7 +103,7 @@ class FileUploader extends React.Component {
                   name: response,
                   username: this.props.user.username
                 };
-                Queries.uploadProfilePhoto(file);
+                Queries.uploadProfilePhoto(file, this.props.config);
               },
               onerror: response => response.data,
               ondata: formData => {
@@ -125,7 +125,7 @@ class FileUploader extends React.Component {
               };
 
               // Should somehow send `source` to server so server can remove the file with this source
-              Queries.deleteAvatar(file);
+              Queries.deleteAvatar(file,this.props.config);
               // Can call the error method if something is wrong, should exit after
               error("oh my goodness");
 

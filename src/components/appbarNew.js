@@ -152,14 +152,24 @@ export default function HideAppBar(props) {
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar color="inherit">
+        <AppBar color="inherit" >
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={props.toggleMenu}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}>
           <a href="/" className={classes.hottofind}>HotToFind</a>
-          </Typography>
+          </Typography> */}
+<Typography variant="h6" className={classes.title}>
+          <Link href="/">
+                <a className={classes.link}>
+                  {/* <Typography className={classes.title} variant="h6" noWrap>
+                    HotToFind
+                  </Typography> */}
+                   <img src="/images/logo.png" alt={`hotToFind Local Classifieds`}/>
+                </a>
+              </Link>
+              </Typography>
           <Link href="/dashboard/newpost">
                   <IconButton aria-label="New Post" aria-haspopup="true" className={classes.butNewB}>
                     <AddCircleOutlineIcon />

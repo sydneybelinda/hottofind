@@ -66,7 +66,7 @@ export default function TemporaryDrawer(props) {
     //  onKeyDown={props.drawerClose}
     >
 
-      <Search drawerClose={props.drawerClose} />
+      <Search drawerClose={props.drawerClose} {...props}/>
       {/* <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>

@@ -1,24 +1,19 @@
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import fetch from "isomorphic-unfetch";
-import React, { useState } from "react";
-import { login } from "../utils/auth";
+import React from "react";
 import Head from "../components/head";
-import config from "../../config";
+
 import CircularProgress from '@material-ui/core/CircularProgress';
-import * as EmailValidator from 'email-validator';
-import {sendPasswordReset, checkSerial, changePassword} from '../utils/queries';
+import {checkSerial, changePassword} from '../utils/queries';
 import ErrorPage from "./_error";
 
 function Copyright() {
@@ -174,7 +169,7 @@ class Reset extends React.Component {
 
   render(){
 
-    const { classes, query } = this.props;
+    const { classes, query, config } = this.props;
 
     if (!query.serial) {
         return (

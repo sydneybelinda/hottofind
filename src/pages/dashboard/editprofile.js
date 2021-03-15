@@ -9,9 +9,11 @@ import Breadcrumbs from "../../components/dashboard/breadcrumbs";
 import DashboardMenu from "../../components/dashboard/dashboardMenu";
 import Layout from "../../components/layout";
 import ProfileForm from "../../components/dashboard/profileForm";
-import config from "../../../config";
+
 import { withAuth } from "../../utils/auth";
 import * as Queries from "../../utils/queries";
+import getConfig from "../../../confignew";
+
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -202,6 +204,7 @@ function EditProfile(props) {
                     user={props.user}
                     categories={props.categories}
                     citydata={props.citydata}
+                    config={props.config}
                   />
                   </Card>
             </Grid>
@@ -214,10 +217,14 @@ function EditProfile(props) {
   );
 }
 
-EditProfile.getInitialProps = async ctx => {
-  let userdata = await Queries.checkUserLogin(ctx);
+EditProfile.getInitialProps = async (ctx) => {
+  const {config} = getConfig(ctx.req) ;
+
+  console.log(config)
+
+  let userdata = await Queries.checkUserLogin(ctx, config);
   if (userdata) {
-    let citydata = await Queries.getAllCities();
+    let citydata = await Queries.getAllCities(config);
 
     return { userdata, citydata };
   }

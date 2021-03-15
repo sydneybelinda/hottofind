@@ -279,9 +279,10 @@ export default function PrimarySearchAppBar(props) {
             <Toolbar className={classes.tb}>
             <Link href="/">
                 <a className={classes.link}>
-                  <Typography className={classes.title} variant="h6" noWrap>
+                  {/* <Typography className={classes.title} variant="h6" noWrap>
                     HotToFind
-                  </Typography>
+                  </Typography> */}
+                   <img src="/images/logo.png" alt={`hotToFind Local Classifieds ${props.config.COUNTRY}`}/>
                 </a>
               </Link>
              
