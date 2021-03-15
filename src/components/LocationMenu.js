@@ -1,7 +1,6 @@
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { withRouter } from 'next/router';
+import Divider from "@material-ui/core/Divider";
 import React from 'react';
 
 const useStyles = makeStyles(theme => ({
@@ -59,7 +59,8 @@ const useStyles = makeStyles(theme => ({
 
 const styles = theme => ({
   locHead: {
-    marginBottom: "15px"
+    marginBottom: 0,
+    color: "#828283"
   },
   butOpen: {
     padding: "5px 5px",
@@ -71,9 +72,10 @@ const styles = theme => ({
       }
   },
   card: {
-    minWidth: 275,
+    boxShadow: 'none',
+    background: '#f3f3f3',
     transition: ".3s ease-in-out",
-    height: "63px",
+    height: "33px",
     [theme.breakpoints.up("sm")]: {
     height: "100%"
     }
@@ -90,6 +92,16 @@ const styles = theme => ({
   pos: {
     marginBottom: 12
   },
+  cc: {
+    padding: 0
+  },
+  fc: {
+    marginTop: 15,
+    width: "100%"
+  },
+  lb:{
+    color: '#239189'
+  }
 
 })
 
@@ -150,7 +162,9 @@ class LocationMenu extends React.Component {
     }
 
     if (city == "ALL CITIES") {
-      var href = "/posts/" + this.props.catindex + "/" + this.props.keyindex;
+      var href = "/posts/"; 
+      if(this.props.catindex) {href += `${this.props.catindex}`}
+      if(this.props.keyindex) {href +=  `/${this.props.keyindex}`}
     }
 
     router.push(href);
@@ -161,23 +175,24 @@ class LocationMenu extends React.Component {
     console.log("card: ", this.card)
 
 
-      if(this.card.current.offsetHeight == "63"){
+      if(this.card.current.offsetHeight == "33"){
         this.card.current.style.height = "100%"
       } else {
-        this.card.current.style.height = "63px"
+        this.card.current.style.height = "33px"
       }
   };
 
   return (
     <Card className={classes.card} ref={this.card}>
-      <CardContent>
+      <CardContent className={classes.cc}>
         <Typography variant="h5" component="h2" className={classes.locHead}>
           LOCATION <Button variant="outlined" className={classes.butOpen} onClick={handleMenuChange}>      
           <MenuIcon fontSize="small" />
    
         </Button>  
         </Typography>
-        <FormControl component="fieldset">
+        <Divider />
+        <FormControl component="fieldset" className={classes.fc}>
           <RadioGroup
             defaultValue="ALL CITIES"
             aria-label="cities"
@@ -190,13 +205,15 @@ class LocationMenu extends React.Component {
               control={<StyledRadio />}
               label="ALL CITIES"
               key="ALL CITIES"
+              className={classes.lb}
             />
-            {this.props.cities.map((city,key) => (
+            {this.props.cities.map(city => (
               <FormControlLabel
                 value={city.city.toLowerCase()}
                 control={<StyledRadio />}
                 label={city.city}
-                key={key}
+                key={city.city}
+                className={classes.lb}
               />
             ))}
           </RadioGroup>

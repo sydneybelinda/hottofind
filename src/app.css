@@ -8,3 +8,22 @@
     transform: translateY(-64px);
     transition: none !important;
 }
+
+.side-sticky{
+    position: fixed;
+    top: 40px;
+}
+
+footer {
+    z-index: 1000;
+    position: relative;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .side-sticky{
+        position: relative;
+        top: 0px;
+    }
+
+}

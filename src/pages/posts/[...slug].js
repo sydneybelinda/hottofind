@@ -128,8 +128,7 @@ const useStyles = makeStyles(theme => ({
   },
   left: {
     [theme.breakpoints.up("sm")]: {
-      display: "block",
-      width: "350px",
+      width: "200px",
       height: "100%"
     },
     
@@ -142,7 +141,7 @@ const useStyles = makeStyles(theme => ({
   },
   right: {
     [theme.breakpoints.up("sm")]: {
-      width: "calc(100% - 350px)"
+      // width: "calc(100% - 350px)"
     },
     width: "100%",
     padding: 5
@@ -172,6 +171,16 @@ const useStyles = makeStyles(theme => ({
     padding: 40,
     textAlign: "center",
     width: "100%"
+    },
+    flex: {   
+       [theme.breakpoints.up("sm")]: {
+        display: 'flex'
+      },
+      display: 'block'
+    },
+    filter: {
+      padding: 15,
+      marginTop: 20
     }
 }));
 
@@ -320,8 +329,9 @@ const {config} = props;
       </Paper>
       <Breadcrumbs query={props.query} categories={props.categories} />
       <Container maxWidth="xl" className={classes.cont}>
-        <div className={classes.left}>
-          <div className={classes.filter}>
+        <div className={classes.flex}>
+                  <div className={classes.left}>
+          <div id="sidemenu" className={classes.filter}>
             <LocationMenu
               cities={props.cities}
               catindex={catindex}
@@ -397,6 +407,7 @@ const {config} = props;
               ""
             )}
           </div>
+        </div>
         </div>
       </Container>
     </Layout>

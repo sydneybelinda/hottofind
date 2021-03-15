@@ -173,6 +173,7 @@ export default function HideAppBar(props) {
         document.body.scrollTop ||
         0;
     const header = document.getElementById('top-menu');
+    const sidemenu = document.getElementById('sidemenu');
     if (header !== null) {
         if (number >= 300) {
             header.classList.add('header-sticky');
@@ -180,6 +181,13 @@ export default function HideAppBar(props) {
             header.classList.remove('header-sticky');
         }
     }
+    if (sidemenu !== null) {
+      if (number >= 300) {
+          sidemenu.classList.add('side-sticky');
+      } else {
+          sidemenu.classList.remove('side-sticky');
+      }
+  }
 };
 useEffect(() => {
     if (process.browser) {
