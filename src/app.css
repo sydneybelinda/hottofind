@@ -1,0 +1,10 @@
+.header{
+    transform: none;
+    transition: none!important;
+    position: relative !important;
+}
+.header-sticky{ 
+    position: fixed !important;
+    transform: translateY(-64px);
+    transition: none !important;
+}

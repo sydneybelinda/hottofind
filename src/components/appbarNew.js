@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -81,6 +81,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
+  },
+  closedMenu: {
+    display: "none"
   }
 }));
 
@@ -96,15 +99,50 @@ const mainCats = [
 ];
 
 
+
+const Header = () => {
+
+  return (
+      <header
+          className="header header--mobile header--mobile-product"
+          id="header-mobile"
+          data-sticky="true">
+          <div className="navigation--mobile">
+              <div className="navigation__left">
+                  <Link href="/shop">
+                      <a href="/" className="header__back">
+                          <i className="icon-chevron-left"></i>
+                          <strong>Back to previous</strong>
+                      </a>
+                  </Link>
+              </div>
+              <div className="navigation__right">
+                  <MobileHeaderActions />
+              </div>
+          </div>
+      </header>
+  );
+};
+
+
+
+
 function HideOnScroll(props) {
   const { children, window } = props;
+  const [hide, setHide] = useState(null);
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
   // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
+  //console.log('trigger')
+ // console.log(trigger)
+  
+ 
+
+
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide appear={false} direction="down" in={!trigger} style={trigger ? {height:0, minHeght:0, opacity:0, overflow: "hidden", transition: `opacity 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;`}: ''}>
       {children}
     </Slide>
   );
@@ -119,11 +157,37 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
+
+
+
 export default function HideAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const stickyHeader = () => {
+    let number =
+        window.pageXOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+    const header = document.getElementById('top-menu');
+    if (header !== null) {
+        if (number >= 300) {
+            header.classList.add('header-sticky');
+        } else {
+            header.classList.remove('header-sticky');
+        }
+    }
+};
+useEffect(() => {
+    if (process.browser) {
+        window.addEventListener('scroll', stickyHeader);
+    }
+}, []);
+
+  
   const open = Boolean(anchorEl);
 
   const handleChange = event => {
@@ -148,12 +212,15 @@ export default function HideAppBar(props) {
     logout();
   };
 
+
+
   return (
     <React.Fragment>
       <CssBaseline />
-      <HideOnScroll {...props}>
-        <AppBar color="inherit" >
-        <Toolbar>
+      
+        <AppBar color="inherit"  id="top-menu" className="header" >
+        {/* <HideOnScroll {...props}> */}
+        <Toolbar >
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={props.toggleMenu}>
             <MenuIcon />
           </IconButton>
@@ -237,6 +304,7 @@ export default function HideAppBar(props) {
         <span className={classes.divider}>-</span>
          <CountryMenu />
         </Toolbar>
+        {/* </HideOnScroll> */}
         <Toolbar
         className={classes.bottomTool}
         >
@@ -253,9 +321,10 @@ export default function HideAppBar(props) {
                 );
               })}
         </Toolbar>
+
         </AppBar>
-      </HideOnScroll>
-      <Toolbar />
+     
+
 
     </React.Fragment>
   );
