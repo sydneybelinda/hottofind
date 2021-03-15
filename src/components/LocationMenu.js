@@ -77,7 +77,7 @@ const styles = theme => ({
     transition: ".3s ease-in-out",
     height: "33px",
     [theme.breakpoints.up("sm")]: {
-    height: "100%"
+    height: "auto"
     }
 
   },

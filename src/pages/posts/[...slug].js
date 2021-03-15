@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3)
   },
   card: {
-    display: "flex"
+    display: "flex",
   },
   cardDetails: {
     flex: 1
@@ -180,7 +180,12 @@ const useStyles = makeStyles(theme => ({
     },
     filter: {
       padding: 15,
-      marginTop: 20
+      marginTop: 20,
+      [theme.breakpoints.up("sm")]: {
+      height: `calc(100vh - 90px)`,
+      width: 200,
+      overflowX: "scroll"
+      }
     }
 }));
 

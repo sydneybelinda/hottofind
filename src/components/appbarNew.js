@@ -174,6 +174,7 @@ export default function HideAppBar(props) {
         0;
     const header = document.getElementById('top-menu');
     const sidemenu = document.getElementById('sidemenu');
+    const footer = document.getElementById('footer');
     if (header !== null) {
         if (number >= 300) {
             header.classList.add('header-sticky');

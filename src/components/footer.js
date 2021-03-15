@@ -82,7 +82,7 @@ const Footer = props => {
   const {URL, COUNTRY} = props;
 
   return (
-    <footer className={classes.footer}>
+    <footer id="footer" className={classes.footer}>
       <div className={classes.topFooter}>
         <Container maxWidth="xl" spacing={3}>
           <Grid container>
