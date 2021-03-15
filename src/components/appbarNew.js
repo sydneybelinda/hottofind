@@ -188,6 +188,25 @@ export default function HideAppBar(props) {
       } else {
           sidemenu.classList.remove('side-sticky');
       }
+
+   
+
+        var windowHeight = window.outerHeight
+      
+         var someDiv = document.getElementById('footer');
+         var distanceToTop = someDiv.getBoundingClientRect().top;
+         
+         if(distanceToTop < windowHeight){
+         
+         var height = windowHeight - (windowHeight - distanceToTop) - 64
+         
+         document.getElementById('sidemenu').style.height = height + "px"
+      
+         console.log(windowHeight - distanceToTop);
+         }
+
+      
+      
   }
 };
 useEffect(() => {
