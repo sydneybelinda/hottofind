@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   sitename: {
     fontSize: "46px",
+    marginBottom: 0,
     [theme.breakpoints.down("md")]: {
       fontSize: "30px",
       lineHeight: "35px"
@@ -56,8 +57,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
-      marginTop: 35,
-      paddingRight: 0
+      marginTop: 0,
+      paddingRight: 0,
+      padding: 32
     },
     textAlign: "center",
     marginLeft: "auto",
@@ -73,8 +75,9 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   subtext: {
-    fontFamily: 'Lora, "Times New Roman", Times, Baskerville, Georgia, serif',
+    fontFamily: 'Nunito, sans-serif',
     fontSize: "18px",
+    margin: 5,
     [theme.breakpoints.down("md")]: {
       fontSize: "12px"
     }
