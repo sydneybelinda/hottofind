@@ -101,7 +101,7 @@ const useStyles = makeStyles(theme => ({
     float: "right"
   },
   subcat: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: 'Nunito, sans-serif',
     fontSize: "15px",
     letterSpacing: "normal",
     color: "#717171"

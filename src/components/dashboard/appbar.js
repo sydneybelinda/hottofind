@@ -98,14 +98,15 @@ const useStyles = makeStyles(theme => ({
     color: "inherit"
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
+    fontFamily: `Nunito, sans-serif  !important`
   },
   bottomToolbar: {
     minHeight: "30px",
     textAlign: "center"
   },
   lnk: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: `Nunito, sans-serif  !important`,
     textDecoration: "none",
     textTransform: "uppercase",
     margin: "0 25px",
@@ -121,7 +122,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   rlnk: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: `Nunito, sans-serif  !important`,
     textDecoration: "none",
     textTransform: "uppercase",
     padding: "0",
@@ -175,7 +176,7 @@ const useStyles = makeStyles(theme => ({
     padding: "0 10px",
     overflow: "hidden",
     fontSize: 12,
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: `Nunito, sans-serif  !important`,
     fontWeight: 600,
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",

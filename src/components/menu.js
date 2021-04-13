@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
   link: {
     textDecoration: "none",
     color: "black",
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: "Nunito, sans-serif"
   },
 }));
 

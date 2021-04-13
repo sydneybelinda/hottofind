@@ -102,7 +102,8 @@ const useStyles = makeStyles(theme => ({
     color: "inherit"
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
+    fontFamily: `Nunito, sans-serif  !important`
   },
   bottomToolbar: {
     minHeight: "30px",
@@ -180,7 +181,7 @@ const useStyles = makeStyles(theme => ({
     padding: "0 10px",
     overflow: "hidden",
     fontSize: 12,
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "Nunito, sans-serif",
     fontWeight: 600,
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",

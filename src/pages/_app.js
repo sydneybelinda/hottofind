@@ -69,6 +69,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
           /><link rel="icon" type="image/icon" href="/favicon.ico"></link>
+
           
         </Head>
         <ThemeProvider theme={theme}>

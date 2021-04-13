@@ -382,36 +382,7 @@ const {config} = props;
               : <div className={classes.none}>Sorry there are no posts in this category</div>}
     
           </Grid>
-          <div className={classes.pagination}>
-            {props.page > 1 ? (
-              <Link href={`${pLock.replace("?", "")}`}>First page</Link>
-            ) : (
-              ""
-            )}
-            {props.page > 1 ? (
-              <Link href={`${pLock}&page=${prevpage}`}>
-                <button
-                  // onClick={() => router.push(`${pLock}&page=${prevpage}`)}
-                  disabled={props.page <= 1}
-                >
-                  PREV
-                </button>
-              </Link>
-            ) : (
-              ""
-            )}
-            {props.posts.count > acount ? (
-              <Link href={`${pLock}&page=${nextpage}`}>
-                <button
-                // onClick={() => router.push(`${pLock}&page=${nextpage}`)}
-                >
-                  NEXT
-                </button>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
+
         </div>
         </div>
       </Container>

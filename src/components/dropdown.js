@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     lineHeight: "10px"
   },
   lnk: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "Nunito, sans-serif",
     textDecoration: "none",
     textTransform: "uppercase",
     padding: "0 10px",
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   lnkb: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "Nunito, sans-serif",
     textDecoration: "none",
     padding: "0 10px",
     fontSize: "12px",
